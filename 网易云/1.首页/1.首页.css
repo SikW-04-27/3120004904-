@@ -1,0 +1,705 @@
+body{
+    background-color: #f5f5f5;
+}
+
+
+/* 轮播图 */
+.roll{
+    width: 100%;
+    height: 285px;
+    /* overflow: hidden; */
+    position: relative;
+}
+.roll .roll_content{
+    position: relative;
+    height: 285px;
+}
+.roll .roll_content li{
+    width: 100%;
+    position: absolute;
+    background-size: cover;
+    transition: 1s;
+}
+.roll .roll_content li:hover{
+    cursor: pointer;
+}
+.roll .roll_content li img{
+    display: block;
+    margin: 0 auto;
+    height: 285px;
+}
+.roll .roll_content li:nth-child(1){
+
+    background-image: url('../img/1.1.jpg');
+}
+.roll .roll_content li:nth-child(2){
+    /* display: none; */
+
+    background-image: url('../img/2.1.jpg');
+}
+.roll .roll_content li:nth-child(3){
+    /* display: none; */
+
+    transition: 0.5s;
+    background-image: url('../img/3.1.jpg');
+}
+.roll .roll_content li:nth-child(4){
+    /* display: none; */
+
+    background-image: url('../img/4.1.jpg');
+}
+.roll .roll_content li:nth-child(5){
+    /* display: none; */
+
+    background-image: url('../img/5.1.jpg');
+}
+.roll .roll_content li:nth-child(6){
+    /* display: none; */
+
+    background-image: url('../img/6.1.jpg');
+}
+.roll .roll_content li:nth-child(7){
+    /* display: none; */
+
+    background-image: url('../img/7.1.jpg');
+}
+.roll .roll_content li:nth-child(8){
+    /* display: none; */
+
+    background-image: url('../img/8.1.jpg');
+}
+.roll .roll_content li:nth-child(9){
+    /* display: none; */
+
+    background-image: url('../img/9.1.jpg');
+}
+.roll .roll_content li:nth-child(10){
+    /* display: none; */
+
+    background-image: url('../img/10.1.jpg');
+}
+
+.hidden{
+    opacity: 0;
+    transition: 0.5s;
+}
+.visible{
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.roll_pointers{
+    width: 250px;
+    position: absolute;
+    height: 4px;
+    /* margin: 0 auto; */
+    left: 50%;
+    margin-left: -125px;
+    bottom: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+.roll_pointers .pointer{
+    /* float: left; */
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin: 0 4px;
+    background-color: #9b9b9b;
+    opacity: 0.6;
+}
+.roll_pointers .pointer:hover{
+    cursor: pointer;
+}
+
+/* 轮播图箭头 */
+.roll .arrow{
+    top: 50%;
+    margin-top: -31.5px;
+    width: 37px;
+    height: 63px;
+    position: absolute;
+    background-image: url('../img/banner.png');
+}
+
+.roll .arrow_left{
+    left:50%;
+    margin-left: -450px;
+
+    background-position: 0 300px;
+}
+.roll .arrow_left:hover{
+    background-position: 0 230px;
+    cursor: pointer;
+}
+.roll .arrow_right{
+    right:50%;
+    margin-right: -448px;
+    background-position: 0 152px;
+}
+.roll .arrow_right:hover{
+    background-position: 0 82px;
+    cursor: pointer;
+}
+
+/* 热门推荐 */
+.recommend{
+    width: 999px;
+    height: 1700px;
+    margin: 0 auto;
+    display: flex;
+    border:rgb(211, 211, 211) 1px solid;
+}
+
+/* 推荐左侧 */
+.recommend_left,
+.recommend_right{
+    width: 689px;
+    height: 1640px;
+    padding: 20px;
+    padding-bottom: 40px;
+    background-color: white;
+    position: relative;
+}
+.recommend_right{
+    width: 230px;
+}
+
+/* 推荐的每一行标题栏 */
+.rectop{
+    width: 645px;
+    padding: 0 10px 0 34px;
+    height: 33px;
+    display: flex;
+    position: relative;
+    border-bottom: 2px solid rgb(193, 13, 12);
+    margin-bottom: 20px;
+}
+
+/* 标题栏的图标 */
+.rectop .icon{
+    position: absolute;
+    left: 0;
+    width: 33px;
+    height: 33px;
+    background-image: url('../img/index.png');
+    background-position: -225px -154px;
+}
+
+/* 标题栏的标题大字 */
+.rectop .rectitle{
+    font-size: 20px;
+    line-height: 33px
+}
+
+/* 标题栏的超链接栏 */
+.rectop .rec_list{
+    height: 33px;
+    width: 240px;
+    display: flex;
+    margin-left: 20px;
+    padding-top: 10px;
+    /* line-height: 33px; */
+    /* justify-content: space-around; */
+}
+
+/* 标题栏的超链接栏的每一项 */
+.rectop .rec_list .rec_li{
+    height: 13.5px;
+    font-size: 12px;
+    padding: 0 10px;
+    border-right: 1px solid #949494;
+}
+/* 鼠标移入有超链接的样式 */
+.rectop .rec_list .rec_li:hover,
+.rectop .rec_more:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.rectop .rec_list .rec_li:last-child{
+    border-right: none;
+}
+
+/* 标题栏的更多 */
+.rectop .rec_more{
+    width: 40px;
+    line-height: 33px;
+    font-size: 12px;
+    position: absolute;
+    right: 0;
+}
+
+.CreateMusic_list{
+    font-size: 20px;
+    padding: 10px 0;
+    /* padding-bottom: 15px; */
+    border-bottom: 2px solid rgb(194, 12, 12);
+    margin-bottom: 20px;
+}
+
+.MusicList{
+    width: 731px;
+    height: 468px;
+    margin-left: -42px;
+}
+
+/* 歌单盒子 */
+.MusicList .CreateMusic {
+    width: 140px;
+    height: 204px;
+    padding-left: 42px;
+    padding-bottom: 30px;
+    position: relative;
+    float: left;
+}
+
+.MusicList .CreateMusic .CreateMusic_img{
+    width: 140px;
+    height: 140px;
+}
+
+.MusicList .CreateMusic .CreateMusic_bottom{
+    width: 140px;
+    height: 27px;
+    position: absolute;
+    /* bottom: 30px; */
+    top: 113px;
+    color: #949494;
+    background-color: rgba(0, 0, 0, 0.527);
+}
+
+.MusicList .CreateMusic .CreateMusic_bottom i{
+    background-image: url('../img/iconall.png');
+    width: 14px;
+    height: 13px;
+    margin: 7px;
+    float: left;
+    display: block;
+    background-position: 0 -23px;
+}
+
+.MusicList .CreateMusic .CreateMusic_bottom span{
+    line-height: 27px;
+    font-size: 12px;
+}
+
+.MusicList .CreateMusic .CreateMusic_name{
+    width: 140px;
+    height: 40px;
+    font-size: 14px;
+    position: absolute;
+    top: 145px;
+    line-height: 20px;
+    left: 42px;
+}
+
+/* 新碟上架的轮播图 */
+.roll_1{
+    width: 689px;
+    height: 186px;
+    border: 1px solid #d3d3d3;
+    margin: 20px 0 37px;
+    position: relative;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+} 
+
+/* 轮播图的箭头 */
+.roll_1 i{
+    color: rgb(110, 110, 110);
+    width: 17px;
+    height: 17px;
+    display: block;
+    text-align: center;
+    z-index: 10;
+}
+.roll_1 i:hover{
+    color: rgb(100, 100, 100);
+    cursor: pointer;
+}
+
+.roll_1_big{
+    width: 645px;
+    height: 186px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.roll_1_content{
+    position: relative;
+    width: 2580px;
+    height: 188px;
+    display: flex;
+    background-color: #f5f5f5;
+}
+
+.roll_1_big ul{
+    position: relative;
+    left: 0;
+    width: 645px;
+    height: 150px;
+    padding-top: 28px;
+}
+
+.roll_1_content li{
+    height: 150px;
+    width: 118px;
+    margin-left: 11px;
+    float: left;
+}
+
+.roll_1_content li a{
+    display: block;
+    width: 118px;
+    height: 100px;
+    margin-bottom: 7px;
+    background-image: url('../img/coverall.png');
+    background-position: 0 -570px;
+}
+.roll_1_content li a img{
+    width: 100px;
+    height: 100px;
+}
+.roll_1_content .roll_li_workname,
+.roll_1_content .roll_li_name{
+    height: 18px;
+    font-size: 12px;
+}
+.roll_1_content .roll_li_name{
+    color:rgb(102, 102, 102);
+}
+
+/* 榜单 */
+.chart{
+    width: 689px;
+    height: 472px;
+    background-color: #f5f5f5;
+    display: flex;
+    background-image: url('../img/index_bill.png');
+}
+.chart_list{
+    width: 230px;
+    height: 472px;
+}
+.chart_list_top{
+    width: 210px;
+    height: 100px;
+    padding-left: 20px;
+    padding-top: 20px;
+    display: flex;
+}
+.chart_list_top .chart_img{
+    width: 80px;
+    height: 80px;
+    display: block;
+}
+.chart_list_top .chart_img img{
+    width: 80px;
+}
+.chart_list_top .chart_in{
+    margin: 6px 0 10px 10px;
+    display: block;
+    height: 18.5px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 700;
+    font-size: 14px;
+}
+.chart_list_top .chart_btn{
+    width: 116px;
+    height: 30px;
+    margin-left: 10px;
+}
+.chart_list_top .chart_btn a{
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-image: url('../img/index.png');
+    margin-right: 6px;
+}
+.chart_musics{
+    width: 230px;
+    height: 320px;
+}
+.chart_music{
+    width: 230px;
+    height: 32px;
+    display: block;
+    position: relative;
+    overflow-wrap: break-word;
+}
+.chart_music .chart_num{
+    display: block;
+    float: left;
+    width: 35px;
+    height: 32px;
+    margin-left: 25px;
+    text-align: center;
+    line-height: 32px;
+    font-size: 16px;
+    margin-right: 0;
+}
+.chart_music .chart_music_name{
+    float: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    height: 32px;
+    width: 170px;
+    display: block;
+    font-size: 12px;
+    line-height: 32px;
+    text-decoration: none;
+    color: #000;
+}
+.chart_music .chart_music_name:hover{
+    text-decoration: underline;
+}
+.chart_music .oper{
+    width: 82px;
+    height: 19px;
+    margin-top: 7px;
+    float: right;
+    display: none;
+}
+.chart_music .oper a{
+    float: left;
+    width: 17px;
+    height: 17px;
+    margin-right: 10px;
+    background-image: url('../img/index.png');
+}
+.chart_music:hover .oper{
+    display: block;
+}
+.chart_music:hover .chart_music_name{
+    width: 88px;
+    display: block;
+}
+.chartmore{
+    width: 198px;
+    height: 32px; 
+    margin-right: 32px;
+    text-align: right;
+    color:#333;
+    font-size: 12px;
+    line-height: 32px;
+}
+.chartmore:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* 右边部分的个人信息 */
+.user_profile{
+    width: 250px;
+    height: 165px;
+    padding-top: 20px;
+    background-color: #f5f5f5;
+    background-image: url('../img/index.png');
+    background-position: 0 -270px;
+} 
+
+.user_profile .user_profile_top{
+    width: 250px;
+    height: 87px;
+    display: flex;
+}
+
+/* 头像部分 */
+.user_profile .user_profile_top .user_profile_left{
+    width: 80px;
+    height: 80px;
+    padding: 2px;
+    border: 1px solid #dadada;
+    margin-left: 20px;
+}
+
+.user_profile .user_profile_top .user_profile_left .avatar{
+    width: 80px;
+    height: 80px;
+}
+
+/* 个人信息部分 */
+.user_profile .user_profile_top .user_profile_right{
+    width: 115px;
+    height: 84px;
+    padding-top: 3px;
+    margin-left: 18px;
+    position: relative;
+}
+.user_profile .user_profile_top .user_profile_right .user_profile_name{
+    font-size: 14px;
+    font-weight: 700;
+}
+.user_profile .user_profile_top .user_profile_right .user_profile_level{
+    display: block;
+    margin-top: 7px;
+    width: 14px;
+    padding: 1px;
+    padding-left: 25px;
+    overflow: hidden;
+    border: 2px solid #999;
+    border-radius: 10px;
+    height: 12px;
+    background-image: url('../img/icon2.png');
+    background-position: -135px -66px;
+    background-origin: padding-box;
+    background-clip: border-box;
+}
+.user_profile .user_profile_top .user_profile_right .user_profile_levelnum{
+    font-size: 12px;
+    font-weight: bold;
+    font-style: italic;
+    color: #999;
+    position: relative;
+    top: -4px;
+    left: -3px;
+}
+
+.user_profile .user_profile_top .user_profile_right .user_profile_btn{
+    display: block;
+    width: 71px;
+    height: 27px;
+    padding-right: 5px;
+    position: absolute;
+    bottom: 0;
+    border: 1.3px solid rgb(204, 204, 204);
+    border-radius: 5px;
+    background-color: rgb(239, 239, 239);
+    text-align: center;
+    line-height: 27px;
+    font-size: 12px;
+    color: rgb(190, 190, 190);
+}
+
+.user_profile .user_profile_bottom{
+    width: 230px;
+    height: 40px;
+    margin-top: 22px;
+    margin-left: 2px;
+    display: flex;
+    font-size: 12px;
+    color: rgb(102, 102, 102);
+}
+.user_profile .user_profile_bottom .user_profile_li{
+    font-weight: 400;
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+.user_profile .user_profile_bottom li{
+    width: 26px;
+    height: 40px;
+    padding: 0 18px;
+    border-right: 1px solid #e4e4e4;
+}
+
+.n_singer{
+    width: 230px;
+    height: 455px;
+    padding-top: 15px;
+    padding-left: 20px;
+    border-left: 1px solid rgb(211, 211, 211);
+}
+.n_dj{
+    height: 1010px;
+}
+.n_singer .singer_top{
+    width: 210px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    height: 24px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+.n_singer .singer_top .singer_top_left{
+    font-weight: 700;
+    color: #333;
+}
+.n_singer .singer_top .singer_top_right{
+    color: #666;
+}
+.n_singer .n_singer_content{
+    width: 210px;
+}
+.n_singer .n_singer_content .n_singer_content_li{
+    width: 210px;
+    height: 62px;
+    margin-top: 14px;
+    border: 1px solid rgb(221, 221, 221);
+    background-color: rgb(245, 245, 245);
+}
+.n_singer .n_singer_content li .n_singer_li_left,
+.n_singer .n_singer_content li .n_singer_li_left img{
+    float: left;
+    width: 62px;
+    height: 62px;
+}
+.n_singer .n_singer_content li .n_singer_li_right{
+    float: right;
+    width: 133px;
+    height: 60px;
+}
+.n_singer .n_singer_content li .n_singer_li_right .n_singer_name{
+    margin-top: 10px;
+    height: 20px;
+    font-size: 12px;
+    color: #333;
+    font-weight: 700;
+}
+.n_singer .n_singer_content li .n_singer_li_right .n_singer_from{
+    margin-top: 6px;
+    height: 20px;
+    font-size: 12px;
+    color: #666;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
+}
+.n_singer .n_singer_content .music_btn{
+    margin-top: 10px;
+    display: block;
+    width: 205px;
+    height: 29px;
+    line-height: 31px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    margin-left: 3px;
+    background-image: url('../img/button2.png');
+    background-position: 100% -60px;
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 5px;
+}
+.n_singer .n_singer_content .music_btn:hover{
+    cursor: pointer;
+    background-position: 100% -224px;
+}
+
+.n_singer .n_singer_content .n_dj_content_li{
+    width: 210px;
+    height: 50px;
+    margin-top: 14px;
+}
+.n_singer .n_singer_content .n_dj_content_li .n_dj_li_left,
+.n_singer .n_singer_content .n_dj_content_li .n_dj_li_left img{
+    width: 40px;
+    height: 40px;
+    float: left;
+}
+.n_singer .n_singer_content .n_dj_content_li .n_dj_li_right{
+    width: 160px;
+    float: right;
+    font-size: 12px;
+}
+.n_singer .n_singer_content .n_dj_content_li .n_dj_li_right .n_dj_name{
+    color: #333;
+    margin-top: 6px;
+}
+.n_singer .n_singer_content .n_dj_content_li .n_dj_li_right .n_dj_from{
+    color: #666;
+    margin-top: 8px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
+}

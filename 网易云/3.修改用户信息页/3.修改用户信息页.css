@@ -1,0 +1,149 @@
+/* 覆盖首页的导航栏样式 */
+.top{
+    height: 70px;
+}
+
+/* 覆盖首页的头像隐藏 */
+.nav_1 .SignUp_User{
+    display: block;
+}
+.nav_1 .SignUp_User:hover{
+    cursor: pointer;
+}
+
+/* 中部内容框 */
+.middle{
+    width: 900px;
+    height: 500px;
+    margin: 0 auto;
+    padding: 40px;
+    /* background-color: royalblue; */
+}
+
+.middle .middle_info_title,
+.middle .middle_privacy_title,
+.middle .middle_password_title{
+    font-size: 24px;
+    font-weight: 400;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgb(209, 48, 48);
+}
+
+.middle .info_content{
+    padding-top: 40px;
+    width: 820px;
+    height: 300px;
+    position: relative;
+}
+
+/* 内容框中的文字 */
+.middle .info_content div span{
+    font-size: 12px;
+}
+
+
+/* 文本框 */
+.middle .info_content input{
+    outline: none;
+    border: 1px solid #949494;
+}
+
+#nickname{
+    width: 292px;
+    height: 19px;
+    padding: 5px 6px;
+}
+
+.signature_span{
+    position: relative;
+    top: -120px;
+}
+
+#signature {
+    outline: none;
+    border: 1px solid #949494;
+    resize: none;
+    width: 292px;
+    height: 122px;
+    padding: 5px 6px;
+}
+
+/* 头像部分 */
+.avatar_big{
+    position: absolute;
+    top: 40px;
+    right: 300px;
+    width: 140px;
+    height: 140px;
+}
+.avatar{
+    width: 140px;
+    height: 140px;
+}
+.avatar_big_bottom{
+    position: absolute;
+    text-align: center;
+    line-height: 26px;
+    font-size: 12px;
+    color: #fff;
+    bottom: 0px;
+    width: 140px;
+    height: 26px;
+    background-color: rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+}
+
+.file{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+}
+.file:hover{
+    cursor: pointer;
+}
+
+#birthday{
+    width: 304px;
+    height: 29px;
+    margin-right: 20px;
+}
+
+/* 账号设置 */
+.privacy_content{
+    padding: 40px 0;
+    font-size: 12px;
+}
+
+.updata_phone input{
+    width: 150px;
+    height: 15px;
+    padding: 3px 3px;
+    margin-right: 20px;
+    outline: none;
+}
+
+
+/* 发送验证码按钮 */
+.save_button,
+.captcha_button,
+.save_button1{
+    font-size: 12px;
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    line-height: 21px;
+    width: 100px;
+    height: 21px;
+    border: 1px solid black;
+    border-radius: 5px;
+    overflow: hidden;
+    background-image: url('../img/button2.png');
+    background-position: 0 -469px;
+}
+.save_button:hover,
+.captcha_button:hover,
+.save_button1:hover{
+    cursor: pointer;
+    background-position: 0 -560px;
+}

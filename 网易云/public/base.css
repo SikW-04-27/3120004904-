@@ -1,0 +1,453 @@
+.top{
+    height:70px;
+    background-color: #242424;
+}
+
+.nav_1{
+    height: 70px;
+    width: 1100px;
+    margin: 0 auto;
+    background-color: #242424;
+    position: relative;
+}
+
+.nav_1 .logo{
+    float: left;
+    width: 176px;
+    height: 70px;
+    overflow: hidden;
+    background-image: url('../img/topbar.png');
+}
+
+.nav_1 .nav_1_menu{
+    float: left;
+    width: 508px;
+    height: 70px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nav_1 .nav_1_menu a{
+    color: rgb(204, 204, 204);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 0 19px;
+    height: 70px;
+    display: block;
+    line-height: 70px;
+    position: relative;
+}
+
+.nav_1 .nav_1_menu a .hot{
+    position: absolute;
+    top: 20px;
+    right: -20px;
+    width: 28px;
+    height: 19px;
+    background-image: url('../img/topbar.png');
+    background-position: -190px 0;
+}
+
+.nav_1 .nav_1_menu a:hover{
+    color: #fff;
+    background-color: #000;
+}
+
+/* 搜索框 */
+.nav_1 .search{
+    float: right;
+    line-height: 70px;
+    align-items: center;
+    position: relative;
+    margin: 0 10px;
+}
+
+/* 搜索按钮 */
+.nav_1 .search i{
+    position: absolute;
+    top: 31px;
+    left: 10px;
+    color: #9b9b9b;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* 搜索框 */
+.nav_1 .search input{
+    width: 98px;
+    height: 32px;
+    border-radius: 32px;
+    padding: 0 30px;
+    border: none;
+    outline: none;
+}
+
+/* 创作者中心 */
+.nav_1 .createCenter{
+    float: right;
+    width: 90px;
+    height: 32px;
+    border-radius: 32px;
+    margin: 20px 10px;
+    color: #9b9b9b;
+    font-size: 12px;
+    text-align: center;
+    line-height: 32px;
+    border: 1px solid rgb(79, 79, 79);
+}
+.nav_1 .createCenter:hover{
+    cursor: pointer;
+    color: #fff;
+    border-color: #fff;
+}
+
+/* 登录按钮 */
+.nav_1 .SignUp{
+    margin: 0 10px;
+    display: block;
+    float: right;
+    color: #9b9b9b;
+    line-height: 70px;
+    font-size: 12px;
+    text-decoration: none;
+}
+.nav_1 .SignUp:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    color:#5a5a5a;
+}
+
+/* 登录成功状态 */
+.nav_1 .SignUp_User{
+    display: none;
+    /* position: relative; */
+    float: right;
+    width: 30px;
+    height: 30px;
+    margin-top: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.nav_1 .SignUp_User:hover{
+    cursor: pointer;
+}
+.nav_1 .SignUp_User .avatar{
+    width: 30px;
+    height: 30px;
+}
+
+.nav_1 .SignUp_User:hover .SignUp_User_down{
+    height: 68px;
+}
+/* 下拉框 */
+.nav_1 .SignUp_User .SignUp_User_down{
+    position: absolute;
+    width: 160px;
+    height: 0px;
+    right: -70px;
+    top: 60px;
+    display: block;
+    background-color: rgb(43, 43, 43);
+    box-shadow: 0 8px 24px 0 rgba(0,0,0,0.50) ;
+    z-index: 999;
+    transition: 0.5s;
+    overflow: hidden;
+}
+.nav_1 .SignUp_User .SignUp_User_down li{
+    height: 34px;
+    width: 160px;
+    text-align: center;
+    line-height: 34px;
+    color: rgb(204, 204, 204);
+    font-size: 12px;
+    position: relative;
+}
+.nav_1 .SignUp_User .SignUp_User_down li:hover{
+    background-color: rgb(53, 53, 53);
+}
+.nav_1 .SignUp_User .SignUp_User_down li i{
+    font-size: 16px;
+    position: absolute;
+    left: 30px;
+    top: 10px;
+}
+
+/* 登录框 */
+.nav_1 .SignUpBox{
+    z-index: 9999;
+    display: none;
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    margin-left: -265px;
+    width: 530px;
+    /* height: 272px; */
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 0px 10px rgb(51, 51, 51);
+}
+
+/* 登录框顶部 */
+.nav_1 .SignUpBox .SignUptop{
+    position: relative;
+    height: 38px;
+    padding: 0 18px;
+    line-height: 38px;
+    background-color: #2d2d2d;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* 关闭按钮 */
+.nav_1 .SignUpBox .SignUptop .SignUp_error{
+    position: absolute;
+    right: 0;
+    font-size: 20px;
+    font-weight: 400;
+    color: #9b9b9b;
+    float: right;
+    width: 38px;
+    height: 38px;
+    text-align: center;
+    cursor: pointer;
+}
+.nav_1 .SignUpBox .SignUptop .SignUp_error:hover{
+    color: #fff;
+}
+
+.nav_1 .SignUpbig{
+    margin: 30px 0 0;
+    width: 100%;
+}
+
+/* 手机登录内容框 */
+.nav_1 .SignUpBox .SignUp_content,
+.nav_1 .SignUpBox .sentctcode_content,
+.nav_1 .SignUpBox .register_content,
+.nav_1 .SignUpBox .email_content{
+    display: block;
+    width: 220px;
+    margin: 30px auto;
+}
+.nav_1 .SignUpBox .sentctcodebig,
+.nav_1 .SignUpBox .registerbig,
+.nav_1 .SignUpBox .emailbig{/*注意！！！！！！！！*/
+    display: none;
+}
+
+/* 登录文本框 */
+.nav_1 .SignUpBox #SignUp_phone,
+.nav_1 .SignUpBox #SignUp_password,
+.nav_1 .sentctcode_content #sentctcode_phone,
+.nav_1 .sentctcode_content #sentctcode_code,
+.nav_1 .register_content input,
+.nav_1 .email_content #email_phone,
+.nav_1 .email_content #email_password{
+    width: 206px;
+    height: 27px;
+    outline: none;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* 自动登录 */
+.nav_1 .SignUpBox .RemPassword{
+    display: inline-block;
+    color: #9b9b9b;
+    margin: 0 auto;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+.nav_1 .SignUpBox .RemPassword input{
+    margin-right: 10px;
+    vertical-align:sub;
+}
+.nav_1 .SignUpBox .RemPassword input:hover{
+    cursor: pointer;
+}
+
+/* 忘记密码 */
+.nav_1 .SignUpBox .forget{
+    float: right;
+    font-size: 12px;
+    color: #9b9b9b;
+    position: relative;
+    top: 4px;
+}
+
+/* 登录注册按钮 */
+.nav_1 .SignUpBox button{
+    width: 220px;
+    height: 30px;
+    margin: 0 auto;
+    display: block;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.nav_1 .SignUpBox #SignUp_btn,
+.nav_1 .SignUpBox #sentctcode_btn,
+.nav_1 .SignUpBox #email_SignUp_btn{
+    background-image: url('../img/button2.png');
+    background-position: 0 -469px;
+}
+.nav_1 .SignUpBox #SignUp_btn:hover,
+.nav_1 .SignUpBox #sentctcode_btn:hover,
+.nav_1 .SignUpBox #email_SignUp_btn:hover{
+    cursor: pointer;
+    background-position: 0 -550px;
+}
+.nav_1 .SignUpBox #SignUp_btn:active,
+.nav_1 .SignUpBox #sentctcode_btn:active,
+.nav_1 .SignUpBox #email_SignUp_btn:active{
+    background-position: 0 -388px;
+}
+
+.nav_1 .SignUpBox #register_btn,
+.nav_1 .SignUpBox #captcha_btn,
+.nav_1 .SignUpBox #email_register_btn{
+    background-image: url('../img/button2.png');
+    background-position: 0 -59px;
+}
+.nav_1 .SignUpBox #register_btn:hover,
+.nav_1 .SignUpBox #captcha_btn:hover,
+.nav_1 .SignUpBox #email_register_btn:hover{
+    cursor: pointer;
+    background-position: 0 -141px;
+}
+.nav_1 .SignUpBox #register_btn:active,
+.nav_1 .SignUpBox #captcha_btn:active,
+.nav_1 .SignUpBox #email_register_btn:active{
+    background-position: 0 -223px;
+}
+
+/* 登录页面底部 */
+.nav_1 .SignUp_bottom,
+.nav_1 .sentctcode_bottom,
+.nav_1 .register_bottom,
+.nav_1 .email_bottom{
+    text-align: center;
+    line-height: 48px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 18px;
+    background-color: rgb(247, 247, 247);
+    border-top: 1px solid rgb(198, 198, 198);
+    width: 494px;
+    height: 48px;
+    font-size: 14px;
+    color: #9b9b9b;
+}
+.nav_1 .SignUp_bottom span:hover,
+.nav_1 .sentctcode_bottom span:hover,
+.nav_1 .register_bottom span:hover,
+.nav_1 .email_bottom span:hover{
+    cursor: pointer;
+    color: #6e6e6e;
+}
+
+
+.nav_2{
+    height: 35px;
+    background-color: #C20C0C;
+}
+
+.nav_2_content{
+    width: 1100px;
+}
+
+.bottom{
+    width: 100%;
+    height: 173px;
+    border-top: 1px solid #d3d3d3;
+}
+
+.bottom .bottom_content{
+    width: 980px;
+    height: 115px;
+    margin: 0 auto;
+    font-size: 12px;
+}
+
+.bottom .bottom_left{
+    width: 520px;
+    height: 115px;
+    padding-top: 15px;
+    float: left;
+}
+
+.bottom .bottom_left .bottom_left_top{
+    width: 520px;
+    height: 24px;
+    color: #999;
+}
+
+.bottom .bottom_left .bottom_left_top li{
+    float: left;
+}
+.bottom .bottom_left .bottom_left_top li:hover{
+    cursor: pointer;
+}
+
+.bottom .bottom_left .bottom_left_top li span{
+    margin-right:10px;
+    margin-left: 8px;
+}
+
+.bottom .bottom_left p{
+    height: 24px;
+    width: 520px;
+    color: #666;
+    line-height: 24px;
+}
+.bottom .bottom_left p a{
+    color: #666;
+    text-decoration: none;
+}
+.bottom .bottom_left p a:hover{
+    text-decoration: underline;
+}
+.bottom .bottom_left p i{
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url('../img/police.png');
+    background-size: 14px 14px;
+}
+
+.bottom .bottom_right{
+    width: 460px;
+    height: 70px;
+    float: right;
+    margin-top: 33px;
+}
+
+.bottom .bottom_right li{
+    width: 60px;
+    height: 70px;
+    float: left;
+    margin-left: 30px;
+    position: relative;
+}
+
+.bottom .bottom_right li a{
+    display: inline-block;
+    width: 50px;
+    height: 45px;
+    margin: 0 5px;
+    background-size: 110px 552px;
+}
+
+.bottom .bottom_right li p{
+    width: 100px;
+    text-align: center;
+    font-size: 10px;
+    position: absolute;
+    left: -18px;
+    top: 50px;
+    color: rgb(129, 129, 129);
+}

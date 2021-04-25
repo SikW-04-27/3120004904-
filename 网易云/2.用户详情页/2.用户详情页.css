@@ -1,0 +1,204 @@
+/* 覆盖首页的导航栏样式 */
+.top{
+    height: 70px;
+}
+
+/* 覆盖首页的头像隐藏 */
+.nav_1 .SignUp_User{
+    display: block;
+}
+.nav_1 .SignUp_User:hover{
+    cursor: pointer;
+}
+
+.middle{
+    width: 980px;
+    height: 700px;
+    margin: 0 auto;
+    /* background-color: rosybrown; */
+}
+
+.middle .middle_content_1{
+    padding: 40px;
+    width: 900px;
+    height: 188px;
+}
+
+.middle .middle_content_1 .user_avatar{
+    float: left;
+    width: 180px;
+    height: 180px;
+    padding: 3px;
+    border: 1px solid #949494;    
+}
+
+.middle .middle_content_1 .user_avatar img{
+    width: 180px;
+    height: 180px;
+}
+
+/* 用户信息框 */
+.middle .middle_content_1 .user_info{
+    float: right;
+    width: 670px;
+    height: 166px;
+    padding: 10px;
+    border: 1px;
+    position: relative;
+    /* background-color: saddlebrown; */
+}
+
+/* 用户名字 */
+.middle .middle_content_1 .user_info .user_name{
+    font-size: 22px;
+    font-weight: bold;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #949494;
+}
+
+/* 用户等级 */
+.middle .middle_content_1 .user_info .user_level{
+    background-image: url('../img/icon2.png');
+    width: 75px;
+    height: 25px;
+    background-position: -135px -194px;
+    position: absolute;
+    top: 8px;
+    left: 150px;
+    background-size: 310px;
+}
+.middle .middle_content_1 .user_info .user_level .level{
+    position: absolute;
+    top: 5px;
+    left: 40px;
+    font-size: 14px;
+    font-style: italic;
+    color: rgb(224, 58, 36);
+    font-weight: 800;
+}
+/* 粉丝什么的乱七八糟 */
+.middle .middle_content_1 .user_info .tab_box{
+    height: 41px;
+    margin: 10px 0;
+    padding-bottom: 10px;
+}
+
+.middle .middle_content_1 .user_info .tab_box .tab_div{
+    float: left;
+    width: 26px;
+    height: 40px;
+    padding-right: 20px;
+    padding-left: 10px;
+    border-right: 1px solid #949494;
+}
+.middle .middle_content_1 .user_info .tab_box .tab_div:first-child{
+    padding-left: 0;
+}
+.tab_box .tab_div span{
+    font-size: 24px;
+}
+.tab_box .tab_div div{
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.middle .middle_content_1 .user_info .user_id{
+    font-size: 14px;
+    margin: 20px 0;
+}
+.middle .middle_content_1 .user_info .user_add{
+    font-size: 14px;
+}
+
+.middle .middle_content_1 .user_info .Modefy_Userinfo{
+    height: 30px;
+    width: 106px;
+    text-align: center;
+    line-height: 30px;
+    position: absolute;
+    top: 10px;
+    right: 0;
+    border-radius: 5px;
+    font-size: 12px;
+    /* background-image: url('./img/icon2.png'); */
+    background-color: rgb(244, 244, 244);
+    border: 1px solid #949494;
+    box-shadow: 0 0 2px #949494;
+}
+.middle .middle_content_1 .user_info .Modefy_Userinfo:hover{
+    background-color: rgb(250, 250, 250);
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.middle_content_2{
+    width: 900px;
+    padding: 40px;
+    height: 400px;
+}
+
+.middle_content_2 .CreateMusic_list{
+    font-size: 20px;
+    padding: 10px 0;
+    /* padding-bottom: 15px; */
+    border-bottom: 2px solid rgb(194, 12, 12);
+    margin-bottom: 20px;
+}
+
+/* 歌单总盒子 */
+.middle_content_2  .CreateMusics{
+    /* display: flex;
+    justify-content: ; */
+    width: 950px;
+    position: relative;
+    left: -50px;
+}
+
+/* 歌单盒子 */
+.middle_content_2  .CreateMusic {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 30px;
+    margin-left: 50px;
+    position: relative;
+    float: left;
+}
+
+.middle_content_2  .CreateMusic .CreateMusic_img{
+    width: 140px;
+    height: 140px;
+}
+
+.middle_content_2  .CreateMusic .CreateMusic_bottom{
+    width: 140px;
+    height: 27px;
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.527);
+}
+
+.middle_content_2  .CreateMusic .CreateMusic_bottom i{
+    background-image: url('../img/iconall.png');
+    width: 14px;
+    height: 13px;
+    margin: 7px;
+    float: left;
+    display: block;
+    background-position: 0 -23px;
+}
+
+.middle_content_2  .CreateMusic .CreateMusic_bottom span{
+    line-height: 27px;
+    font-size: 12px;
+}
+
+.middle_content_2  .CreateMusic .CreateMusic_name{
+    width: 140px;
+    height: 20px;
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网易云</title>
+    <link rel="stylesheet" href="../public/重置样式表.css">
+    <link rel="stylesheet" href="../fontawesome/css/all.css">
+    <link rel="stylesheet" href="../public/base.css">
+    <link rel="stylesheet" href="./3.修改用户信息页.css">
+    <script src="../public/tool.js"></script>
+    <script src="./3.修改用户信息页.js"></script>
+</head>
+<body>
+    <div class="top">
+        <div class="nav_1">
+            <div class="logo"> </div>
+            <div class="nav_1_menu">
+                <a href="">发现音乐</a>
+                <a href="">我的音乐</a>
+                <a href="">朋友</a>
+                <a href="">商城</a>
+                <a href="">音乐人</a>
+                <a href="">
+                    下载客户端
+                    <div class="hot"></div>
+                </a>
+            </div>
+            <!-- 登录成功状态 -->
+            <div class="SignUp_User">
+                <img class="avatar" src="" alt="">
+            </div>
+
+            <!-- 创作者中心 -->
+            <div class="createCenter">创作者中心</div>
+            <!-- 搜索 -->
+            <div class="search">
+                <i class="fas fa-search" id="searchBtn"></i>
+                <input type="text" placeholder="常言道" id="searchBox">
+            </div>
+        </div>
+    </div>
+
+    <div class="middle">
+        <div class="middle_info_title">个人设置</div>
+        <div class="info_content">
+            <div>
+                <span class="nickname_span">昵称：</span>
+                <input type="text" id="nickname">
+            </div><br>
+            <div>
+                <span class="signature_span">介绍：</span>
+                <textarea  id="signature" ></textarea>
+            </div><br>
+            <div class="avatar_big">
+                <img src="" class="avatar" alt="">
+                <div class="avatar_big_bottom">更换头像</div>
+                <input type="file" class="avatar_big_bottom file"></input>
+            </div>
+            <div class="birthday_big">
+                <span class="birthday_span">生日：</span>
+                <input type="date" id="birthday">
+                <span class="save_button">保存设置</span>
+            </div><br><br>
+            
+        </div>
+        <div class="middle_privacy_title">更改绑定手机</div>
+        <div class="privacy_content">
+            <div class="updata_phone">
+                <!-- <span class="updata_phone_title">更改绑定手机</span><br><br> -->
+                <span>原手机号码：&nbsp; &nbsp;</span>
+                <input type="text" id="oldphone">
+                <span class="captcha_button">发送验证码</span><br><br>
+                <span>原手机验证码：</span>
+                <input type="text" id="oldcaptcha"><br><br>
+                <span>新手机号码：&nbsp; &nbsp;</span>
+                <input type="text" id="newphone">
+                <span class="captcha_button">发送验证码</span><br><br>
+                <span>新手机验证码：</span>
+                <input type="text" id="captcha"><br><br>
+                <div class="save_button1">保存更改</div>
+            </div><br>
+        </div>
+        <div class="middle_password_title">修改密码</div>
+        <div class="privacy_content">
+            <div class="updata_phone">
+                <span>手机号码：&nbsp; &nbsp;</span>
+                <input type="text" id="phonenum">
+                <span class="captcha_button">发送验证码</span><br><br>
+                <span>验证码：&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <input type="text" id="captcha_password"><br><br>
+                <span>手机新密码：</span>
+                <input type="text" id="new_password"><br><br>
+                <div class="save_button1">确认更改</div>
+            </div><br>
+        </div>
+    </div>
+</body>
+</html>
