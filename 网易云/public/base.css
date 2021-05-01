@@ -1,3 +1,7 @@
+body{
+    background-color: #f5f5f5;
+}
+
 .top{
     height:70px;
     background-color: #242424;
@@ -450,4 +454,262 @@
     left: -18px;
     top: 50px;
     color: rgb(129, 129, 129);
+}
+
+/* 播放条样式 */
+.mp3_content{
+    width: 100%;
+    height: 47px;
+    background-color: #333;
+    position:sticky;
+    bottom: 0;
+}
+
+/* 播放器容器 */
+.mp3Box {
+    width: 980px;
+    height: 47px;
+    background-color: #333;
+    margin: 100px auto;
+    display: flex;
+    /*  background-image: url('./img/playbar.png');
+    background-position: 0 0; */
+}
+
+/* 播放，上一首，下一首按钮 */
+.radioBox {
+    width: 137px;
+    height: 35px;
+    padding-top: 6px;
+    float: left;
+}
+
+.radioBox .prev,
+.radioBox .next {
+    float: left;
+    width: 28px;
+    height: 28px;
+    margin: 5px 8px 0 0;
+    background-image: url('../img/playbar.png');
+    background-position: 0 -130px;
+}
+
+.radioBox .next {
+    background-position: -80px -130px;
+}
+
+.radioBox .broadcast {
+    float: left;
+    width: 36px;
+    height: 36px;
+    margin-right: 8px;
+    background-image: url('../img/playbar.png');
+    background-position: 0 -204px;
+}
+
+.radioBox .next:hover,
+.radioBox .broadcast:hover,
+.radioBox .prev:hover {
+    cursor: pointer;
+}
+
+.radioBox .prev:hover {
+    background-position: -30px -130px;
+}
+
+.radioBox .broadcast:hover {
+    background-position: -40px -204px;
+}
+
+.radioBox .next:hover {
+    background-position: -110px -130px;
+}
+
+/* 专辑头像 */
+.head_avatar {
+    width: 34px;
+    height: 34px;
+    margin-top: 6px;
+    margin-right: 15px;
+}
+
+.header_avatar_img {
+    /* display: block; */
+    width: 34px;
+    height: 34px;
+}
+
+/* 进度条信息 */
+.bar {
+    width: 608px;
+    height: 37px;
+}
+
+.bar .bar_info {
+    width: 608px;
+    height: 28px;
+    display: flex;
+}
+
+.bar .bar_info .bar_musicname {
+    max-width: 300px;
+    display: block;
+    font-size: 12px;
+    line-height: 28px;
+    color: #e8e8e8;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.bar .bar_info .bar_musician {
+    display: block;
+    max-width: 220px;
+    font-size: 12px;
+    line-height: 28px;
+    text-decoration: none;
+    color: #9b9b9b;
+    margin-left: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.bar .bar_info .bar_link {
+    width: 14px;
+    height: 15px;
+    margin: 7px 0 0 13px;
+    background-position: -110px -103px;
+    background-image: url('../img/playbar.png');
+}
+
+.bar .bar_info .bar_link:hover {
+    background-position: -130px -103px;
+}
+
+/* 进度条主体 */
+.bar .bar_body {
+    height: 10px;
+    display: flex;
+}
+
+#shichang {
+    -webkit-appearance: none;
+    outline: none;
+    position: relative;
+    top: -3px;
+    background: -webkit-linear-gradient(red, red) no-repeat;
+    background-size: 0 90%;
+    background-position: '';
+    border-radius: 5px;
+    height: 8px;
+    width: 493px;
+}
+
+
+#shichang::-webkit-slider-runnable-track {
+    position: relative;
+    top: 3px;
+    /* background-color: #333; */
+    background-image: url('../img/statbar.png');
+    /* background-position: 100% 0px; */
+    border-radius: 5px;
+}
+
+#shichang::-webkit-slider-thumb {
+    position: relative;
+    top: -2px;
+    -webkit-appearance: none;
+    /*清除系统默认样式*/
+    height: 14px;
+    /*拖动块高度*/
+    width: 14px;
+    /*拖动块宽度*/
+    border: 4px solid #fff;
+    background-color: rgba(156, 0, 0, 0.575);
+    /*拖动块背景*/
+    border-radius: 50%;
+    /*外观设置为圆形*/
+}
+
+.bar .bar_body .time {
+    height: 14px;
+    position: relative;
+    top: -4px;
+    font-size: 12px;
+    left: 10px;
+    color: #797979;
+}
+
+.bar .bar_body .time .currentTime {
+    color: #a1a1a1;
+}
+
+.bar .bar_body .time .duraTime {
+    color: #797979;
+}
+
+.bar_collect {
+    width: 25px;
+    height: 25px;
+    margin-top: 12px;
+    background-image: url('../img/playbar.png');
+    background-position: -88px -163px;
+}
+
+.bar_collect:hover {
+    background-position: -88px -189px;
+}
+
+.bar_voice {
+    width: 25px;
+    height: 25px;
+    margin-left: 15px;
+    margin-top: 12px;
+    background-image: url('../img/playbar.png');
+    background-position: -2px -248px;
+}
+
+.bar_voice:hover {
+    background-position: -31px -248px;
+    cursor: pointer;
+}
+
+/* 音量条 */
+#voice {
+    -webkit-appearance: none;
+    position: relative;
+    top: 18px;
+    outline: none;
+    left: 4px;
+    background-color: #333;
+    background: -webkit-linear-gradient(red, red) no-repeat;
+    background-size: 0 90%;
+    border-radius: 5px;
+    height: 8px;
+    width: 90px;
+}
+
+#voice::-webkit-slider-runnable-track {
+    position: relative;
+    top: 3px;
+    background-image: url('../img/statbar.png');
+    border-radius: 5px;
+}
+
+#voice::-webkit-slider-thumb {
+    position: relative;
+    top: -2px;
+    -webkit-appearance: none;
+    /*清除系统默认样式*/
+    height: 14px;
+    /*拖动块高度*/
+    width: 14px;
+    /*拖动块宽度*/
+    border: 4px solid #fff;
+    background-color: rgba(156, 0, 0, 0.575);
+    /*拖动块背景*/
+    border-radius: 50%;
+    /*外观设置为圆形*/
 }

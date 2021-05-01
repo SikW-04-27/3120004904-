@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>网易云</title>
+    <link rel="icon" href="//s1.music.126.net/style/favicon.ico?v20180823">
     <link rel="stylesheet" href="./1.首页.css">
     <link rel="stylesheet" href="../public/重置样式表.css">
     <link rel="stylesheet" href="../fontawesome/css/all.css">
     <link rel="stylesheet" href="../public/base.css">
-    <script src="../public/tool.js"></script>
     <script src="./1.首页.js"></script>
+    <script src="../public/tool.js"></script>
 </head>
 
 <body>
@@ -184,8 +185,8 @@
                 </div>
             </div>
             <div class="MusicList">
-                <div class="CreateMusic">
-                    <a class="CreateMusic_a" href="">
+                <!-- <div class="CreateMusic">
+                    <a class="CreateMusic_a" href="javascript:;">
                         <img class="CreateMusic_img" src="" alt="">
                     </a>
                     <div class="CreateMusic_bottom">
@@ -193,7 +194,7 @@
                         <span class="CreateMusic_num"></span>
                     </div>
                     <div class="CreateMusic_name"></div>
-                </div>
+                </div> -->
 
             </div>
             <div class="rectop">
@@ -202,7 +203,7 @@
 
             </div>
             <div class="MusicList" style="height:254px">
-                <div class="CreateMusic">
+                <!-- <div class="CreateMusic">
                     <a class="CreateMusic_a" href="">
                         <img class="CreateMusic_img" src="" alt="">
                     </a>
@@ -211,7 +212,7 @@
                         <span class="CreateMusic_num"></span>
                     </div>
                     <div class="CreateMusic_name"></div>
-                </div>
+                </div> -->
 
             </div>
             <div class="rectop">
@@ -472,28 +473,80 @@
             </div>
             <ul class="bottom_right">
                 <li>
-                    <a href="" style="background-image: url('../img/foot_enter_new.png'); background-position: -60px -456.5px;"></a>
+                    <a href=""
+                        style="background-image: url('../img/foot_enter_new.png'); background-position: -60px -456.5px;"></a>
                     <p>Amped Studio</p>
                 </li>
                 <li>
-                    <a href="" style="background-image: url('../img/foot_enter_new.png'); background-position: -60px -101px;"></a>
+                    <a href=""
+                        style="background-image: url('../img/foot_enter_new.png'); background-position: -60px -101px;"></a>
                     <p>用户认证</p>
-                </li>               
+                </li>
                 <li>
-                    <a href="" style="background-image: url('../img/foot_enter_new.png'); background-position: 0 0;"></a>
+                    <a href=""
+                        style="background-image: url('../img/foot_enter_new.png'); background-position: 0 0;"></a>
                     <p>独立音乐人</p>
                 </li>
                 <li>
-                    <a href="" style="background-image: url('../img/foot_enter_new.png'); background-position: -60px -50px;"></a>
+                    <a href=""
+                        style="background-image: url('../img/foot_enter_new.png'); background-position: -60px -50px;"></a>
                     <p>赞赏</p>
                 </li>
                 <li>
-                    <a href="" style="background-image: url('../img/foot_enter_new.png'); background-position: 0 -101px;"></a>
+                    <a href=""
+                        style="background-image: url('../img/foot_enter_new.png'); background-position: 0 -101px;"></a>
                     <p>视频奖励</p>
                 </li>
             </ul>
         </div>
     </div>
+
+    <!-- 播放条 -->
+    <div class="mp3_content">
+        <div class="mp3Box">
+            <!-- 播放开关 -->
+            <div class="radioBox">
+
+                <div class="prev">
+                    <audio id="prev_1"></audio>
+                </div>
+                <div class="broadcast">
+                    <audio id="broadcast_1"></audio>
+                </div>
+                <div class="next">
+                    <audio id="next_1"></audio>
+                </div>
+            </div>
+            <!-- 专辑头像 -->
+            <div class="head_avatar">
+                <img class="header_avatar_img" src="../img/" alt="">
+            </div>
+            <!-- 进度条 -->
+            <div class="bar">
+                <!-- 进度条信息 -->
+                <div class="bar_info">
+                    <a class="bar_musicname" href="">未播放</a>
+                    <a class="bar_musician" href="">未播放</a>
+                    <a class="bar_link" href=""></a>
+                </div>
+                <!-- 进度条主体 -->
+                <div class="bar_body">
+                    <input type="range" step="1" min="0" max="100" id="shichang" value="0" />
+                    <div class="time">
+                        <span class="currentTime">00:00</span> /
+                        <span class="duraTime">00:00</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 搜藏图标 -->
+            <a class="bar_collect" href=""></a>
+            <!-- 声音图标 -->
+            <span class="bar_voice" href=""></span>
+            <!-- 音量条 -->
+            <input type="range" id="voice" step="1" min="0" max="100" value="0">
+        </div>
+    </div>
+
 </body>
 
 </html>

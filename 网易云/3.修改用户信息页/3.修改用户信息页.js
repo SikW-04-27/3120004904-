@@ -53,11 +53,7 @@ window.onload = function () {
         }
     });
 
-    // 将时间戳转化为时间
-    function formatDateT(dataTime) {
-        var newDate = new Date(dataTime + 8 * 3600 * 1000)
-        return newDate.toISOString()
-    };
+    
 
     // 监听file是否改变
     file[0].onchange = function (event) {

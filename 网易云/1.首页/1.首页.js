@@ -29,7 +29,7 @@ window.onload = function () {
     var SignUp_User = document.querySelector(".SignUp_User");
     var avatar = document.getElementsByClassName("avatar");
     var SignUp = document.querySelector(".SignUp");
-    
+
     var user_profile_name = document.getElementsByClassName("user_profile_name");
     var user_profile_levelnum = document.getElementsByClassName("user_profile_levelnum");
     var user_profile_li = document.getElementsByClassName("user_profile_li");
@@ -77,9 +77,9 @@ window.onload = function () {
                 SignUp.style.display = 'block';
                 sessionStorage.clear();
                 document.cookie = "rem=false";
-                if(getCookie('rem')=='false'){
-                    avatar[1].src='';
-                    user_profile_name[0].innerHTML=' ';
+                if (getCookie('rem') == 'false') {
+                    avatar[1].src = '';
+                    user_profile_name[0].innerHTML = ' ';
                     user_profile_levelnum[0].innerHTML = ' ';
                 }
             }
@@ -383,12 +383,6 @@ window.onload = function () {
     Ajax({
         url: getMusicList,
         success: function (results) {
-            CreateMusic_img[0].src = results.result[0].picUrl;
-            CreateMusic_name[0].innerHTML = results.result[0].name;
-            CreateMusic_num[0].innerHTML = results.result[0].trackCount;
-            CreateMusic_img[1].src = results.result[8].picUrl;
-            CreateMusic_name[1].innerHTML = results.result[8].name;
-            CreateMusic_num[1].innerHTML = results.result[8].trackCount;
             function xunhuan(num, font, after) {
                 for (let j = font; j < after; j++) {
                     var MusicList = document.getElementsByClassName("MusicList");
@@ -411,22 +405,34 @@ window.onload = function () {
 
                     div_1.className = "CreateMusic";
                     a.className = "CreateMusic_a";
-                    a.href = "";
+                    a.href = "javascript:;";
                     img.className = "CreateMusic_img";
                     div_2.className = "CreateMusic_bottom";
                     span.className = "CreateMusic_num";
                     div_3.className = "CreateMusic_name";
 
                     CreateMusic_img[j].src = results.result[j].picUrl;
+                    CreateMusic_img[j].id = results.result[j].id;
                     CreateMusic_name[j].innerHTML = results.result[j].name;
                     CreateMusic_num[j].innerHTML = results.result[j].trackCount;
                 }
             }
-            xunhuan(0, 1, 8);
-            xunhuan(1, 9, 12);
-
+            xunhuan(0, 0, 8);
+            xunhuan(1, 8, 12);
+            for(let i=0;i<CreateMusic_img.length;i++){
+                console.log(i);
+                CreateMusic_img[i].num=i;
+                CreateMusic_img[i].onclick=function(){
+                    console.log(this.id);
+                    sessionStorage.setItem('musicid', this.id);
+                    sessionStorage.setItem('type', '歌单');
+                    window.location.href='../4.歌单详情页/4.歌单详情页.html';
+                }
+            }
         }
     });
+    
+    
 
 
     // 榜单传数据
@@ -515,11 +521,12 @@ window.onload = function () {
     }, 900));
 
     // 第二个轮播图传数据
+    // 此处新碟上架的接口过慢，故改成最新专辑接口
     var roll_li_img = document.getElementsByClassName("roll_li_img");
     var roll_li_workname = document.getElementsByClassName("roll_li_workname");
     var roll_li_name = document.getElementsByClassName("roll_li_name");
     let getroll_li =
-        defaultUrlHeader + '/top/album';
+        defaultUrlHeader + '/album/newest';
     Ajax({
         url: getroll_li,
         success: function (results) {
@@ -556,22 +563,34 @@ window.onload = function () {
                     li.appendChild(div_2);
 
                     a.className = "roll_li_a";
-                    a.href = "";
+                    a.href = "javascript:;";
                     img.className = "roll_li_img";
                     div_1.className = "roll_li_workname";
                     div_2.className = "roll_li_name";
 
                     if (i == 0 || i == 2) {
-                        roll_li_img[k].src = results.monthData[j].blurPicUrl;
-                        roll_li_workname[k].innerHTML = results.monthData[j].artists[0].name;
-                        roll_li_name[k].innerHTML = results.monthData[j].name;
+                        roll_li_img[k].src = results.albums[j].blurPicUrl;
+                        roll_li_img[k].id = results.albums[j].id;
+                        roll_li_workname[k].innerHTML = results.albums[j].artists[0].name;
+                        roll_li_name[k].innerHTML = results.albums[j].name;
                     } else {
-                        roll_li_img[k].src = results.monthData[v].blurPicUrl;
-                        roll_li_workname[k].innerHTML = results.monthData[v].artists[0].name;
-                        roll_li_name[k].innerHTML = results.monthData[v].name;
+                        roll_li_img[k].src = results.albums[v].blurPicUrl;
+                        roll_li_img[k].id = results.albums[v].id;
+                        roll_li_workname[k].innerHTML = results.albums[v].artists[0].name;
+                        roll_li_name[k].innerHTML = results.albums[v].name;
                     }
-
-
+                }
+            }
+            console.log(roll_li_img.length);
+            for(let i=0;i<roll_li_img.length;i++){
+                console.log(i);
+                roll_li_img[i].num=i;
+                roll_li_img[i].onclick=function(){
+                    console.log("123");
+                    console.log(this.id);
+                    sessionStorage.setItem('musicid', this.id);
+                    sessionStorage.setItem('type', '专辑');
+                    window.location.href='../4.歌单详情页/4.歌单详情页.html';
                 }
             }
 
@@ -579,6 +598,50 @@ window.onload = function () {
         }
     });
 
+    // 搜索功能
+    // 此处应该改为跳转页面
+    var searchBtn = document.getElementById("searchBtn");
+    var searchBox = document.getElementById("searchBox");
+    var header_avatar_img = document.getElementsByClassName("header_avatar_img");
+    var bar_musicname = document.getElementsByClassName("bar_musicname");
+    var bar_musician = document.getElementsByClassName("bar_musician");
+    var musicurl;
+    var bofangurl;
+    var searchurl;
+    searchBtn.addEventListener("click", function () {
+        if (searchBox.value == '') {
+            searchurl = defaultUrlHeader + '/cloudsearch?keywords=' + '常言道';
+        } else {
+            searchurl = defaultUrlHeader + '/cloudsearch?keywords=' + searchBox.value;
+        }
+
+        Ajax({
+            url: searchurl,
+            success: function (results) {
+                bofangurl = defaultUrlHeader + '/song/url?id=' + results.result.songs[0].id;
+                header_avatar_img[0].src = results.result.songs[0].al.picUrl;
+                bar_musicname[0].innerHTML = results.result.songs[0].name;
+                bar_musician[0].innerHTML = results.result.songs[0].ar[0].name;
+                console.log(bofangurl);
+                Ajax({
+                    url: bofangurl,
+                    success: function (resultss) {
+                        console.log("8y8");
+                        musicurl = resultss.data[0].url;
+                    }
+                });
+            }
+        });
+        console.log(bofangurl);
+
+        setTimeout(function () {
+            console.log(musicurl);
+            bofangurls(musicurl);
+        }, 1000);
+    })
+    bofang();
+
+    // bofang(musicurl);
     // 在第二页返回时图片数据也能正常显示
     // let user = JSON.parse(sessionStorage.getItem("user"));
     // avatar[0].src = user.profile.avatarUrl;
