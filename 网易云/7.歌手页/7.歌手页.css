@@ -1,0 +1,112 @@
+.middle{
+    width: 980px;
+    background-color: #fff;
+    background-image: url('../img/wrap2.png');
+    margin: 0 auto;
+    border: 1px rgb(211, 211, 211) solid;
+    border-top: none;
+    border-bottom: none;
+}
+
+.middle_content{
+    width: 980px;
+    display: flex;
+    /* justify-content: space-between; */
+}
+
+/* 左侧 */
+.middle .middle_left{
+    width: 160px;
+    height: 878px;
+    border-right: 1px ;
+    padding: 30px 10px 40px 10px;
+}
+
+.middle_left .nav{
+    /* padding-left: 14px; */
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgb(211, 211, 211);
+}
+.middle_left .nav:last-child{
+    border-bottom: none;
+}
+.middle_left .nav h1{
+    padding-top: 16px;
+    padding-left: 14px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(51, 51, 51);
+}
+
+.middle_left .nav ul li{
+    line-height: 29px;
+    padding-left: 27px;
+    height: 29px;
+    font-size: 12px;
+    background-image: url('../img/singer.png');
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.nohover_li{
+    color: rgb(51, 51, 51);
+    background-position: 0 -30px;
+    
+}
+.hover_li{
+    color: rgb(194, 12, 12);
+    background-position: 0 0;
+}
+
+/* 右侧 */
+.middle_right{
+    width: 720px;
+    padding: 40px;
+}
+
+.middle_right .right_title{
+    font-size: 24px;
+    font-weight: 400;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 2px rgb(194, 12, 12) solid;
+}
+
+.middle_right .musician_list{
+    width: 736px;
+    margin-left: -17px;
+    margin-top: 20px;
+}
+
+.middle_right .musician_list li{
+    width: 130px;
+    height: 154px;
+    padding: 0 0 30px 17px;
+    float: left;
+    cursor: pointer;
+}
+
+.middle_right .musician_list li .li_img{
+    width: 130px;
+    height: 130px;
+}
+
+.middle_right .musician_list li .li_img .avatar_img{
+    width: 130px;
+    height: 130px;
+}
+
+.middle_right .musician_list li .li_p{
+    /* position: absolute;
+    bottom: 0; */
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.middle_right .musician_list li .li_p a{
+    /* font-size: 12px; */
+    color: #000;
+    text-decoration: none;
+}

@@ -30,6 +30,7 @@ body{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    position: relative;
 }
 
 .nav_1 .nav_1_menu a{
@@ -51,6 +52,60 @@ body{
     height: 19px;
     background-image: url('../img/topbar.png');
     background-position: -190px 0;
+}
+
+.qrcode_a::after{
+    /* display: none; */
+    content: '';
+    position: absolute;
+    top: 62px;
+    left: 40px;
+    border: 8px solid transparent;
+    border-bottom-width: 0;
+    border-top: none;
+    border-color: transparent transparent #fff transparent;
+    transition-delay:0.4s;
+}
+
+.qrcode{
+    width: 130px;
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+    right: -10px;
+    top: 70px;
+    z-index: 2;
+    box-shadow: 0 8px 24px 0 rgb(0 0 0 / 50%);
+    background-color: #fff;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.qrcode img{
+    width: 90px;
+    height: 90px;
+    margin: 20px;
+}
+
+.qrcode p{
+    width: 130px;   
+    font-size: 14px;
+    color: rgb(51, 51, 51);
+    position: absolute;
+    text-align: center;
+    top: 120px;
+    line-height: 20px;
+    height: 20px;
+}
+
+.qrcode_a:hover::after{
+    /* display: block; */
+    border-width: 8px;
+    transition-delay:0s;
+}
+.qrcode_a:hover .qrcode,
+.qrcode:hover{
+    height: 150px;
 }
 
 .nav_1 .nav_1_menu a:hover{

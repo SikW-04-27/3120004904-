@@ -1,0 +1,351 @@
+.middle{
+    width: 980px;
+    margin: 0 auto;
+}
+
+.middle .middle_content{
+    width: 980px;
+    display: flex;
+    background-image: url('../img/wrap4.png');
+}
+
+.middle_left{
+    width: 640px;
+    padding:  47px 30px 40px 39px;
+}
+
+.title{
+    height: 34px;
+    display: flex;
+    padding-bottom: 5px;
+}
+
+.title .musician_h2{
+    font-size: 24px;
+    line-height: 34px;
+    color: rgb(51, 51, 51);
+}
+.title .musician_h3{
+    font-size: 14px;
+    line-height: 38px;
+    color: rgb(153, 153, 153);
+    padding-left: 10px;
+}
+
+.avatar_big{
+    width: 640px;
+    height: 300px;
+    background-image: url('../img/ban_mask.png');
+    position: relative;
+}
+
+.avatar_big img{
+    width: 640px;
+    height: 300px;
+}
+video{
+    width: 640px;
+    height: 360px;
+    position: relative;
+    outline: none;
+    z-index: 1;
+}
+.mask{
+    width: 640px;
+    height: 300px;
+    background-image: url('../img/ban_mask.png');
+    position: absolute;
+    top: 0;
+}
+
+.musician_nav{
+    width: 638px;
+    height: 39px;
+    position: relative;
+    top: -1px;
+    border-left: 1px solid rgb(204, 204, 204);
+    border-right: 1px solid rgb(204, 204, 204);
+    background-image: url('../img/tab.png');
+}
+
+.musician_nav li{
+    float: left;
+    width: 134px;
+    height: 39px;
+    line-height: 37px;
+    text-align: center;
+    font-size: 14px;
+    color: rgb(51, 51, 51);
+    cursor: pointer;
+}
+
+.musician_nav_hover{
+    background-image: url('../img/tab.png');
+    background-position: -5px -45px;
+} 
+
+.musician_nav_active{
+    background-image: url('../img/tab.png');
+    background-position: 100% -90px;
+}
+
+table{
+    width: 640px;
+}
+
+tbody tr td{
+    padding: 6px 10px;
+    line-height: 18px;
+    text-align: left;
+}
+.td_one{
+    /* width: 54px;
+    height: 18px; */
+    /* background-color: #666; */
+}
+.td_one .td_one_content{
+    width: 54px;
+    height: 18px;
+}
+.td_one .td_one_content .td_one_num{
+    color: #666;
+    font-size: 12px;
+    float: left;
+}
+.td_one .td_one_content .td_one_play{
+    width: 17px;
+    height: 17px;
+    float: right;
+    background-image: url('../img/table.png');
+    background-position: 0 -103px;
+}
+.td_one .td_one_content .td_one_play:hover{
+    cursor: pointer;
+    background-position: 0 -128px;
+}
+.td_text{
+    display: block;
+    height: 18px;
+    color: #333;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.td_music_name{
+    width: 165.5px;
+}
+.td_time{
+    width: 40px;
+}
+.td_musician{
+    width: 78px;
+}
+.td_edition{
+    width: 111.5px;
+}
+.td_text:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.even{
+    background-color: #f7f7f7;
+}
+
+.musician_edition_list,
+.musician_mv_list{
+    width: 658px;
+    position: relative;
+    left: -18px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.musician_mv_list{
+    width: 669px;
+    left: -29px;
+}
+
+.musician_edition_list li{
+    width: 145px;
+    height: 140px;
+    padding: 0 0 30px 18px;
+    /* float: left; */
+}
+
+.edition_img_li{
+    width: 120px;
+    height: 120px;
+    position: relative;
+    cursor: pointer;
+}
+
+.edition_img_li img{
+    width: 120px;
+    height: 120px;
+}
+.edition_img_li a{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 145px;
+    height: 120px;
+    background-image: url('../img/coverall.png');
+    background-position: -170px -850px;
+}
+
+.edition_name{
+    margin: 8px 0 3px 0;
+    width: 145px;
+    font-size: 14px;
+    color: rgb(51, 51, 51);
+    line-height: 19px;
+}
+
+.edition_time{
+    font-size: 12px;
+    line-height: 16.8px;
+    color: rgb(102,102,102);
+}
+
+/* 页码 */
+.pages{
+    display: flex;
+    margin-top:20px;
+    text-align: center;
+    justify-content: center;
+}
+.pages a{
+    text-decoration: none;
+    color: #000;
+    font-size: 12px;
+}
+.pages li{
+    /* float: left; */
+    width: 60px;
+    height: 30px;
+    border: 2px solid rgb(204, 204, 204);
+    border-left: none;
+    background-color: #fff;
+    line-height: 25px;
+}
+.pages li:first-child{
+    border-left: 2px solid rgb(204, 204, 204);
+}
+.pages li:hover{
+    background-color: rgb(192, 14, 20);
+    color: #fff;
+}
+.pages li:hover a{
+    color:#fff;
+}
+
+.musician_mv_list li{
+    width: 137px;
+    height: 140px;
+    padding: 0 0 30px 29px;
+}
+
+.mv_img_li{
+    width: 137px;
+    height: 103px;
+    position: relative;
+}
+
+.mv_img{
+    width: 137px;
+    height: 103px;
+}
+
+.mv_a{
+    display: block;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -22px 0 0 -22px;
+    background-image: url('../img/iconall.png');
+    background-position: -30px -135px;
+}
+
+.mv_a:hover{
+    background-position: -30px -85px;
+}
+
+.mv_p{
+    margin: 8px 0 3px 0;
+    font-size: 14px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.musician_intro_list{
+    width: 640px;
+}
+
+.musician_intro_list li{
+    margin-top: 30px;
+    width: 640px;
+}
+
+.first_h1{
+    margin: 28px 0 8px 0;
+    border-left: 3px solid rgb(193, 13, 12);
+    padding-left: 7px;
+}
+
+.intro_title{
+    font-weight: 700;
+    font-size: 14px;
+    color: rgb(51, 51, 51);
+}
+
+.intro_p{
+    color: rgb(102,102,102);
+    font-size: 12px;
+    line-height: 25px;
+}
+
+.middle_right{
+    width: 200px;
+    padding: 20px 40px 40px 30px;
+}
+
+.middle_right h1{
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 30px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+    margin-bottom: 10px;
+}
+
+.similar{
+    width: 225px;
+    position: relative;
+    left: -25px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.similar li{
+    width: 50px;
+    height: 92px;
+    padding-left: 25px;
+    cursor: pointer;
+}
+
+.similar li img{
+    width: 50px;
+    height: 50px;
+    display: block;
+}
+
+.similar li p{
+    font-size: 12px;
+    color: rgb(51, 51, 51);
+    margin-top: 7px;
+}

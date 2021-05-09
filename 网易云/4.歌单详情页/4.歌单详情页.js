@@ -33,8 +33,12 @@ window.onload = function () {
 
     // 播放歌曲
     var td_one_play = document.getElementsByClassName("td_one_play");
+    // 查询歌曲详情
+    var td_music_name = document.getElementsByClassName("td_music_name");
+    // 查询歌手
+    var td_musician = document.getElementsByClassName("td_musician");
     // 查询专辑
-    var td_edition=document.getElementsByClassName("td_text td_edition");
+    var td_edition = document.getElementsByClassName("td_text td_edition");
 
     var collect_btn = document.getElementsByClassName("collect_btn");
 
@@ -100,10 +104,12 @@ window.onload = function () {
                 for (let j = 0; j < music_info.playlist.tracks.length; j++) {
                     let span1 = j + 1;
                     let span2 = music_info.playlist.tracks[j].name;
+                    let temp = music_info.playlist.tracks[j].dt;
+                    let span3=dtime(temp);
                     let span4 = music_info.playlist.tracks[j].ar[0].name;
                     let span5 = music_info.playlist.tracks[j].al.name;
                     let span5_id = music_info.playlist.tracks[j].al.id;
-                    getsongs(span1, span2, span4, span5,span5_id);
+                    getsongs(span1, span2,span3, span4, span5, span5_id,j);
                     td_one_play[j].onclick = function () {
                         let x = j;
                         // 定义一个自动播放的函数
@@ -131,24 +137,32 @@ window.onload = function () {
                             play();
                         }
                         autoplay(x);
-                        var next=document.getElementsByClassName("next");
-                        next[0].onclick=function(){
+                        var next = document.getElementsByClassName("next");
+                        next[0].onclick = function () {
                             x++;
-                            if(x>music_info.playlist.tracks.length-1){
-                                x=music_info.playlist.tracks.length-1;
+                            if (x > music_info.playlist.tracks.length - 1) {
+                                x = music_info.playlist.tracks.length - 1;
                             }
                             autoplay(x);
                         }
-                        var prev=document.getElementsByClassName("prev");
-                        prev[0].onclick=function(){
+                        var prev = document.getElementsByClassName("prev");
+                        prev[0].onclick = function () {
                             x--;
-                            if(x<0){
-                                x=0;
+                            if (x < 0) {
+                                x = 0;
                             }
                             autoplay(x);
                         }
                     }
-                    td_edition[j].onclick=function(){
+                    td_music_name[j].onclick = function () {
+                        sessionStorage.setItem("playing_id", music_info.playlist.tracks[j].id);
+                        window.location.href = '../6.歌曲详情/6.歌曲详情.html';
+                    }
+                    td_musician[j].onclick=function(){
+                        sessionStorage.setItem("musicianid", music_info.playlist.tracks[j].ar[0].id);
+                        window.location.href = '../8.歌手详情/8.歌手详情.html';
+                    }
+                    td_edition[j].onclick = function () {
                         sessionStorage.setItem('musicid', this.id);
                         sessionStorage.setItem('type', '专辑');
                         window.location.href = '../4.歌单详情页/4.歌单详情页.html';
@@ -246,11 +260,13 @@ window.onload = function () {
                 for (let j = 0; j < music_info.songs.length; j++) {
                     let span1 = j + 1;
                     let span2 = music_info.songs[j].name;
+                    let temp = music_info.songs[j].dt;
+                    let span3=dtime(temp);
                     let span4 = music_info.songs[j].ar[0].name;
                     let span5 = music_info.songs[j].al.name;
                     let span5_id = music_info.songs[j].al.id;
 
-                    getsongs(span1, span2, span4, span5,span5_id);
+                    getsongs(span1, span2,span3, span4, span5, span5_id,j);
 
                     td_one_play[j].onclick = function () {
                         let x = j;
@@ -279,24 +295,32 @@ window.onload = function () {
                             play();
                         }
                         autoplay(x);
-                        var next=document.getElementsByClassName("next");
-                        next[0].onclick=function(){
+                        var next = document.getElementsByClassName("next");
+                        next[0].onclick = function () {
                             x++;
-                            if(x>music_info.songs.length-1){
-                                x=music_info.songs.length-1;
+                            if (x > music_info.songs.length - 1) {
+                                x = music_info.songs.length - 1;
                             }
                             autoplay(x);
                         }
-                        var prev=document.getElementsByClassName("prev");
-                        prev[0].onclick=function(){
+                        var prev = document.getElementsByClassName("prev");
+                        prev[0].onclick = function () {
                             x--;
-                            if(x<0){
-                                x=0;
+                            if (x < 0) {
+                                x = 0;
                             }
                             autoplay(x);
                         }
                     }
-                    td_edition[j].onclick=function(){
+                    td_music_name[j].onclick = function () {
+                        sessionStorage.setItem("playing_id", music_info.songs[j].id);
+                        window.location.href = '../6.歌曲详情/6.歌曲详情.html';
+                    }
+                    td_musician[j].onclick=function(){
+                        sessionStorage.setItem("musicianid", music_info.songs[j].ar[0].id);
+                        window.location.href = '../8.歌手详情/8.歌手详情.html';
+                    }
+                    td_edition[j].onclick = function () {
                         sessionStorage.setItem('musicid', this.id);
                         sessionStorage.setItem('type', '专辑');
                         window.location.href = '../4.歌单详情页/4.歌单详情页.html';
@@ -365,7 +389,7 @@ window.onload = function () {
 
 
     // 获取歌曲创造节点
-    function getsongs(span1, span2, span4, span5,span5_id) {
+    function getsongs(span1, span2,span3, span4, span5, span5_id,j) {
         let tbody = document.getElementsByTagName("tbody");
         let tr = document.createElement("tr");
         let td_1 = document.createElement("td");
@@ -407,9 +431,15 @@ window.onload = function () {
         span_5.className = 'td_text td_edition';
         span_1_1.innerHTML = span1;
         span_2.innerHTML = span2;
+        span_3.innerHTML = span3;
         span_4.innerHTML = span4;
         span_5.innerHTML = span5;
         span_5.id = span5_id;
+        if (j % 2 == 0) {
+            tr.className = 'even'
+        } else {
+            tr.style.backgroundColor = '#fff';
+        }
     }
 
     // 获取评论创造节点

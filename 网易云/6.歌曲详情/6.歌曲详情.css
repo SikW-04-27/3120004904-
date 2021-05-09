@@ -1,0 +1,296 @@
+.middle{
+    width: 910px;
+    padding: 40px;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+.middle_content{
+    display: flex;
+    justify-content: space-between;
+}
+
+.middle .middle_left{
+    position: relative;
+    left: 80px;
+    top: 70px;
+    width: 198px;
+    height: 198px;
+}
+
+.middle .middle_left img{
+    width: 130px;
+    height: 130px;
+    margin: 34px;
+}
+
+.middle .img_roll{
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    width: 206px;
+    height: 206px;
+    background-image: url('../img/coverall.png');
+    background-position: -140px -580px;
+}
+
+/* 当开始播放时光碟会旋转 */
+.play_roll{
+    animation:rotate 10s linear infinite;
+}
+.pause{
+    animation-play-state:paused;
+}
+@keyframes rotate{
+    from{
+        transform: rotate(0);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+.middle_right{
+    width: 600px;
+    height: 600px;
+    /* background-color: royalblue; */
+    
+    
+}
+
+.middle_right .middle_body{
+    position: relative;
+    width: 600px;
+    height: 550px;
+    margin: 0 auto;
+    text-align: center;
+    overflow: hidden;
+}
+
+.middle_right .middle_body .title_name{
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 100px;
+    background-color: #fff;
+    position: relative;
+    z-index: 10;
+}
+
+/* 歌词 */
+.middle_right .middle_body .lyric{
+    margin-top: 105px;
+    width: 600px;
+    height: 500px;
+    transition: 1s;
+    /* background-color: #bfa; */
+    /* overflow:auto; */
+}
+
+.normal{
+    /* height: 50px; */
+    line-height: 50px;
+    font-size: 20px;
+}
+
+.big{
+    font-size: 35px;
+    /* height: 60px; */
+    line-height: 60px;
+    color: rgb(230, 0, 38);
+}
+
+.list_top{
+    height: 33px;
+    border-bottom: 2px solid rgb(194, 12, 12);
+    color: 12px;
+}
+.list_top h3{
+    color: #333;
+    font-size: 20px;
+    font-weight: 400;
+    float: left;
+    line-height: 33px;
+}
+.list_top span{
+    margin-left: 20px;
+    /* margin-top: 9px; */
+    font-size: 12px;
+    line-height: 33px;
+}
+.list_top .list_top_span2{
+    float: right;
+}
+.list_top .list_top_span2 i{
+    color: rgb(194, 12, 12);
+    font-weight: 700;
+}
+
+.my_comment{
+    width: 910px;
+    height: 110px;
+    margin: 20px 0;
+}
+.my_comment .my_comment_left{
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+.my_comment .my_comment_left .avatar{
+    width: 65px;
+    height: 65px;
+}
+.my_comment .my_comment_right{
+    width: 816px;
+    height: 150px;
+    float: right;
+}
+.my_comment .my_comment_right textarea{
+    width: 800px;
+    height: 80px;
+    padding: 6px;
+    resize: none;
+    outline: none;
+    font-size: 17px;
+}
+.my_comment .my_comment_right .my_comment_btn{
+    width: 46px;
+    height: 25px;
+    background-image: url('../img/button.png');
+    background-position: -84px -64px;
+    color: #fff;
+    text-align: center;
+    line-height: 25px;
+    font-size: 12px;
+    float: right;
+    margin-top: 5px;
+}
+.my_comment .my_comment_right .my_comment_btn:hover{
+    cursor: pointer;
+    background-position: -84px -94px;
+}
+.comment_list{
+    width: 910px;
+    color: #333;
+    font-size: 14px;
+}
+.comment_list .comment_list_top{
+    display: inline-block;
+    border-bottom: 1px solid rgb(207, 207, 207);
+    font-weight: 700;
+    height: 20px;
+}
+.comment_list .comments{
+    width: 910px;
+    position: relative;
+    top: -1px;
+}
+.comment_content{
+    width: 910px;
+    display: flex;
+    /* justify-content: space-between; */
+    padding: 15px 0;
+    border-top: 1px dotted rgb(204, 204, 204);
+}
+.comment_content_left{
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+}
+.comment_content_left .user_avatar{
+    width: 50px;
+    height: 50px;
+}
+.comment_content_right{
+    /* width: 880px; */
+    min-height: 50px;
+    color: #333;
+    font-size: 16px;
+}
+.comment_content_right .content_top{
+    min-height: 20px;
+}
+.comment_content_right .content_top .user_name{
+    color: #0c73c2;
+    font-size: 16px;
+}
+.comment_content_right .content_top .user_name:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.comment_content_right .content_top .user_comment{
+    line-height: 24px;
+}
+.comment_content_right .more_user_info{
+    width: 840px;
+    height: 15px;
+    margin-top: 15px;
+    position: relative;
+}
+.comment_content_right .more_user_info .comment_time{
+    float: left;
+    color: #999;
+}
+.comment_content_right .more_user_info .good{
+    position: absolute;
+    right: 40px;
+    width: 15px;
+    height: 14px;
+    background-image: url('../img/icon2.png');
+    background-position: -150px 0;
+}
+.comment_content_right .more_user_info .good .good_num{
+    position: relative;
+    left: 20px;
+}
+
+/* 页码 */
+.pages{
+    display: flex;
+    margin-top:20px;
+    text-align: center;
+    justify-content: center;
+}
+.pages a{
+    text-decoration: none;
+    color: #000;
+    font-size: 12px;
+}
+.pages li{
+    /* float: left; */
+    width: 60px;
+    height: 30px;
+    border: 2px solid rgb(204, 204, 204);
+    border-left: none;
+    background-color: #fff;
+    line-height: 25px;
+}
+.pages li:first-child{
+    border-left: 2px solid rgb(204, 204, 204);
+}
+.pages li:hover{
+    background-color: rgb(192, 14, 20);
+    color: #fff;
+}
+.pages li:hover a{
+    color:#fff;
+}
+
+
+/* .middle_right .title .title_musician{
+    position: absolute;
+    bottom: 15px;
+    left: 50px;
+    width: 200px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 500;
+}
+.middle_right .title .title_edition{
+    position: absolute;
+    bottom: 15px;
+    right: 50px;
+    width: 200px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 500;
+} */

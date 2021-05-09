@@ -100,6 +100,7 @@ window.onload = function () {
                 console.log(result);
                 let resultstr = JSON.stringify(result);
                 console.log(resultstr);
+                console.log("123");
                 sessionStorage.setItem('user', resultstr);
 
                 // 缓存存完就执行，个人头像信息
@@ -238,7 +239,27 @@ window.onload = function () {
     let roll_li = document.getElementsByClassName("roll_li");
     let pointer = document.getElementsByClassName("pointer");
     let arrow = document.getElementsByClassName("arrow");
+    let roll_content = document.getElementsByClassName("roll_content");
     var index = 0;
+
+    // 加载轮播图的图片
+    Ajax({
+        url: 'https://autumnfish.cn/banner?type=0',
+        success: function (results) {
+            for (let j = 0; j < 10; j++) {
+                let li = document.createElement("li");
+                let img = document.createElement("img");
+                roll_content[0].appendChild(li);
+                li.appendChild(img);
+                li.className = "roll_li visible";
+                img.src = results.banners[j].imageUrl+'?param=732y285';
+                li.style.display='none';
+                li.style.backgroundImage='url('+results.banners[j].imageUrl+'?imageView&blur=40x20'+')' ;
+            }
+            roll_li[0].className='roll_li visible';
+            roll_li[0].style.display='block';
+        }
+    })
 
     function move(font, after, speed) {
         // timer=setInterval(() => {
@@ -311,6 +332,7 @@ window.onload = function () {
     for (let i = 0; i < arrow.length; i++) {
         arrow[i].num = i;
         arrow[i].addEventListener("click", function () {
+            console.log("23");
             clearInterval(timer);
             // console.log(index);
             let tiao_1 = index;
@@ -411,7 +433,7 @@ window.onload = function () {
                     span.className = "CreateMusic_num";
                     div_3.className = "CreateMusic_name";
 
-                    CreateMusic_img[j].src = results.result[j].picUrl;
+                    CreateMusic_img[j].src = results.result[j].picUrl+'?param=140y140"';
                     CreateMusic_img[j].id = results.result[j].id;
                     CreateMusic_name[j].innerHTML = results.result[j].name;
                     CreateMusic_num[j].innerHTML = results.result[j].trackCount;
@@ -419,26 +441,23 @@ window.onload = function () {
             }
             xunhuan(0, 0, 8);
             xunhuan(1, 8, 12);
-            for(let i=0;i<CreateMusic_img.length;i++){
-                console.log(i);
-                CreateMusic_img[i].num=i;
-                CreateMusic_img[i].onclick=function(){
+            for (let i = 0; i < CreateMusic_img.length; i++) {
+                CreateMusic_img[i].num = i;
+                CreateMusic_img[i].onclick = function () {
                     console.log(this.id);
                     sessionStorage.setItem('musicid', this.id);
                     sessionStorage.setItem('type', '歌单');
-                    window.location.href='../4.歌单详情页/4.歌单详情页.html';
+                    window.location.href = '../4.歌单详情页/4.歌单详情页.html';
                 }
             }
         }
     });
-    
-    
+
+
 
 
     // 榜单传数据
     var chart_musics = document.getElementsByClassName("chart_musics");
-    var chart_num = document.getElementsByClassName("chart_num");
-    var chart_music_name = document.getElementsByClassName("chart_music_name");
     let getchart_li_1 = defaultUrlHeader + '/playlist/detail?id=19723756';
     let getchart_li_2 = defaultUrlHeader + '/playlist/detail?id=3779629';
     let getchart_li_3 = defaultUrlHeader + '/playlist/detail?id=2884035';
@@ -473,8 +492,12 @@ window.onload = function () {
             a_3.href = "";
             div_1.className = "oper";
 
-            chart_num[j].innerHTML = i + 1;
-            chart_music_name[j].innerHTML = results.playlist.tracks[i].name;
+            div.innerHTML = i + 1;
+            a.innerHTML = results.playlist.tracks[i].name;
+            a.onclick = function () {
+                sessionStorage.setItem("playing_id", results.playlist.tracks[i].id);
+                a.href = '../6.歌曲详情/6.歌曲详情.html';
+            }
         }
     }
     Ajax({
@@ -569,28 +592,26 @@ window.onload = function () {
                     div_2.className = "roll_li_name";
 
                     if (i == 0 || i == 2) {
-                        roll_li_img[k].src = results.albums[j].blurPicUrl;
+                        roll_li_img[k].src = results.albums[j].blurPicUrl+'?param=100y100';
                         roll_li_img[k].id = results.albums[j].id;
                         roll_li_workname[k].innerHTML = results.albums[j].artists[0].name;
                         roll_li_name[k].innerHTML = results.albums[j].name;
                     } else {
-                        roll_li_img[k].src = results.albums[v].blurPicUrl;
+                        roll_li_img[k].src = results.albums[v].blurPicUrl+'?param=100y100';
                         roll_li_img[k].id = results.albums[v].id;
                         roll_li_workname[k].innerHTML = results.albums[v].artists[0].name;
                         roll_li_name[k].innerHTML = results.albums[v].name;
                     }
                 }
             }
-            console.log(roll_li_img.length);
-            for(let i=0;i<roll_li_img.length;i++){
-                console.log(i);
-                roll_li_img[i].num=i;
-                roll_li_img[i].onclick=function(){
+            for (let i = 0; i < roll_li_img.length; i++) {
+                roll_li_img[i].num = i;
+                roll_li_img[i].onclick = function () {
                     console.log("123");
                     console.log(this.id);
                     sessionStorage.setItem('musicid', this.id);
                     sessionStorage.setItem('type', '专辑');
-                    window.location.href='../4.歌单详情页/4.歌单详情页.html';
+                    window.location.href = '../4.歌单详情页/4.歌单详情页.html';
                 }
             }
 
@@ -609,40 +630,41 @@ window.onload = function () {
     var bofangurl;
     var searchurl;
     searchBtn.addEventListener("click", function () {
+        sessionStorage.setItem('page', 0);
         if (searchBox.value == '') {
-            searchurl = defaultUrlHeader + '/cloudsearch?keywords=' + '常言道';
+            searchurl = defaultUrlHeader + '/cloudsearch?keywords=' + '常言道' + '&limit=20&offset=0';
         } else {
-            searchurl = defaultUrlHeader + '/cloudsearch?keywords=' + searchBox.value;
+            searchurl = defaultUrlHeader + '/cloudsearch?keywords=' + searchBox.value + '&limit=20&offset=0';
         }
 
         Ajax({
             url: searchurl,
             success: function (results) {
-                bofangurl = defaultUrlHeader + '/song/url?id=' + results.result.songs[0].id;
-                header_avatar_img[0].src = results.result.songs[0].al.picUrl;
-                bar_musicname[0].innerHTML = results.result.songs[0].name;
-                bar_musician[0].innerHTML = results.result.songs[0].ar[0].name;
-                console.log(bofangurl);
-                Ajax({
-                    url: bofangurl,
-                    success: function (resultss) {
-                        console.log("8y8");
-                        musicurl = resultss.data[0].url;
-                    }
-                });
+                let resultstr = JSON.stringify(results);
+                sessionStorage.setItem("search", searchurl);
+                sessionStorage.setItem("search_key", searchBox.value);
+                window.location.href = "../5.搜索歌曲页面/5.搜索歌曲页面.html";
+                // bofangurl = defaultUrlHeader + '/song/url?id=' + results.result.songs[0].id;
+                // header_avatar_img[0].src = results.result.songs[0].al.picUrl;
+                // bar_musicname[0].innerHTML = results.result.songs[0].name;
+                // bar_musician[0].innerHTML = results.result.songs[0].ar[0].name;
+                // console.log(bofangurl);
+                // Ajax({
+                //     url: bofangurl,
+                //     success: function (resultss) {
+                //         console.log("8y8");
+                //         musicurl = resultss.data[0].url;
+                //     }
+                // });
             }
         });
-        console.log(bofangurl);
 
-        setTimeout(function () {
-            console.log(musicurl);
-            bofangurls(musicurl);
-        }, 1000);
+        // setTimeout(function () {
+        //     console.log(musicurl);
+        //     bofangurls(musicurl);
+        // }, 1000);
     })
-    bofang();
+    var musicianbtn = document.getElementById("musicianbtn");
 
-    // bofang(musicurl);
-    // 在第二页返回时图片数据也能正常显示
-    // let user = JSON.parse(sessionStorage.getItem("user"));
-    // avatar[0].src = user.profile.avatarUrl;
+    musician();
 }

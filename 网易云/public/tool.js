@@ -98,7 +98,7 @@ function bofang() {
     // 获取时长的进度条
     var shichang = document.getElementById("shichang");
     shichang.value = 0;
-    broadcast_1.ontimeupdate = function () {
+    broadcast_1.addEventListener("timeupdate", function () {
         shichang.value = (broadcast_1.currentTime / broadcast_1.duration) * 100.0;
         if (broadcast_1.currentTime == 0) {
             shichang.value = 0;
@@ -109,11 +109,11 @@ function bofang() {
         var duraTime = document.querySelector(".duraTime");
         duraTime.innerHTML = transTime(broadcast_1.duration);
         if (broadcast_1.currentTime === broadcast_1.duration) {
-            
-        }
-    }
 
-    shichang.oninput = function (e) {
+        }
+    })
+
+    shichang.addEventListener("input", function (e) {
         let x = e.target.value;
         let bfb = (x / 100.0) * broadcast_1.duration;
         shichang.style.value = bfb;
@@ -125,7 +125,7 @@ function bofang() {
         if (broadcast_1.currentTime === broadcast_1.duration) {
             broadcast_1.currentTime = 0;
         }
-    };
+    });
 
     // 获取调节音量的条
     var voice = document.getElementById("voice");
@@ -160,35 +160,55 @@ function bofang() {
 }
 function play() {
     // 不能用事件监听
+    var middle_left = document.getElementsByClassName("middle_left");
     broadcast[0].onclick = function () {
         if (broadcast_1.paused) {
             broadcast_1.play();
-            console.log("555");
             broadcast[0].style.backgroundPosition = '0 -165px';
+            middle_left[0].className = 'middle_left play_roll';
         } else {
             broadcast_1.pause();
-            console.log("666");
             broadcast[0].style.backgroundPosition = '0 -204px';
+            middle_left[0].className = 'middle_left play_roll pause';
         }
     };
     broadcast[0].onmouseover = function () {
         if (broadcast_1.paused) {
-            console.log("111");
             broadcast[0].style.backgroundPosition = '-40px -204px';
         } else {
-            console.log("222");
             broadcast[0].style.backgroundPosition = '-40px -165px';
         }
     };
     broadcast[0].onmouseover = function () {
         if (broadcast_1.paused) {
-            console.log("333");
             broadcast[0].style.backgroundPosition = '0 -204px';
         } else {
-            console.log("444");
             broadcast[0].style.backgroundPosition = '0 -165px';
         }
     };
+
+
+
 }
 
+// 歌曲时间转化为秒数
+function dtime(dt) {
+    var min = parseInt(dt / 1000 / 60);
+    var sec = dt / 1000 % 60;
+    sec = parseInt(sec);
+    if (sec < 10) {
+        sec = '0' + sec;
+    }
+    ct = min + ':' + sec;
+    return ct;
+}
+
+// 点击导航栏跳转音乐家
+function musician() {
+    musicianbtn.onclick = function () {
+        console.log("123");
+        musicianbtn.href = '../7.歌手页/7.歌手页.html';
+        
+    }
+}
 

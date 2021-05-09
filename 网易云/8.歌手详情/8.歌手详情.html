@@ -5,15 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>网易云</title>
+    <title>歌手详情</title>
     <link rel="icon" href='../img/favicon.ico'>
     <link rel="stylesheet" href="../public/base.css">
-    <link rel="stylesheet" href="../public/重置样式表.css">
-    <link rel="stylesheet" href="../public/tool.js">
+    <link rel="stylesheet" href="./8.歌手详情.css">
     <link rel="stylesheet" href="../fontawesome/css/all.css">
-    <link rel="stylesheet" href="./4.歌单详情页.css">
+    <link rel="stylesheet" href="../public/重置样式表.css">
     <script src="../public/tool.js"></script>
-    <script src="./4.歌单详情页.js"></script>
+    <script src="./8.歌手详情.js"></script>
 </head>
 
 <body>
@@ -47,83 +46,24 @@
     </div>
 
     <div class="middle">
-        <div class="middle_left">
-            <div class="playlist_info">
-                <div class="info_musician_avatar">
-                    <img class="musician_avatar" src="" alt="">
-                    <span></span>
+        <div class="middle_content">
+            <div class="middle_left">
+                <div class="title">
+                    <h2 class="musician_h2"></h2>
+                    <h3 class="musician_h3"></h3>
                 </div>
-                <div class="detail_info">
-                    <div class="info_title">
-                        <i></i>
-                        <div class="info_name">熬夜做考核</div>
-                    </div>
-                    <div class="info_musician">
-                        <img class="musician_avatar_1" src="" alt="">
-                        <span class="musician_name_1">7890</span>
-                        <img class="musician_level_1" src="" alt="">
-                        <span class="musician_time_1">1243546</span>
-                    </div>
-                    <div class="info_btns">
-                        <div class="play_btn">
-                            <i></i>播放
-                        </div>
-                        <div class="plus_btn"></div>
-                        <div class="collect_btn">
-                            <i>收藏</i>
-                        </div>
-                        <div class="relay_btn">
-                            <i>分享</i>
-                        </div>
-                        <div class="download_btn">
-                            <i>下载</i>
-                        </div>
-                        <div class="comment_btn">
-                            <i>评论</i>
-                        </div>
-                    </div>
-                    <div class="info_tags">
-                        <b>标签:</b>
-                        <!-- <a class="info_tag" href="">
-                            <i>华语</i>
-                        </a>
-                        <a class="info_tag" href="">
-                            <i></i>
-                        </a>
-                        <a class="info_tag" href="">
-                            <i></i>
-                        </a> -->
-                    </div>
-                    <div class="info_introduce">
-                        <b>介绍：</b>
-                        <p class="info_intr"></p>
-                    </div>
-                    <div class="info_more">
-                        <b>介绍：</b>
-                        <p class="info_more_intr"></p>
-                    </div>
-                    <div class="more">展开</div>
+                <div class="avatar_big">
+                    <img class="avatar_img" src="" alt="">
+                    <div class="mask"></div>
                 </div>
-            </div>
-            <div class="list">
-                <div class="list_top">
-                    <h3>歌曲列表</h3>
-                    <span class="list_top_span1">303首歌</span>
-                    <span class="list_top_span2">播放：
-                        <i class="span2_num">23456</i>
-                        次</span>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="w1"></th>
-                            <th class="w2">歌曲标题</th>
-                            <th class="w3">时长</th>
-                            <th class="w4">歌手</th>
-                            <th class="w5">专辑</th>
-                        </tr>
-                    </thead>
-
+                <video class="avatar_audio" src="" controls preload poster='' style="display: none;"></video>
+                <ul class="musician_nav">
+                    <li class="musician_li musician_nav_active">热门作品</li>
+                    <li class="musician_li">所有专辑</li>
+                    <li class="musician_li">相关MV</li>
+                    <li class="musician_li">艺人介绍</li>
+                </ul>
+                <table class="musician_work_list" style="display:table;">
                     <tbody>
                         <!-- <tr class="even">
                             <td class="td_one">
@@ -147,69 +87,55 @@
                         </tr> -->
                     </tbody>
                 </table>
+                <ul class="musician_edition_list" style="display: none;">
+                    此歌手暂时没有专辑哦
+                    <!-- <li >
+                        <div class="edition_img_li">
+                            <img class="edition_img" src="" alt="">
+                            <a class="edition_a" href=""></a>
+                        </div>
+                        <p class="edition_name">Private Corner迷你音乐会</p>
+                        <p class="edition_time">Private Corner迷你音乐会</p>
+                    </li> -->
+                </ul>
+                <ul class="musician_mv_list" style="display: none;">
+                    此歌手暂时没有MV哦
+                    <!-- <li>
+                        <div class="mv_img_li">
+                            <img class="mv_img"  src="" alt="">
+                            <a class="mv_a" href="javascript:;"></a>
+                        </div>
+                        <p class="mv_p">哈哈哈哈哈哈哈哈哈哈</p>
+                    </li> -->
+                </ul>
+                <ul class="pages" style="display: none;">
+                    <li><a href="javascript:;" id="page_first">首页</a></li>
+                    <li><a href="javascript:;" id="page_prev">上一页</a></li>
+                    <li><a href="javascript:;" id="page_next">下一页</a></li>
+                    <li><a href="javascript:;" id="page_last">尾页</a></li>
+                    <li><a href="javascript:;" id='now_page'>第几页</a></li>
+                    <li><a href="javascript:;" id='page_count'>共几页</a></li>
+                </ul>
+                <ul class="musician_intro_list" style="display: none;">
+                    <!-- <li class="musician_intro_first">
+                        <h1 class="first_h1 intro_title">123</h1>
+                        <p class="first_p intro_p">123</p>
+                    </li> -->
+                </ul>
             </div>
-            <div class="playlist_see_more">
-                <span>查看更多内容</span>
-                <a href="javascript:;">立即下载</a>
-            </div>
-            <div class="comment">
-                <div class="list_top">
-                    <h3>评论</h3>
-                    <span class="list_top_span1 comment_num">100条评论</span>
-                </div>
-                <div class="my_comment">
-                    <div class="my_comment_left">
-                        <img class="avatar" src="" alt="">
-                    </div>
-                    <div class="my_comment_right">
-                        <textarea name="" id="" maxlength="140"></textarea>
-                        <div class="my_comment_btn">评论</div>
-                    </div>
-                </div>
-                <div class="comment_list">
-                    <div class="comment_list_top">最新评论（18）</div>
-                    <ul class="comments">
-                        <!-- <li class="comment_content">
-                            <div class="comment_content_left">
-                                <img class="user_avatar" src="" alt="">
-                            </div>
-                            <div class="comment_content_right">
-                                <div class="content_top">
-                                    <span class="user_name">123：</span>
-                                    <span class="user_comment">qidojqo</span>
-                                </div>
-                                <div class="more_user_info">
-                                    <div class="comment_time">2021.1.1</div>
-                                    <div class="good">
-                                        <span class="good_num">1234</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li> -->
-                    </ul>
-                </div>
+            <div class="middle_right">
+                <h1>相似歌手</h1>
+                <ul class="similar">
+                    <!-- <li>
+                        <img src="" alt="">
+                        <p>1234</p>
+                    </li> -->
+                </ul>
             </div>
         </div>
-        <!-- 此处要调用推荐歌单 -->
-        <div class="middle_right">
-            <div class="middle_right_top">相关推荐</div>
-            <ul class="middle_right_ul">
-                <!-- <li class="middle_right_li">
-                    <div class="tuijian_li_left">
-                        <img class="tuijian_img" src="" alt="">
-                    </div>
-                    <div class="tuijian_li_right">
-                        <div class="tuijian_right_top">123422222222222222222222222222225</div>
-                        by<span class="tuijian_right_bottom">1234</span>
-                    </div>
-                </li> -->
-            </ul>
-        </div>
-    </div>
 
     </div>
 
-    <!-- 底部 -->
     <div class="bottom">
         <div class="bottom_content">
             <div class="bottom_left">
@@ -262,7 +188,6 @@
         </div>
     </div>
 
-    <!-- 播放条 -->
     <div class="mp3_content">
         <div class="mp3Box">
             <!-- 播放开关 -->
@@ -272,7 +197,7 @@
                     <audio id="prev_1"></audio>
                 </div>
                 <div class="broadcast">
-                    <audio id="broadcast_1" autoplay ></audio>
+                    <audio id="broadcast_1" autoplay></audio>
                 </div>
                 <div class="next">
                     <audio id="next_1"></audio>
@@ -307,6 +232,7 @@
             <input type="range" id="voice" step="1" min="0" max="100" value="0">
         </div>
     </div>
+
 
 </body>
 

@@ -1,0 +1,165 @@
+.middle{
+    width: 900px;
+    padding: 40px;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+/* 大搜索框 */
+.search_big{
+    width: 420px;
+    height: 40px;
+    margin: 0 auto;
+    background-image: url('../img/sprite.png');
+    background-position: 0 0;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.search_big .searchBox_big{
+    width: 320px;
+    margin: 12px 0 0 20px;
+    outline: none;
+    border: none;
+}
+
+.search_big .hoverbtn{
+    width: 50px;
+    height: 40px;
+    background-image: url('../img/sprite.png');
+    background-position: -430px 0;
+    position: absolute;
+    right: 0px;
+    top: 0;
+    opacity: 0;
+}
+
+.hoverbtn:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+table{
+    width: 900px;
+}
+thead tr{
+    background-image: url('../img/table.png');
+    background-position: 0 0;
+}
+thead tr th{
+    height: 38px;
+    background-image: url('../img/table.png');
+    background-repeat: no-repeat;
+    color: #666;
+    font-size: 12px;
+    line-height: 37px;
+    text-align: left;
+    padding-left: 10px;
+}
+.w2{
+    width: 311px;
+    background-position: 0 -56px;
+}
+.w3{
+    width: 111px;
+    background-position: 0 -56px;
+}
+.w4{
+    width: 89px;
+    background-position: 0 -56px;
+}
+.w5{
+    width: 127px;
+    background-position: 0 -56px;
+}
+tbody{
+    max-height: 1290px;
+}
+tbody tr td{
+    padding: 6px 10px;
+    line-height: 18px;
+    text-align: left;
+}
+.td_one{
+    /* width: 54px;
+    height: 18px; */
+    /* background-color: #666; */
+}
+.td_one .td_one_content{
+    width: 54px;
+    height: 18px;
+}
+.td_one .td_one_content .td_one_num{
+    color: #666;
+    font-size: 12px;
+    float: left;
+}
+.td_one_play{
+    width: 17px;
+    height: 17px;
+    float: left;
+    margin-right: 10px;
+    background-image: url('../img/table.png');
+    background-position: 0 -103px;
+}
+.td_one_play:hover{
+    cursor: pointer;
+    background-position: 0 -128px;
+}
+.td_text{
+    display: block;
+    height: 18px;
+    color: #333;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.td_music_name{
+    width: 311px;
+}
+.td_musician{
+    width: 78px;
+}
+.td_edition{
+    width: 111.5px;
+}
+.td_text:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.even{
+    background-color: #f7f7f7;
+}
+
+/* 页码 */
+.pages{
+    display: flex;
+    margin-top:20px;
+    text-align: center;
+    justify-content: center;
+}
+.pages a{
+    text-decoration: none;
+    color: #000;
+    font-size: 12px;
+}
+.pages li{
+    /* float: left; */
+    width: 60px;
+    height: 30px;
+    border: 2px solid rgb(204, 204, 204);
+    border-left: none;
+    background-color: #fff;
+    line-height: 25px;
+}
+.pages li:first-child{
+    border-left: 2px solid rgb(204, 204, 204);
+}
+.pages li:hover{
+    background-color: rgb(192, 14, 20);
+    color: #fff;
+}
+.pages li:hover a{
+    color:#fff;
+}

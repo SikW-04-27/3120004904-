@@ -26,56 +26,47 @@
     margin: 0 auto;
     height: 285px;
 }
-.roll .roll_content li:nth-child(1){
+/* .roll .roll_content li:nth-child(1){
 
     background-image: url('../img/1.1.jpg');
 }
 .roll .roll_content li:nth-child(2){
-    /* display: none; */
 
     background-image: url('../img/2.1.jpg');
 }
 .roll .roll_content li:nth-child(3){
-    /* display: none; */
 
     transition: 0.5s;
     background-image: url('../img/3.1.jpg');
 }
 .roll .roll_content li:nth-child(4){
-    /* display: none; */
 
     background-image: url('../img/4.1.jpg');
 }
 .roll .roll_content li:nth-child(5){
-    /* display: none; */
 
     background-image: url('../img/5.1.jpg');
 }
 .roll .roll_content li:nth-child(6){
-    /* display: none; */
 
     background-image: url('../img/6.1.jpg');
 }
 .roll .roll_content li:nth-child(7){
-    /* display: none; */
 
     background-image: url('../img/7.1.jpg');
 }
 .roll .roll_content li:nth-child(8){
-    /* display: none; */
 
     background-image: url('../img/8.1.jpg');
 }
 .roll .roll_content li:nth-child(9){
-    /* display: none; */
 
     background-image: url('../img/9.1.jpg');
 }
 .roll .roll_content li:nth-child(10){
-    /* display: none; */
 
     background-image: url('../img/10.1.jpg');
-}
+} */
 
 .hidden{
     opacity: 0;
@@ -117,6 +108,7 @@
     width: 37px;
     height: 63px;
     position: absolute;
+    z-index: 1;
     background-image: url('../img/banner.png');
 }
 
