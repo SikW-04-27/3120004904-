@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,19 +14,23 @@
     <script src="../public/tool.js"></script>
     <script src="./5.搜索歌曲页面.js"></script>
 </head>
+
 <body>
     <div class="top">
         <div class="nav_1">
             <div class="logo"> </div>
             <div class="nav_1_menu">
-                <a href="">发现音乐</a>
-                <a href="">我的音乐</a>
-                <a href="">朋友</a>
-                <a href="">商城</a>
-                <a href="">音乐人</a>
-                <a href="">
+                <a class="onebtn" href="javascript:;">发现音乐</a>
+                <a class="twobtn" href="javascript:;">我的主页</a>
+                <a class="fivebtn" href="JavaScript:;">搜索音乐</a>
+                <a class="sevenbtn" href="javascript:;">音乐人</a>
+                <a class="qrcode_a" href="">
                     下载客户端
                     <div class="hot"></div>
+                    <div class="qrcode">
+                        <img src="../img/qrcode.jpg"alt="">
+                        <p>扫描二维码下载</p>
+                    </div>
                 </a>
             </div>
             <!-- 登录成功状态 -->
@@ -63,6 +68,7 @@
                         <td class="td_two">
                             <span class="td_one_play"></span>
                             <span class="td_text td_music_name">1234</span>
+                                <span class="add fas fa-plus"></span>
                         </td>
                         <td class="td_three">
                             <span class="td_text td_time">1234</span>
@@ -76,6 +82,19 @@
                     </tr> -->
                 </tbody>
             </table>
+            <div class="plusMusic_div" style="display: none;">
+                <h1>收藏至歌单</h1>
+                <ul class="plusMusic_ul">
+                    <!-- <li class="plusMusic_li">
+                        <span class="plusMusic_text">wodeshi </span>    
+                    </li> -->
+                    
+                </ul>
+                <div>
+                    <span class="cancel_plusMusic">取消</span>
+                    <span class="confirm_plusMusic">确认</span>
+                </div>
+            </div>
         </div>
 
         <!-- 页码 -->
@@ -139,49 +158,6 @@
             </ul>
         </div>
     </div>
-    <div class="mp3_content">
-        <div class="mp3Box">
-            <!-- 播放开关 -->
-            <div class="radioBox">
-
-                <div class="prev">
-                    <audio id="prev_1"></audio>
-                </div>
-                <div class="broadcast">
-                    <audio id="broadcast_1" autoplay ></audio>
-                </div>
-                <div class="next">
-                    <audio id="next_1"></audio>
-                </div>
-            </div>
-            <!-- 专辑头像 -->
-            <div class="head_avatar">
-                <img class="header_avatar_img" src="../img/" alt="">
-            </div>
-            <!-- 进度条 -->
-            <div class="bar">
-                <!-- 进度条信息 -->
-                <div class="bar_info">
-                    <a class="bar_musicname" href="">未播放</a>
-                    <a class="bar_musician" href="">未播放</a>
-                    <a class="bar_link" href=""></a>
-                </div>
-                <!-- 进度条主体 -->
-                <div class="bar_body">
-                    <input type="range" step="1" min="0" max="100" id="shichang" value="0" />
-                    <div class="time">
-                        <span class="currentTime">00:00</span> /
-                        <span class="duraTime">00:00</span>
-                    </div>
-                </div>
-            </div>
-            <!-- 搜藏图标 -->
-            <a class="bar_collect" href=""></a>
-            <!-- 声音图标 -->
-            <span class="bar_voice" href=""></span>
-            <!-- 音量条 -->
-            <input type="range" id="voice" step="1" min="0" max="100" value="0">
-        </div>
-    </div>
 </body>
+
 </html>

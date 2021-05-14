@@ -21,11 +21,10 @@
         <div class="nav_1">
             <div class="logo"> </div>
             <div class="nav_1_menu">
-                <a href="">发现音乐</a>
-                <a href="">我的音乐</a>
-                <a href="">朋友</a>
-                <a href="">商城</a>
-                <a id="musicianbtn" href="javascript:;">音乐人</a>
+                <a class="onebtn" href="javascript:;">发现音乐</a>
+                <a class="twobtn" href="javascript:;">我的主页</a>
+                <a class="fivebtn" href="JavaScript:;">搜索音乐</a>
+                <a class="sevenbtn" href="javascript:;">音乐人</a>
                 <a class="qrcode_a" href="">
                     下载客户端
                     <div class="hot"></div>
@@ -68,14 +67,12 @@
                         <div class="RemPassword">
                             <input type="checkbox" id="Rem_Password">记住密码
                         </div>
-                        <div class="forget">忘记密码？</div>
                         <button id="SignUp_btn">登录</button>
                         <button id="register_btn">注册</button>
 
                     </div>
                     <div class="SignUp_bottom">
                         <span id="SignUp_email0">＜邮箱登录</span>
-                        <span id="SignUp_qrcode0">二维码登录＞</span>
                     </div>
                 </div>
 
@@ -110,24 +107,18 @@
                     <div class="email_content">
                         <input type="text" id="email_phone" placeholder="请输入邮箱">
                         <input type="password" id="email_password" placeholder="请输入密码">
-                        <div class="auto-Sign">
-                            <input type="checkbox" id="autoSignUp">自动登录
+                        <div class="RemPassword">
+                            <input type="checkbox" id="Rem_Password">记住密码
                         </div>
-                        <div class="forget">忘记密码？</div>
                         <button id="email_SignUp_btn">登录</button>
                         <button id="email_register_btn">注册</button>
 
                     </div>
                     <div class="email_bottom">
                         <span id="SignUp_phone3">＜手机登录</span>
-                        <span id="SignUp_qrcode3">二维码登录＞</span>
                     </div>
                 </div>
 
-                <!-- 二维码登录页面 -->
-                <div class="qrcodebig">
-
-                </div>
             </div>
             <!-- 创作者中心 -->
             <div class="createCenter">创作者中心</div>
@@ -179,7 +170,7 @@
             <div class="rectop">
                 <span class="icon"></span>
                 <span class="rectitle">热门推荐</span>
-                <ul class="rec_list">
+                <!-- <ul class="rec_list">
                     <li class="rec_li">华语</li>
                     <li class="rec_li">流行</li>
                     <li class="rec_li">摇滚</li>
@@ -188,7 +179,7 @@
                 </ul>
                 <div class="rec_more">更多
                     <i class="fas fa-arrow-right" style="color: rgb(139,14,13);"></i>
-                </div>
+                </div> -->
             </div>
             <div class="MusicList">
                 <!-- <div class="CreateMusic">
@@ -251,9 +242,6 @@
             <div class="rectop">
                 <span class="icon"></span>
                 <span class="rectitle">榜单</span>
-                <div class="rec_more">更多
-                    <i class="fas fa-arrow-right" style="color: rgb(139,14,13);"></i>
-                </div>
             </div>
             <div class="chart">
                 <ul class="chart_list">
@@ -263,10 +251,6 @@
                         </a>
                         <div>
                             <a class="chart_in" href="">飙升榜</a>
-                            <div class="chart_btn">
-                                <a href="javascript:;" style="background-position: -267px -205px;"></a>
-                                <a href="javascript:;" style="background-position: -300px -205px;"></a>
-                            </div>
                         </div>
 
                     </div>
@@ -281,10 +265,6 @@
                         </a>
                         <div>
                             <a class="chart_in" href="">新歌榜</a>
-                            <div class="chart_btn">
-                                <a href="javascript:;" style="background-position: -267px -205px;"></a>
-                                <a href="javascript:;" style="background-position: -300px -205px;"></a>
-                            </div>
                         </div>
 
                     </div>
@@ -299,10 +279,6 @@
                         </a>
                         <div>
                             <a class="chart_in" href="">原创榜</a>
-                            <div class="chart_btn">
-                                <a href="javascript:;" style="background-position: -267px -205px;"></a>
-                                <a href="javascript:;" style="background-position: -300px -205px;"></a>
-                            </div>
                         </div>
 
                     </div>
@@ -310,6 +286,19 @@
                     </ul>
                     <div class="chartmore">查看更多></div>
                 </ul>
+                <div class="plusMusic_div" style="display: none;">
+                    <h1>收藏至歌单</h1>
+                    <ul class="plusMusic_ul">
+                        <!-- <li class="plusMusic_li">
+                            <span class="plusMusic_text">wodeshi </span>    
+                        </li> -->
+                        
+                    </ul>
+                    <div>
+                        <span class="cancel_plusMusic">取消</span>
+                        <span class="confirm_plusMusic">确认</span>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -508,9 +497,8 @@
     </div>
 
     <!-- 播放条 -->
-    <div class="mp3_content">
+    <!-- <div class="mp3_content">
         <div class="mp3Box">
-            <!-- 播放开关 -->
             <div class="radioBox">
 
                 <div class="prev">
@@ -523,19 +511,15 @@
                     <audio id="next_1"></audio>
                 </div>
             </div>
-            <!-- 专辑头像 -->
             <div class="head_avatar">
                 <img class="header_avatar_img" src="../img/" alt="">
             </div>
-            <!-- 进度条 -->
             <div class="bar">
-                <!-- 进度条信息 -->
                 <div class="bar_info">
                     <a class="bar_musicname" href="">未播放</a>
                     <a class="bar_musician" href="">未播放</a>
                     <a class="bar_link" href=""></a>
                 </div>
-                <!-- 进度条主体 -->
                 <div class="bar_body">
                     <input type="range" step="1" min="0" max="100" id="shichang" value="0" />
                     <div class="time">
@@ -544,14 +528,11 @@
                     </div>
                 </div>
             </div>
-            <!-- 搜藏图标 -->
             <a class="bar_collect" href=""></a>
-            <!-- 声音图标 -->
             <span class="bar_voice" href=""></span>
-            <!-- 音量条 -->
             <input type="range" id="voice" step="1" min="0" max="100" value="0">
         </div>
-    </div>
+    </div> -->
 
 </body>
 

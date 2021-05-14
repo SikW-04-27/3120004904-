@@ -20,14 +20,17 @@
         <div class="nav_1">
             <div class="logo"> </div>
             <div class="nav_1_menu">
-                <a href="">发现音乐</a>
-                <a href="">我的音乐</a>
-                <a href="">朋友</a>
-                <a href="">商城</a>
-                <a href="">音乐人</a>
-                <a href="">
+                <a class="onebtn" href="javascript:;">发现音乐</a>
+                <a class="twobtn" href="javascript:;">我的主页</a>
+                <a class="fivebtn" href="JavaScript:;">搜索音乐</a>
+                <a class="sevenbtn" href="javascript:;">音乐人</a>
+                <a class="qrcode_a" href="">
                     下载客户端
                     <div class="hot"></div>
+                    <div class="qrcode">
+                        <img src="../img/qrcode.jpg"alt="">
+                        <p>扫描二维码下载</p>
+                    </div>
                 </a>
             </div>
             <!-- 登录成功状态 -->
@@ -73,10 +76,27 @@
                 <div class="Modefy_Userinfo">编辑个人资料</div>
             </div>
         </div>
+        <!-- 我创建的歌单 -->
         <div class="middle_content_2">
-            <h1 class="CreateMusic_list">我创建的歌单（1）</h1>
+            <h1 class="CreateMusic_list">暂无歌单</h1>
+            <span class="deletebtn">编辑</span>
+            <span class="deletebtn_1">取消</span>
+            <span class="deletebtn_2">删除</span>
             <div class="CreateMusics">
                 <div class="CreateMusic">
+                    <a class=" plusMusic" href="javascript:;" title="添加歌单">
+                        <img class="CreateMusic_img" src="../img/plus.jpg" alt="">
+                    </a>
+                    <div class="plusMusic_div" style="display: none;">
+                        <h1>新建歌单</h1>
+                        <input class="plusMusic_input" type="text" placeholder="请输入新建歌单名">
+                        <div>
+                            <span class="cancel_plusMusic">取消</span>
+                            <span class="confirm_plusMusic">确认</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="CreateMusic">
                     <a class="CreateMusic_a" href="">
                         <img class="CreateMusic_img" src="" alt="">
                     </a>
@@ -85,7 +105,17 @@
                         <span class="CreateMusic_num"></span>
                     </div>
                     <div class="CreateMusic_name"></div>
-                </div>
+                    <input class="check" type="checkbox">
+                </div> -->
+            </div>
+        </div>
+        <div class="middle_content_2 edition_hidden" style="display: none;">
+            <h1 class="CreateMusic_list">暂无专辑</h1>
+            <span class="deletebtn">编辑</span>
+            <span class="deletebtn_1">取消</span>
+            <span class="deletebtn_2">删除</span>
+            <div class="CreateMusics">
+
 
             </div>
         </div>
@@ -114,74 +144,35 @@
             </div>
             <ul class="bottom_right">
                 <li>
-                    <a href="" style="background-image: url('../img/foot_enter_new.png'); background-position: -60px -456.5px;"></a>
+                    <a href=""
+                        style="background-image: url('../img/foot_enter_new.png'); background-position: -60px -456.5px;"></a>
                     <p>Amped Studio</p>
                 </li>
                 <li>
-                    <a href="" style="background-image: url('../img/foot_enter_new.png'); background-position: -60px -101px;"></a>
+                    <a href=""
+                        style="background-image: url('../img/foot_enter_new.png'); background-position: -60px -101px;"></a>
                     <p>用户认证</p>
-                </li>               
+                </li>
                 <li>
-                    <a href="" style="background-image: url('../img/foot_enter_new.png'); background-position: 0 0;"></a>
+                    <a href=""
+                        style="background-image: url('../img/foot_enter_new.png'); background-position: 0 0;"></a>
                     <p>独立音乐人</p>
                 </li>
                 <li>
-                    <a href="" style="background-image: url('../img/foot_enter_new.png'); background-position: -60px -50px;"></a>
+                    <a href=""
+                        style="background-image: url('../img/foot_enter_new.png'); background-position: -60px -50px;"></a>
                     <p>赞赏</p>
                 </li>
                 <li>
-                    <a href="" style="background-image: url('../img/foot_enter_new.png'); background-position: 0 -101px;"></a>
+                    <a href=""
+                        style="background-image: url('../img/foot_enter_new.png'); background-position: 0 -101px;"></a>
                     <p>视频奖励</p>
                 </li>
             </ul>
         </div>
     </div>
 
-    <!-- 播放条 -->
-    <div class="mp3_content">
-        <div class="mp3Box">
-            <!-- 播放开关 -->
-            <div class="radioBox">
-
-                <div class="prev">
-                    <audio id="prev_1"></audio>
-                </div>
-                <div class="broadcast">
-                    <audio id="broadcast_1"></audio>
-                </div>
-                <div class="next">
-                    <audio id="next_1"></audio>
-                </div>
-            </div>
-            <!-- 专辑头像 -->
-            <div class="head_avatar">
-                <img class="header_avatar_img" src="../img/赵雷.jpg" alt="">
-            </div>
-            <!-- 进度条 -->
-            <div class="bar">
-                <!-- 进度条信息 -->
-                <div class="bar_info">
-                    <a class="bar_musicname" href="">未播放</a>
-                    <a class="bar_musician" href="">未播放</a>
-                    <a class="bar_link" href=""></a>
-                </div>
-                <!-- 进度条主体 -->
-                <div class="bar_body">
-                    <input type="range" step="1" min="0" max="100" id="shichang" value="0" />
-                    <div class="time">
-                        <span class="currentTime">00:00</span> /
-                        <span class="duraTime">00:00</span>
-                    </div>
-                </div>
-            </div>
-            <!-- 搜藏图标 -->
-            <a class="bar_collect" href=""></a>
-            <!-- 声音图标 -->
-            <span class="bar_voice" href=""></span>
-            <!-- 音量条 -->
-            <input type="range" id="voice" step="1" min="0" max="100" value="0">
-        </div>
-    </div>
+    
 </body>
 
 </html>

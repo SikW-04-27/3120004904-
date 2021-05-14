@@ -368,6 +368,7 @@ tbody tr td{
     padding: 6px 10px;
     line-height: 18px;
     text-align: left;
+    position: relative;
 }
 .td_one{
     /* width: 54px;
@@ -404,7 +405,22 @@ tbody tr td{
     text-overflow: ellipsis;
 }
 .td_music_name{
-    width: 205.5px;
+    width: 170.5px;
+}
+.add,.add_musiclist{
+    position: absolute;
+    right: 35px;
+    top: 12px;
+    font-size: 12px;
+    color: #666;
+    cursor: pointer;
+}
+.add_musiclist{
+    right: 10px;
+}
+.add:hover,
+.add_musiclist:hover{
+    color: #000;
 }
 .td_musician{
     width: 78px;

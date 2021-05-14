@@ -4,9 +4,6 @@ window.onload = function () {
     avatar[1].src = user_6.profile.avatarUrl;
     var lyric = document.getElementsByClassName("lyric");
     let playingid = sessionStorage.getItem('playing_id');
-    var header_avatar_img = document.getElementsByClassName("header_avatar_img");
-    var bar_musicname = document.getElementsByClassName("bar_musicname");
-    var bar_musician = document.getElementsByClassName("bar_musician");
     var roll_img = document.getElementsByClassName("roll_img");
     var title_name = document.getElementsByClassName("title_name");
     var middle_left = document.getElementsByClassName("middle_left");
@@ -14,30 +11,49 @@ window.onload = function () {
     var my_comment_btn = document.getElementsByClassName("my_comment_btn");
     var textarea = document.getElementsByTagName("textarea");
 
+    let ing = sessionStorage.getItem('ing');
+
     bofangurl = defaultUrlHeader + '/song/detail?ids=' + playingid;
     Ajax({
         url: bofangurl,
         success: function (resultss) {
-            header_avatar_img[0].src = resultss.songs[0].al.picUrl;
-            bar_musicname[0].innerHTML = resultss.songs[0].name;
-            bar_musician[0].innerHTML = resultss.songs[0].ar[0].name;
+            // console.log(resultss.songs[0].al.picUrl);
+            parent.header_avatar_img[0].src = resultss.songs[0].al.picUrl;
+            parent.bar_musicname[0].innerHTML = resultss.songs[0].name;
+            parent.bar_musician[0].innerHTML = resultss.songs[0].ar[0].name;
             title_name[0].innerHTML = resultss.songs[0].name;
             roll_img[0].src = resultss.songs[0].al.picUrl;
+            sessionStorage.setItem("musicianid", resultss.songs[0].ar[0].id);
         }
     });
+    if (ing != 'true') {
+        bofangurl_1 = defaultUrlHeader + '/song/url?id=' + playingid;
+        Ajax({
+            url: bofangurl_1,
+            success: function (resultss) {
+                parent.broadcast[0].style.backgroundPosition = '0 -165px';
+                musicurl = resultss.data[0].url;
+                bofangurls(musicurl);
 
-    bofangurl_1 = defaultUrlHeader + '/song/url?id=' + playingid;
-    Ajax({
-        url: bofangurl_1,
-        success: function (resultss) {
-            broadcast[0].style.backgroundPosition = '0 -165px';
-            musicurl = resultss.data[0].url;
-            bofang();
-            bofangurls(musicurl);
+            }
+        });
 
-        }
-    });
+    }
     play();
+    bofang();
+    shichangload();
+
+    let arrdata = JSON.parse(sessionStorage.getItem('arr'));
+    playARR(arrdata);
+
+    // 点击导航栏跳转页面
+    one();
+    two();
+    five();
+    seven();
+
+    // 搜索功能
+    search();
 
     // 获取歌词
     playidurl = defaultUrlHeader + '/lyric?id=' + playingid;
@@ -49,7 +65,7 @@ window.onload = function () {
             console.log(parts);
             for (let i = 0; i < parts.length - 1; i++) {
                 parts[i] = handle_lyric(parts[i]);
-                console.log(parts[i]);
+                // console.log(parts[i]);
             }
 
             // 根据歌词创建li
@@ -58,13 +74,13 @@ window.onload = function () {
                 li.innerHTML = parts[i].words;
                 lyric[0].appendChild(li);
                 li.className = 'normal';
-                console.log("12");
+                // console.log("12");
             }
             var li = document.getElementsByTagName("li");
             // 监听播放条改变
-            broadcast_1.addEventListener("timeupdate", function () {
+            parent.broadcast_1[0].addEventListener("timeupdate", function () {
                 for (let j = 0; ; j++) {
-                    if (parseInt(broadcast_1.currentTime) >= parseInt(parts[j].seconds) && parseInt(broadcast_1.currentTime) < parseInt(parts[j + 1].seconds)) {
+                    if (parseInt(parent.broadcast_1[0].currentTime) >= parseInt(parts[j].seconds) && parseInt(parent.broadcast_1[0].currentTime) < parseInt(parts[j + 1].seconds)) {
                         lyric[0].style.marginTop = -50 * (j - 2) + "px";
                         for (let j = 0; j < parts.length - 1; j++) {
                             li[j].className = 'normal';
@@ -77,9 +93,9 @@ window.onload = function () {
 
             });
             // 点击播放条跳转
-            shichang.addEventListener("input", function () {
+            parent.shichang[0].addEventListener("input", function () {
                 console.log(parseInt(parts.length - 1));
-                if (parseInt(broadcast_1.currentTime) >= parseInt(parts[parts.length - 2].seconds)) {
+                if (parseInt(parent.broadcast_1[0].currentTime) >= parseInt(parts[parts.length - 2].seconds)) {
                     console.log("1298");
                     lyric[0].style.marginTop = -50 * (parts.length - 1 - 3) + "px";
                     for (let j = 0; j < parts.length - 1; j++) {
@@ -88,7 +104,7 @@ window.onload = function () {
                     li[parts.length - 2].className = 'big';
                 } else {
                     for (let j = 1; ; j++) {
-                        if (parseInt(broadcast_1.currentTime) <= parseInt(parts[j + 1].seconds)) {
+                        if (parseInt(parent.broadcast_1[0].currentTime) <= parseInt(parts[j + 1].seconds)) {
                             lyric[0].style.marginTop = -50 * (j - 3) + "px";
                             for (let j = 0; j < parts.length - 1; j++) {
                                 li[j].className = 'normal';
@@ -124,7 +140,12 @@ window.onload = function () {
         }
     });
 
-    let commenturl = defaultUrlHeader + '/comment/music?id=' + playingid;
+    
+    getcom();
+    function getcom(){
+        comments[0].innerHTML = '';
+        let timestamp = (new Date()).valueOf();
+        let commenturl = defaultUrlHeader + '/comment/music?id=' + playingid+ '&timestamp=' + timestamp;
     Ajax({
         url: commenturl,
         success: function (results) {
@@ -140,7 +161,7 @@ window.onload = function () {
             }
             var comment_list_top = document.getElementsByClassName("comment_list_top");
             var comment_num = document.getElementsByClassName("comment_num");
-            comment_num[0].innerHTML = results.comments.length + "条评论";
+            // comment_num[0].innerHTML = results.comments.length + "条评论";
             comment_list_top[0].innerHTML = "最新评论（" + results.total + "）";
             // 储存页码
             sessionStorage.setItem('last_page', parseInt(results.total / 20));
@@ -150,16 +171,31 @@ window.onload = function () {
             now_page.innerHTML = '第' + 1 + '页';
         }
     });
+    }
 
     // 发送评论
     my_comment_btn[0].onclick = function () {
         let text = textarea[0].value;
         let cook = user_6.cookie;
-        let sendcommenturl = defaultUrlHeader + '/comment?t=1&type=0' + '&id=' + playingid + '&content=' + text + '&cookie=' + cook;
+        let timestamp = (new Date()).valueOf();
+        let sendcommenturl = defaultUrlHeader + '/comment?t=1&type=0' + '&id=' + playingid + '&content=' + text + '&cookie=' + cook+ '&timestamp=' + timestamp;
         Ajax({
             url: sendcommenturl,
-            success:function(){
-                alert("发送成功");
+            success: function () {
+                comments[0].innerHTML = '';
+                let div = document.createElement('div');
+                let img = document.createElement('img');
+                comments[0].appendChild(div);
+                div.style.margin = '10px auto';
+                div.style.width = 100 + 'px';
+                div.style.height = 100 + 'px';
+                img.style.width = 100 + 'px';
+                img.style.height = 100 + 'px';
+                div.appendChild(img);
+                img.src = '../img/loading.gif';
+                setTimeout(function () {
+                        getcom();
+                }, 2000);
             }
         });
     }
@@ -223,7 +259,7 @@ window.onload = function () {
             music_page = 0
         }
         sessionStorage.setItem('music_page', music_page);
-        now_page.innerHTML = '第' + (music_page+1) + '页';
+        now_page.innerHTML = '第' + (music_page + 1) + '页';
         let commenturl = defaultUrlHeader + '/comment/music?id=' + playingid + '&limit=20&offset=' + music_page * 20;;
         comments[0].innerHTML = '';
         Ajax({
@@ -246,12 +282,12 @@ window.onload = function () {
     page_next.onclick = function () {
         let music_page = Number(sessionStorage.getItem('music_page')) + 1;
         let lastpage = Number(sessionStorage.getItem('last_page'));
-        console.log(typeof(lastpage));
+        console.log(typeof (lastpage));
         if (music_page > lastpage) {
             music_page = lastpage;
         }
         sessionStorage.setItem('music_page', music_page);
-        now_page.innerHTML = '第' + (music_page+1) + '页';
+        now_page.innerHTML = '第' + (music_page + 1) + '页';
         let commenturl = defaultUrlHeader + '/comment/music?id=' + playingid + '&limit=20&offset=' + music_page * 20;;
         comments[0].innerHTML = '';
         Ajax({

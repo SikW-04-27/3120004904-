@@ -516,8 +516,8 @@ body{
     width: 100%;
     height: 47px;
     background-color: #333;
-    position:sticky;
-    bottom: 0;
+    position:fixed;
+    bottom: 0px;
 }
 
 /* 播放器容器 */
@@ -525,7 +525,7 @@ body{
     width: 980px;
     height: 47px;
     background-color: #333;
-    margin: 100px auto;
+    margin: 0px auto;
     display: flex;
     /*  background-image: url('./img/playbar.png');
     background-position: 0 0; */
@@ -649,7 +649,7 @@ body{
     display: flex;
 }
 
-#shichang {
+.shichang {
     -webkit-appearance: none;
     outline: none;
     position: relative;
@@ -663,7 +663,7 @@ body{
 }
 
 
-#shichang::-webkit-slider-runnable-track {
+.shichang::-webkit-slider-runnable-track {
     position: relative;
     top: 3px;
     /* background-color: #333; */
@@ -672,7 +672,8 @@ body{
     border-radius: 5px;
 }
 
-#shichang::-webkit-slider-thumb {
+.shichang::-webkit-slider-thumb {
+    cursor: pointer;
     position: relative;
     top: -2px;
     -webkit-appearance: none;
@@ -706,15 +707,114 @@ body{
 }
 
 .bar_collect {
+    display: block;
     width: 25px;
     height: 25px;
     margin-top: 12px;
     background-image: url('../img/playbar.png');
     background-position: -88px -163px;
+    position: relative;
 }
 
 .bar_collect:hover {
     background-position: -88px -189px;
+}
+
+.bar_collect:hover .collecting_list{
+    display: block;
+}
+
+.collecting_list{
+    display: none;
+    border-radius: 10px;
+    width: 230px;
+    height: 378px;
+    background-color: #333333;
+    opacity: 0.9;
+    position: absolute;
+    top: -400px;
+    left: -100px;
+    overflow: hidden;
+    padding-bottom: 10px;
+    border-bottom: 15px solid #333333;
+}
+
+.collecting_list .collect_title{
+    height: 30px;
+    line-height: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.collecting_list .collect_title h2:first-child{
+    border-right: 1px solid #797979;
+}
+.collecting_list .collect_title h2{
+    width: 115px;
+    text-align: center;
+    color: #797979;
+    font-size: 14px;
+}
+.collect_all{
+    width: 460px;
+    height: 370px;
+    position: relative;
+    left: 0;
+    background-color: #797979;
+    display: flex;
+    justify-content: space-between;
+    transition: 0.5s;
+}
+.collect_all ul{
+    width: 230px;
+    height: 358px;
+    overflow:auto;
+    border-top: 2px solid #9b9b9b;
+    border-bottom: 2px solid #9b9b9b;
+}
+.collect_all ul::-webkit-scrollbar{
+    width: 0;    
+}
+.collect_01_li,
+.collect_02_li{
+    width: 190px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 20px 0 20px;
+    display: flex;
+    color: #d3d3d3;
+    font-size: 14px;
+}
+.collect_01_li:hover,
+.collect_02_li:hover{
+    background-color: #6e6e6e;
+}
+.collect_01_num,
+.collect_02_num{
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-bottom: 1px solid #9b9b9b;
+}
+.collect_01_content,
+.collect_02_content{
+    display: block;
+    width: 150px;
+    height: 30px;
+    line-height: 30px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border-bottom: 1px solid #9b9b9b;
+}
+.collect_02_delete{
+    display: block;
+    width: 25px;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px solid #9b9b9b;
+}
+.collect_02_delete:hover{
+    color: #fff;
+    opacity: 1;
 }
 
 .bar_voice {
@@ -732,7 +832,7 @@ body{
 }
 
 /* 音量条 */
-#voice {
+.voice {
     -webkit-appearance: none;
     position: relative;
     top: 18px;
@@ -746,14 +846,14 @@ body{
     width: 90px;
 }
 
-#voice::-webkit-slider-runnable-track {
+.voice::-webkit-slider-runnable-track {
     position: relative;
     top: 3px;
     background-image: url('../img/statbar.png');
     border-radius: 5px;
 }
 
-#voice::-webkit-slider-thumb {
+.voice::-webkit-slider-thumb {
     position: relative;
     top: -2px;
     -webkit-appearance: none;
@@ -767,4 +867,90 @@ body{
     /*拖动块背景*/
     border-radius: 50%;
     /*外观设置为圆形*/
+}
+
+/* 添加歌曲 */
+
+.plusMusic_div{
+    width: 300px;
+    height: 270px;
+    background-color: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: -200px 0 0 -150px;
+    z-index: 2;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgb(51 51 51);
+    border-radius: 5px;
+}
+
+.plusMusic_div h1{
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    height: 50px;
+    line-height: 50px;
+}
+
+.plusMusic_div .plusMusic_ul{
+    width: 300px;
+    height: 150px;
+    overflow: auto;
+    margin: 0 auto;
+    border-top: 1px solid #d3d3d3;
+}
+.plusMusic_ul::-webkit-scrollbar{
+    width: 0;    
+}
+
+.plusMusic_div li{
+    text-align: left;
+    height: 30px;
+    line-height: 30px;
+    width: 300px;
+    font-size: 14px;
+}
+
+.plusMusic_div li span{
+    display: block;
+    width: 230px;
+    margin: 0 auto;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+.plusMusic_div li:hover{
+    background-color: #c9c9c9;
+    cursor: pointer;
+}
+
+.plusMusic_div div{
+    width: 250px;
+    height: 40px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cancel_plusMusic,.confirm_plusMusic{
+    display: block;
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 30px;
+    border-radius: 5px;
+    background-image: url('../img/button2.png');
+    background-position: -5px -469px;
+}
+.cancel_plusMusic{
+    background-image: url('../img/button2.png');
+    background-position: 0 -60px;
+}
+
+.cancel_plusMusic:hover{
+    background-position: -5px -142px;
+}
+.confirm_plusMusic:hover{
+    background-position: -5px -551px;
 }

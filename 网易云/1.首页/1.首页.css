@@ -387,26 +387,15 @@
     width: 80px;
 }
 .chart_list_top .chart_in{
-    margin: 6px 0 10px 10px;
+    margin: 20px 0 10px 20px;
     display: block;
     height: 18.5px;
     text-decoration: none;
     color: #333;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 16px;
 }
-.chart_list_top .chart_btn{
-    width: 116px;
-    height: 30px;
-    margin-left: 10px;
-}
-.chart_list_top .chart_btn a{
-    display: inline-block;
-    width: 22px;
-    height: 22px;
-    background-image: url('../img/index.png');
-    margin-right: 6px;
-}
+
 .chart_musics{
     width: 230px;
     height: 320px;
@@ -441,12 +430,13 @@
     line-height: 32px;
     text-decoration: none;
     color: #000;
+    cursor: pointer;
 }
 .chart_music .chart_music_name:hover{
     text-decoration: underline;
 }
 .chart_music .oper{
-    width: 82px;
+    width: 60px;
     height: 19px;
     margin-top: 7px;
     float: right;
@@ -458,7 +448,7 @@
     height: 17px;
     margin-right: 10px;
     background-image: url('../img/index.png');
-}
+}               
 .chart_music:hover .oper{
     display: block;
 }
@@ -693,3 +683,4 @@
     overflow: hidden;
     white-space: nowrap
 }
+

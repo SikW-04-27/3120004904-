@@ -1,7 +1,9 @@
 window.onload = function () {
     var user_3 = JSON.parse(sessionStorage.getItem("user"));
     console.log(user_3);
-
+    bofang();
+    shichangload();
+    play();
     const defaultUrlHeader = "https://autumnfish.cn";
     // 打开如果有保存的话自动登录
 
@@ -41,11 +43,14 @@ window.onload = function () {
     nickname.value = user_3.profile.nickname;
 
     var user_info = user_3.profile.userId;
+    let timestamp=(new Date()).valueOf();
     let getUserList =
-        defaultUrlHeader + '/user/detail?uid=' + user_info;
+        defaultUrlHeader + '/user/detail?uid=' + user_info + '&cookie=' + user_3.cookie+'&timestamp='+timestamp;
     Ajax({
         url: getUserList,
         success: function (result) {
+            console.log(result);
+            nickname.value = result.profile.nickname;
             signature_1.value = result.profile.signature;
             let birth = formatDateT(result.profile.birthday);
             let newbirth = birth.split('T');
@@ -53,44 +58,72 @@ window.onload = function () {
         }
     });
 
-    
 
+
+    // // 监听file是否改变
+    // file[0].onchange = function (event) {
+    //     let file_0 = event.target.files[0];
+    //     let formData = new FormData();
+    //     console.log(file_0);
+    //     formData.append('imgFile', file_0,file_0.name);
+    //     console.log(formData);
+    //     // 创建字符串对象，用于存储请求报文的字符串
+    //     var params = '';
+    //     // 获取参数对象中的各种数据并拼接在一起
+    //     for (var attr in file_0) {
+    //         params += attr + '=' + file_0[attr] + '&';
+    //     }
+    //     // 对拼接在一起的字符串进行截取，目的在于将字符串末尾的 & 去除
+    //     params = params.substr(0, params.length - 1);
+    //     console.log(params);
+    //     Ajax({
+    //         url: 'https://autumnfish.cn/avatar/upload?imgFile='+params+'&imgSize=140'+'&cookie='+user_3.cookie,
+    //         header: {
+    //             'Content-Type': 'multipart/form-data'
+    //         },
+    //         success: function (results) {
+    //             avatar[1].src=results.data.url_pre;
+    //         }
+    //     });
+
+    // }
+
+   
     // 监听file是否改变
     file[0].onchange = function (event) {
         let file_0 = event.target.files[0];
         let formData = new FormData();
-        formData.append('imgFile', file_0)
         console.log(file_0);
-        // 创建字符串对象，用于存储请求报文的字符串
-        var params = '';
-        // 获取参数对象中的各种数据并拼接在一起
-        for (var attr in formData) {
-            params += attr + '=' + formData[attr] + '&';
-        }
-        // 对拼接在一起的字符串进行截取，目的在于将字符串末尾的 & 去除
-        params = params.substr(0, params.length - 1);
-        Ajax({
-            url: 'https://autumnfish.cn/avatar/upload',
-            header: {
-                'Content-Type': 'multipart/form-data'
-            },
-            success: function () {
-                console.log(url);
-            }
-        });
+        formData.append('imgFile', file_0);
+        console.log(formData.get('imgFile'));
 
+        var xhr1=new XMLHttpRequest();
+        xhr1.open('post','https://autumnfish.cn/avatar/upload?imgSize=140&cookie='+user_3.cookie);
+        xhr1.setRequestHeader('Content-Type','multipart/form-data');
+        xhr1.send(formData);
+        xhr1.onreadystatechange=function(){
+            if(xhr1.readyState===4){
+                if(xhr1.status>=200&&xhr1.status<300){
+                    // avatar[1].src=results.data.url_pre;
+                    console.log("123");
+                }
+            }
+        }
     }
 
     // 保存设置
     save_button[0].onclick = function () {
+        timer = new Date(birthday.value).getTime();
         let updataurl =
-            defaultUrlHeader + '/user/update?' + 'gender=0&signature=' + signature_1.value + '&city=440300&nickname=' + nickname.value + '&birthday=1525918298004&province=440000';
-        console.log(updataurl);
+            defaultUrlHeader + '/user/update?' + 'gender=0&signature=' + signature_1.value + '&city=440300&nickname=' + nickname.value + '&birthday=' + timer + '&province=440000&cookie=' + user_3.cookie+'&timestamp='+timestamp;
         Ajax({
-            url: updataurl
+            url: updataurl,
+            success: function () {
+                parent.inner.src = '../3.修改用户信息页/3.修改用户信息页.html';
+            }
         });
 
-        
+
 
 
         // const res = await axios({
@@ -165,9 +198,23 @@ window.onload = function () {
 
     // 修改密码
     save_button1[1].onclick = function () {
-        let urls = defaultUrlHeader + '/register/cellphone?' + 'phone=' + phonenum.value + '&password=' + new_password.value + '&captcha=' + captcha_password.value + '&nickname=' + user_3.profile.nickname;
+        let urls = defaultUrlHeader + '/register/cellphone?' + 'phone=' + phonenum.value + '&password=' + new_password.value + '&captcha=' + captcha_password.value + '&nickname=' + user_3.profile.nickname + '&cookie=' + user_3.cookie;
         Ajax({
             url: urls
         })
     }
+
+    // 可以操作待播歌单
+    let arrdata = JSON.parse(sessionStorage.getItem('arr'));
+    playARR(arrdata);
+
+    // 点击导航栏跳转页面
+    one();
+    two();
+    five();
+    seven();
+
+    // 搜索功能
+    search();
+
 }

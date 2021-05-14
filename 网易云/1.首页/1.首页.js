@@ -37,6 +37,14 @@ window.onload = function () {
     var Rem_Password = document.getElementById("Rem_Password");
     var SignUp_User_down1 = document.querySelector(".SignUp_User_down1");
     var SignUp_User_down2 = document.querySelector(".SignUp_User_down2");
+    // 添加歌曲到待播清单
+    var add = document.getElementsByClassName("add");
+    // 添加歌曲到我的歌单
+    var plusMusic_div = document.getElementsByClassName("plusMusic_div");
+    var plusMusic_ul = document.getElementsByClassName("plusMusic_ul");
+    var plusMusic_li = document.getElementsByClassName("plusMusic_li");
+    var confirm_plusMusic = document.getElementsByClassName("confirm_plusMusic");
+    var cancel_plusMusic = document.getElementsByClassName("cancel_plusMusic");
 
     // 点击登录按钮
     function getCookie(name) {
@@ -65,7 +73,8 @@ window.onload = function () {
 
     // 点击头像跳转到新页面
     SignUp_User_down1.onclick = function () {
-        window.location.href = "../2.用户详情页/2.用户详情页.html";
+        // window.location.href = "../2.用户详情页/2.用户详情页.html";
+        parent.inner.src = '../2.用户详情页/2.用户详情页.html';
     }
     // 退出登录
     SignUp_User_down2.onclick = function () {
@@ -93,6 +102,10 @@ window.onload = function () {
         let password = SignUp_password.value;
         let dengluurl =
             defaultUrlHeader + "/login/cellphone?" + "phone=" + phone + "&" + "password=" + password;
+        signup(dengluurl, phone, password);
+
+    });
+    function signup(dengluurl, phone, password) {
         Ajax({
             url: dengluurl,
             success: function (result) {
@@ -100,7 +113,6 @@ window.onload = function () {
                 console.log(result);
                 let resultstr = JSON.stringify(result);
                 console.log(resultstr);
-                console.log("123");
                 sessionStorage.setItem('user', resultstr);
 
                 // 缓存存完就执行，个人头像信息
@@ -131,17 +143,15 @@ window.onload = function () {
                 SignUpBox.innerHTML = "密码错误";
             }
         });
-    });
+    }
     // 邮箱登录
-    email_SignUp_btn.onclick = function () {
+    email_SignUp_btn.addEventListener('click', function () {
         let email = email_phone.value;
         let password = email_password.value;
         let dengluurl =
             defaultUrlHeader + "/login?email=" + email + "&password=" + password;
-        Ajax({
-            url: dengluurl
-        });
-    }
+        signup(dengluurl, email, password);
+    })
 
     // 手机登录
     var SignUp = document.querySelector(".SignUp");
@@ -154,8 +164,6 @@ window.onload = function () {
     var emailbig = document.querySelector(".emailbig");
     // 邮箱登录跳转
     var SignUp_email0 = document.getElementById("SignUp_email0");
-    // 二维码登录跳转
-    var SignUp_qrcode0 = document.getElementById("SignUp_qrcode0");
     SignUp.addEventListener('click', function () {
         // alert("123");
         SignUpBox.style.display = "block";
@@ -179,8 +187,6 @@ window.onload = function () {
     let sentctcode_phone = document.getElementById("sentctcode_phone");
     // 电话号码跳转
     let SignUp_phone1 = document.getElementById("SignUp_phone1");
-    // 二维码跳转
-    let SignUp_qrcode1 = document.getElementById("SignUp_qrcode1");
     sentctcode_btn.onclick = function () {
         let phone = sentctcode_phone.value;
         // console.log(phone);
@@ -229,10 +235,6 @@ window.onload = function () {
         sentctcodebig.style.display = "block";
     }
 
-    // 二维码
-    SignUp_qrcode0.onclick = function () {
-        Ajax({ url: "https://autumnfish.cn/login/qr/key" });
-    }
 
 
     // 轮播图
@@ -243,21 +245,22 @@ window.onload = function () {
     var index = 0;
 
     // 加载轮播图的图片
+    let timestamp = (new Date()).valueOf();
     Ajax({
-        url: 'https://autumnfish.cn/banner?type=0',
+        url: 'https://autumnfish.cn/banner?type=0' + '&timestamp=' + timestamp,
         success: function (results) {
             for (let j = 0; j < 10; j++) {
                 let li = document.createElement("li");
                 let img = document.createElement("img");
                 roll_content[0].appendChild(li);
                 li.appendChild(img);
-                li.className = "roll_li visible";
-                img.src = results.banners[j].imageUrl+'?param=732y285';
-                li.style.display='none';
-                li.style.backgroundImage='url('+results.banners[j].imageUrl+'?imageView&blur=40x20'+')' ;
+                li.className = "roll_li hidden";
+                img.src = results.banners[j].imageUrl + '?param=732y285';
+                li.style.display = 'none';
+                li.style.backgroundImage = 'url(' + results.banners[j].imageUrl + '?imageView&blur=40x20' + ')';
             }
-            roll_li[0].className='roll_li visible';
-            roll_li[0].style.display='block';
+            roll_li[0].className = 'roll_li visible';
+            roll_li[0].style.display = 'block';
         }
     })
 
@@ -401,7 +404,7 @@ window.onload = function () {
     var CreateMusic_name = document.getElementsByClassName("CreateMusic_name");
     var CreateMusic_num = document.getElementsByClassName("CreateMusic_num");
     let getMusicList =
-        defaultUrlHeader + '/personalized';
+        defaultUrlHeader + '/personalized' + '?timestamp=' + timestamp;
     Ajax({
         url: getMusicList,
         success: function (results) {
@@ -433,7 +436,7 @@ window.onload = function () {
                     span.className = "CreateMusic_num";
                     div_3.className = "CreateMusic_name";
 
-                    CreateMusic_img[j].src = results.result[j].picUrl+'?param=140y140"';
+                    CreateMusic_img[j].src = results.result[j].picUrl + '?param=140y140"';
                     CreateMusic_img[j].id = results.result[j].id;
                     CreateMusic_name[j].innerHTML = results.result[j].name;
                     CreateMusic_num[j].innerHTML = results.result[j].trackCount;
@@ -447,7 +450,8 @@ window.onload = function () {
                     console.log(this.id);
                     sessionStorage.setItem('musicid', this.id);
                     sessionStorage.setItem('type', '歌单');
-                    window.location.href = '../4.歌单详情页/4.歌单详情页.html';
+                    // window.location.href = '../4.歌单详情页/4.歌单详情页.html';
+                    parent.inner.src = '../4.歌单详情页/4.歌单详情页.html';
                 }
             }
         }
@@ -468,7 +472,6 @@ window.onload = function () {
             let div = document.createElement("div");
             let a = document.createElement("a");
             let div_1 = document.createElement("div");
-            let a_1 = document.createElement("a");
             let a_2 = document.createElement("a");
             let a_3 = document.createElement("a");
 
@@ -476,28 +479,93 @@ window.onload = function () {
             li.appendChild(div);
             li.appendChild(a);
             li.appendChild(div_1);
-            div_1.appendChild(a_1);
             div_1.appendChild(a_2);
             div_1.appendChild(a_3);
 
             li.className = "chart_music";
             div.className = "chart_num";
             a.className = "chart_music_name";
-            a_1.style.backgroundPosition = "-267px -268px";
             a_2.style.backgroundPosition = "0px -698px";
             a_2.style.backgroundImage = "url('../img/icon.png')";
+            a_2.className = "add";
             a_3.style.backgroundPosition = "-297px -268px";
-            a_1.href = "";
-            a_2.href = "";
-            a_3.href = "";
+            a_2.href = "javascript:;";
+            a_3.href = "javascript:;";
             div_1.className = "oper";
 
             div.innerHTML = i + 1;
             a.innerHTML = results.playlist.tracks[i].name;
             a.onclick = function () {
+                // var inner = document.getElementById("inner");
+                // console.log(inner.src);
                 sessionStorage.setItem("playing_id", results.playlist.tracks[i].id);
-                a.href = '../6.歌曲详情/6.歌曲详情.html';
+                // a.href = '../6.歌曲详情/6.歌曲详情.html';
+                sessionStorage.setItem('ing', 'false');
+                parent.inner.src = '../6.歌曲详情/6.歌曲详情.html';
             }
+            a_2.addEventListener('mouseover', function () {
+                a_2.style.backgroundPosition = "-22px -698px";
+            });
+            a_2.addEventListener('mouseout', function () {
+                a_2.style.backgroundPosition = "0px -698px";
+            });
+            a_2.addEventListener('click', function () {
+                let name = results.playlist.tracks[i].name;
+                let id = results.playlist.tracks[i].id;
+                let musicname = results.playlist.tracks[i].ar[0].name;
+                let picurl = results.playlist.tracks[i].al.picUrl;
+                // 添加歌曲到待播歌单
+                addmusic(name, id, musicname, picurl);
+                let arrdata = JSON.parse(sessionStorage.getItem('arr'));
+                playARR(arrdata);
+            });
+            a_3.addEventListener('click', function () {
+                let user_1 = JSON.parse(sessionStorage.getItem("user"));
+                plusMusic_div[0].style.display = 'block';
+                sessionStorage.setItem('select_music', results.playlist.tracks[i].id);
+                let timestamp = (new Date()).valueOf();
+                let getmusicurl = defaultUrlHeader + '/user/playlist?uid=' + user_1.account.id + '&cookie=' + user_1.cookie + '&timestamp=' + timestamp;
+                Ajax({
+                    url: getmusicurl,
+                    success: function (results) {
+                        sessionStorage.setItem('select_musiclist', '');
+                        for (let j = 0; j < results.playlist.length; j++) {
+                            let li = document.createElement("li");
+                            let span = document.createElement("span");
+                            plusMusic_ul[0].appendChild(li);
+                            li.appendChild(span);
+                            li.className = 'plusMusic_li';
+                            span.className = 'plusMusic_text';
+                            span.innerHTML = results.playlist[j].name;
+                            li.onclick = function () {
+                                for (let k = 0; k < results.playlist.length; k++) {
+                                    plusMusic_li[k].style.backgroundColor = '';
+                                    console.log("123");
+                                }
+                                li.style.backgroundColor = '#9d9d9d';
+                                sessionStorage.setItem('select_musiclist', results.playlist[j].id);
+                            }
+                        }
+                        cancel_plusMusic[0].onclick = function () {
+                            plusMusic_ul[0].innerHTML = '';
+                            plusMusic_div[0].style.display = 'none';
+                        }
+                        confirm_plusMusic[0].onclick = function () {
+                            let select_musiclist = sessionStorage.getItem("select_musiclist");
+                            let select_music = sessionStorage.getItem("select_music");
+                            let addurl = defaultUrlHeader + '/playlist/tracks?op=add&pid=' + select_musiclist + '&tracks=' + select_music + '&cookie=' + user_1.cookie;
+                            Ajax({
+                                url: addurl,
+                                success: function () {
+                                    alert("添加成功");
+                                    plusMusic_ul[0].innerHTML = '';
+                                    plusMusic_div[0].style.display = 'none';
+                                }
+                            })
+                        }
+                    }
+                })
+            });
         }
     }
     Ajax({
@@ -592,12 +660,12 @@ window.onload = function () {
                     div_2.className = "roll_li_name";
 
                     if (i == 0 || i == 2) {
-                        roll_li_img[k].src = results.albums[j].blurPicUrl+'?param=100y100';
+                        roll_li_img[k].src = results.albums[j].blurPicUrl + '?param=100y100';
                         roll_li_img[k].id = results.albums[j].id;
                         roll_li_workname[k].innerHTML = results.albums[j].artists[0].name;
                         roll_li_name[k].innerHTML = results.albums[j].name;
                     } else {
-                        roll_li_img[k].src = results.albums[v].blurPicUrl+'?param=100y100';
+                        roll_li_img[k].src = results.albums[v].blurPicUrl + '?param=100y100';
                         roll_li_img[k].id = results.albums[v].id;
                         roll_li_workname[k].innerHTML = results.albums[v].artists[0].name;
                         roll_li_name[k].innerHTML = results.albums[v].name;
@@ -611,7 +679,8 @@ window.onload = function () {
                     console.log(this.id);
                     sessionStorage.setItem('musicid', this.id);
                     sessionStorage.setItem('type', '专辑');
-                    window.location.href = '../4.歌单详情页/4.歌单详情页.html';
+                    // window.location.href = '../4.歌单详情页/4.歌单详情页.html';
+                    parent.inner.src = '../4.歌单详情页/4.歌单详情页.html';
                 }
             }
 
@@ -620,51 +689,19 @@ window.onload = function () {
     });
 
     // 搜索功能
-    // 此处应该改为跳转页面
-    var searchBtn = document.getElementById("searchBtn");
-    var searchBox = document.getElementById("searchBox");
-    var header_avatar_img = document.getElementsByClassName("header_avatar_img");
-    var bar_musicname = document.getElementsByClassName("bar_musicname");
-    var bar_musician = document.getElementsByClassName("bar_musician");
-    var musicurl;
-    var bofangurl;
-    var searchurl;
-    searchBtn.addEventListener("click", function () {
-        sessionStorage.setItem('page', 0);
-        if (searchBox.value == '') {
-            searchurl = defaultUrlHeader + '/cloudsearch?keywords=' + '常言道' + '&limit=20&offset=0';
-        } else {
-            searchurl = defaultUrlHeader + '/cloudsearch?keywords=' + searchBox.value + '&limit=20&offset=0';
-        }
+    search();
 
-        Ajax({
-            url: searchurl,
-            success: function (results) {
-                let resultstr = JSON.stringify(results);
-                sessionStorage.setItem("search", searchurl);
-                sessionStorage.setItem("search_key", searchBox.value);
-                window.location.href = "../5.搜索歌曲页面/5.搜索歌曲页面.html";
-                // bofangurl = defaultUrlHeader + '/song/url?id=' + results.result.songs[0].id;
-                // header_avatar_img[0].src = results.result.songs[0].al.picUrl;
-                // bar_musicname[0].innerHTML = results.result.songs[0].name;
-                // bar_musician[0].innerHTML = results.result.songs[0].ar[0].name;
-                // console.log(bofangurl);
-                // Ajax({
-                //     url: bofangurl,
-                //     success: function (resultss) {
-                //         console.log("8y8");
-                //         musicurl = resultss.data[0].url;
-                //     }
-                // });
-            }
-        });
+    bofang();
+    shichangload();
+    play();
 
-        // setTimeout(function () {
-        //     console.log(musicurl);
-        //     bofangurls(musicurl);
-        // }, 1000);
-    })
-    var musicianbtn = document.getElementById("musicianbtn");
+    // 点击导航栏跳转页面
+    one();
+    two();
+    five();
+    seven();
 
-    musician();
+    // 可以操作待播歌单
+    let arrdata = JSON.parse(sessionStorage.getItem('arr'));
+    playARR(arrdata);
 }

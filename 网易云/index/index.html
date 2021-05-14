@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网易云</title>
+    <!-- <link rel="icon" href="//s1.music.126.net/style/favicon.ico?v20180823"> -->
+    <link rel="icon" href='../img/favicon.ico'>
+    <link rel="stylesheet" href="../1.首页/1.首页.css">
+    <link rel="stylesheet" href="../public/重置样式表.css">
+    <link rel="stylesheet" href="../fontawesome/css/all.css">
+    <link rel="stylesheet" href="../public/base.css">
+    <script src="../public/tool.js"></script>
+    
+    <script src="./index.js"></script>
+</head>
+
+<body>
+    
+
+    <iframe id='inner' allowfullscreen='true' frameborder=0 style="width: 100%;height: 100%; position: absolute;" src="../1.首页/1.首页.html" class="sup"></iframe>
+
+    <!-- 底部 -->
+
+    <!-- 播放条 -->
+    <div class="mp3_content">
+        <div class="mp3Box">
+            <!-- 播放开关 -->
+            <div class="radioBox">
+
+                <div class="prev">
+                    <audio id="prev_1"></audio>
+                </div>
+                <div class="broadcast">
+                    <audio class="broadcast_1" autoplay></audio>
+                </div>
+                <div class="next">
+                    <audio id="next_1"></audio>
+                </div>
+            </div>
+            <!-- 专辑头像 -->
+            <div class="head_avatar">
+                <img class="header_avatar_img" src="../img/" alt="">
+            </div>
+            <!-- 进度条 -->
+            <div class="bar">
+                <!-- 进度条信息 -->
+                <div class="bar_info">
+                    <a class="bar_musicname" href="javascript:;">未播放</a>
+                    <a class="bar_musician" href="javascript:;">未播放</a>
+                    <a class="bar_link" href="javascript:;"></a>
+                </div>
+                <!-- 进度条主体 -->
+                <div class="bar_body">
+                    <input type="range" step="1" min="0" max="100" class="shichang" value="0" />
+                    <div class="time">
+                        <span class="currentTime">00:00</span> /
+                        <span class="duraTime">00:00</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 搜藏图标 -->
+            <a class="bar_collect" href="javascript:;">
+                <div class="collecting_list">
+                    <div class="collect_title">
+                        <h2 class="collect_btn_01" style="background-color:gray;color: #fff;" >播放历史</h2>
+                        <h2 class="collect_btn_02">待播清单</h2>
+                    </div>
+                    <div class="collect_all">
+                        <ul class="collect_01">
+                            <!-- <li class="collect_02_li">
+                                <span class="collect_02_num">1</span>
+                                <span class="collect_02_content">12311111111111111111</span>
+                            </li> -->
+                            
+                        </ul>
+                        <ul class="collect_02">
+                            <!-- <li class="collect_02_li">
+                                <span class="collect_02_num">1</span>
+                                <span class="collect_02_content">12311111111111111111</span>
+                                <span class="collect_02_delete fas fa-trash" ></span>
+                            </li>  -->
+                        </ul>
+                    </div>
+                </div>
+            </a>
+            <!-- 声音图标 -->
+            <span class="bar_voice" href=""></span>
+            <!-- 音量条 -->
+            <input type="range" class="voice" step="1" min="0" max="100" value="0">
+        </div>
+    </div>
+
+</body>
+    <script src="./index.js"></script>
+
+</html>

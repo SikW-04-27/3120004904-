@@ -9,6 +9,19 @@ window.onload = function () {
     huidiao(musicurl, musicurl, loadnum, -1, -1);
     right_title[0].innerHTML = musician_li[0].innerHTML;
 
+    bofang();
+    shichangload();
+    play();
+
+    // 点击导航栏跳转页面
+    one();
+    two();
+    five();
+    seven();
+
+    // 搜索功能
+    search();
+
     // Ajax({
     //     url: musicurl,
     //     success: function (results) {
@@ -180,7 +193,7 @@ window.onload = function () {
     //     }
     // }
 
-    function getmusicians(imgsrc, a_text,musicianid) {
+    function getmusicians(imgsrc, a_text, musicianid) {
         let li = document.createElement("li");
         let div = document.createElement("div");
         let img = document.createElement("img");
@@ -203,9 +216,9 @@ window.onload = function () {
         // img.data_src=imgsrc;
         a.innerHTML = a_text;
 
-        img.onclick=function(){
-            sessionStorage.setItem("musicianid",musicianid);
-            window.location.href='../8.歌手详情/8.歌手详情.html';
+        img.onclick = function () {
+            sessionStorage.setItem("musicianid", musicianid);
+            parent.inner.src = '../8.歌手详情/8.歌手详情.html';
         }
     }
 
@@ -217,10 +230,10 @@ window.onload = function () {
                 console.log(results);
                 for (let j = 0; j < results.artists.length; j++) {
 
-                    let imgsrc = results.artists[j].img1v1Url+'?param=130y130';
+                    let imgsrc = results.artists[j].img1v1Url + '?param=130y130';
                     let a_text = results.artists[j].name;
                     let musicianid = results.artists[j].id;
-                    getmusicians(imgsrc, a_text,musicianid);
+                    getmusicians(imgsrc, a_text, musicianid);
                 }
                 window.onscroll = function () {
                     var seeHeight = document.documentElement.clientHeight; //可见区域高度
