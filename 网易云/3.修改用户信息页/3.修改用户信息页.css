@@ -14,7 +14,6 @@
 /* 中部内容框 */
 .middle{
     width: 900px;
-    height: 500px;
     margin: 0 auto;
     padding: 40px;
     /* background-color: royalblue; */
@@ -111,7 +110,8 @@
 
 /* 账号设置 */
 .privacy_content{
-    padding: 40px 0;
+    padding-top: 40px;
+    padding-bottom: 10px;
     font-size: 12px;
 }
 

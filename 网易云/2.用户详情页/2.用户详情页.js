@@ -2,6 +2,7 @@ window.onload = function () {
     let user_2 = JSON.parse(sessionStorage.getItem("user"));
     console.log(user_2.code);
 
+    // 可以操作播放条
     bofang();
     shichangload();
     play();
@@ -30,6 +31,7 @@ window.onload = function () {
     // 新建歌单
     let plusMusic = document.getElementsByClassName("plusMusic");
     let plusMusic_div = document.getElementsByClassName("plusMusic_div");
+    // 创建歌单
     plusMusic[0].onclick = function () {
         plusMusic_div[0].style.display = 'block';
         let plusMusic_input = document.getElementsByClassName("plusMusic_input");
@@ -55,6 +57,7 @@ window.onload = function () {
         }
     };
 
+    // 编辑歌单专辑
     let CreateMusic_list = document.getElementsByClassName("CreateMusic_list");
     var CreateMusics = document.getElementsByClassName("CreateMusics");
     let CreateMusic_a = document.getElementsByClassName("CreateMusic_a");
@@ -66,6 +69,7 @@ window.onload = function () {
     Ajax({
         url: getMusicList,
         success: function (result) {
+            // 获取我的歌单
             CreateMusic_list[0].innerHTML = '我的歌单（' + result.playlist.length + '）';
             for (let j = 0; j < result.playlist.length; j++) {
                 let imgsrc = result.playlist[j].coverImgUrl + '?param=140y140';
@@ -78,6 +82,7 @@ window.onload = function () {
                     CreateMusic_a[j].href = '../4.歌单详情页/4.歌单详情页.html';
                 }
             };
+            // 删除歌单
             deletebtn_2[0].onclick = function () {
                 let deleteurl ='';
                 for (let k = 0; k < playlistlen; k++) {
@@ -95,8 +100,10 @@ window.onload = function () {
                     }
                 });
             }
+            // 记录歌单的数量
             playlistlen = result.playlist.length;
 
+            // 获取我收藏的专辑
             let edition_hidden = document.getElementsByClassName("edition_hidden");
             let timestamp=(new Date()).valueOf();
             let getEditionList = defaultUrlHeader + '/album/sublist' + '?cookie=' + user_2.cookie+'&timestamp='+timestamp;
@@ -117,7 +124,7 @@ window.onload = function () {
                             CreateMusic_a[temp].href = '../4.歌单详情页/4.歌单详情页.html';
                         };
                     };
-                    // 此处不能多选
+                    // 此处不能多选，删除专辑
                     deletebtn_2[1].onclick = function () {
                         let deleteurl ='';
                         for (let k = playlistlen,z=0; k < editionlen + playlistlen; k++,z++) {
@@ -141,7 +148,7 @@ window.onload = function () {
         }
     });
 
-    // 批量删除
+    // 批量删除按钮
     let deletebtn = document.getElementsByClassName("deletebtn");
     let deletebtn_1 = document.getElementsByClassName("deletebtn_1");
     let deletebtn_2 = document.getElementsByClassName("deletebtn_2");
@@ -179,11 +186,14 @@ window.onload = function () {
         };
 
     }
-
     
     // 可以操作待播歌单
     let arrdata = JSON.parse(sessionStorage.getItem('arr'));
     playARR(arrdata);
+    
+    // 可以操作播放历史
+    let historyurl = defaultUrlHeader + '/user/record?uid=' + user_2.account.id + '&type=1&cookie=' + user_2.cookie;
+    historylist(historyurl);
 
     // 点击导航栏跳转页面
     one();
@@ -199,6 +209,7 @@ window.onload = function () {
         window.location.href = "../3.修改用户信息页/3.修改用户信息页.html";
     }
 
+    // 创造歌单节点
     function create(num, imgsrc, div3, span1) {
         var div_1 = document.createElement("div");
         var a = document.createElement("a");

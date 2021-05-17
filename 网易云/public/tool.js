@@ -70,8 +70,9 @@ var voice = document.getElementsByClassName("voice");
 var shichang = document.getElementsByClassName("shichang");
 var next = document.getElementsByClassName("next");
 var prev = document.getElementsByClassName("prev");
+var collect_01 = document.getElementsByClassName("collect_01");
+var collect_01_li = document.getElementsByClassName("collect_01_li");
 function bofang() {
-
     // 获取音乐时长
     if (parent.broadcast_1[0] != null) {
         // var duration;
@@ -81,11 +82,6 @@ function bofang() {
             parent.duraTime[0].innerHTML = transTime(parent.broadcast_1[0].duration)
         }
     }
-
-    2
-
-    // 获取时长的进度条
-
 
     // 获取调节音量的条
     parent.voice[0].style.backgroundSize = parent.broadcast_1[0].volume * 100 + '%';
@@ -118,6 +114,7 @@ function bofang() {
     }
 }
 
+// 进度条操作
 function shichangload() {
     // parent.shichang[0].value = 0;
     parent.broadcast_1[0].addEventListener("timeupdate", function () {
@@ -167,6 +164,7 @@ function transTime(time) {
     return minute + isM0 + sec;
 }
 
+// 播放暂停
 function playorpause(){
     if (parent.broadcast_1[0].paused) {
         parent.broadcast[0].style.backgroundPosition = '0 -165px';
@@ -175,6 +173,7 @@ function playorpause(){
     }
 }
 
+// 播放
 function play() {
     // 不能用事件监听
     var middle_left = document.getElementsByClassName("middle_left");
@@ -182,11 +181,17 @@ function play() {
         if (parent.broadcast_1[0].paused) {
             parent.broadcast_1[0].play();
             parent.broadcast[0].style.backgroundPosition = '0 -165px';
-            middle_left[0].className = 'middle_left play_roll';
+            if(middle_left[0]){
+                middle_left[0].className = 'middle_left play_roll';
+            }
+            
         } else {
             parent.broadcast_1[0].pause();
             parent.broadcast[0].style.backgroundPosition = '0 -204px';
-            middle_left[0].className = 'middle_left play_roll pause';
+            if(middle_left[0]){
+                middle_left[0].className = 'middle_left play_roll pause';
+            }
+            
         }
     };
     parent.broadcast[0].onmouseover = function () {
@@ -225,6 +230,7 @@ var twobtn = document.getElementsByClassName("twobtn");
 var fivebtn = document.getElementsByClassName("fivebtn");
 var sevenbtn = document.getElementsByClassName("sevenbtn");
 
+// 导航栏跳转
 function one() {
     onebtn[0].onclick = function () {
         parent.inner.src = '../1.首页/1.首页.html';
@@ -253,12 +259,8 @@ var collect_02 = document.getElementsByClassName("collect_02");
 // 加载待播歌曲
 function updataARR() {
     let arrdata = JSON.parse(sessionStorage.getItem('arr'));
-    console.log(arrdata.arr);
-    console.log(arrdata.arr.length);
     parent.collect_02[0].innerHTML = '';
     for (let i = 1; i < arrdata.arr.length; i++) {
-
-        console.log("123");
         let li = document.createElement("li");
         let span_1 = document.createElement("span");
         let span_2 = document.createElement("span");
@@ -340,7 +342,6 @@ function playARR(arrdata) {
             let arrnew = '{"arr":[{}';
             for (let j = 1; j < arrdata.arr.length; j++) {
                 if (j != i + 1) {
-                    // arrnew += ',{"name":"' + arrdata.arr[j].name + '","id":' + arrdata.arr[j].id + '}';
                     arrnew += ',{"name":"' + arrdata.arr[j].name + '","id":' + arrdata.arr[j].id + ',"musicname":"' + arrdata.arr[j].musicname + '","picurl":"' + arrdata.arr[j].picurl + '"}';
                 }
 
@@ -442,4 +443,34 @@ function search() {
             // });
         }
     }
+}
+
+// 查询历史记录函数
+function historylist(historyurl){
+    Ajax({
+        url: historyurl,
+        success: function (results) {
+            parent.collect_01[0].innerHTML='';
+            for (let i = 0; i < results.weekData.length; i++) {
+                let li = document.createElement("li");
+                let span_1 = document.createElement("span");
+                let span_2 = document.createElement("span");
+                parent.collect_01[0].appendChild(li);
+                li.appendChild(span_1);
+                li.appendChild(span_2);
+                li.className = 'collect_01_li';
+                span_1.className = 'collect_01_num';
+                span_2.className = 'collect_01_content';
+                span_1.innerHTML = i + 1;
+                span_2.innerHTML = results.weekData[i].song.name;
+                parent.collect_01_li[i].addEventListener('click',function () {
+                    sessionStorage.setItem('playing_id', results.weekData[i].song.id);
+                    sessionStorage.setItem('ing', 'false');
+                    parent.inner.src = '../6.歌曲详情/6.歌曲详情.html';
+                }) 
+            }
+
+
+        }
+    });
 }

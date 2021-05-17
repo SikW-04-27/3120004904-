@@ -6,30 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>网易云</title>
-    <!-- <link rel="icon" href="//s1.music.126.net/style/favicon.ico?v20180823"> -->
     <link rel="icon" href='../img/favicon.ico'>
     <link rel="stylesheet" href="../1.首页/1.首页.css">
     <link rel="stylesheet" href="../public/重置样式表.css">
     <link rel="stylesheet" href="../fontawesome/css/all.css">
     <link rel="stylesheet" href="../public/base.css">
     <script src="../public/tool.js"></script>
-    
-    <script src="./index.js"></script>
+    <script src="../public/index.js"></script>
 </head>
 
 <body>
     
-
+    <!-- 内嵌在页面里的内联框架 -->
     <iframe id='inner' allowfullscreen='true' frameborder=0 style="width: 100%;height: 100%; position: absolute;" src="../1.首页/1.首页.html" class="sup"></iframe>
-
-    <!-- 底部 -->
 
     <!-- 播放条 -->
     <div class="mp3_content">
         <div class="mp3Box">
             <!-- 播放开关 -->
             <div class="radioBox">
-
                 <div class="prev">
                     <audio id="prev_1"></audio>
                 </div>
@@ -42,7 +37,7 @@
             </div>
             <!-- 专辑头像 -->
             <div class="head_avatar">
-                <img class="header_avatar_img" src="../img/" alt="">
+                <img class="header_avatar_img" src="" alt="">
             </div>
             <!-- 进度条 -->
             <div class="bar">
@@ -69,6 +64,7 @@
                         <h2 class="collect_btn_02">待播清单</h2>
                     </div>
                     <div class="collect_all">
+                        <!-- 历史记录 -->
                         <ul class="collect_01">
                             <!-- <li class="collect_02_li">
                                 <span class="collect_02_num">1</span>
@@ -76,6 +72,7 @@
                             </li> -->
                             
                         </ul>
+                        <!-- 待播清单 -->
                         <ul class="collect_02">
                             <!-- <li class="collect_02_li">
                                 <span class="collect_02_num">1</span>
@@ -94,6 +91,5 @@
     </div>
 
 </body>
-    <script src="./index.js"></script>
 
 </html>

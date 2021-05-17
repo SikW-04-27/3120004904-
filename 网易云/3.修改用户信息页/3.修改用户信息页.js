@@ -1,22 +1,11 @@
 window.onload = function () {
     var user_3 = JSON.parse(sessionStorage.getItem("user"));
     console.log(user_3);
+
+    // 可以操作播放条
     bofang();
     shichangload();
     play();
-    const defaultUrlHeader = "https://autumnfish.cn";
-    // 打开如果有保存的话自动登录
-
-    // let dengluurl_1 =
-    //     defaultUrlHeader + "/login/cellphone?" + "phone=" + getCookie('phone') + "&" + "password=" + getCookie('password');
-    // Ajax({
-    //     url: dengluurl_1,
-    //     success: function () {
-    //         console.log("ihioh");
-    //     }
-    // });
-
-
 
     var avatar = document.getElementsByClassName("avatar");
     var nickname = document.getElementById("nickname");
@@ -33,15 +22,12 @@ window.onload = function () {
     var captcha_password = document.getElementById("captcha_password");
     var file = document.getElementsByClassName("file");
 
-
-
-
-
     // 将右上角用户头像导入
     avatar[0].src = user_3.profile.avatarUrl;
     avatar[1].src = user_3.profile.avatarUrl;
     nickname.value = user_3.profile.nickname;
 
+    // 填入信息
     var user_info = user_3.profile.userId;
     let timestamp=(new Date()).valueOf();
     let getUserList =
@@ -58,37 +44,6 @@ window.onload = function () {
         }
     });
 
-
-
-    // // 监听file是否改变
-    // file[0].onchange = function (event) {
-    //     let file_0 = event.target.files[0];
-    //     let formData = new FormData();
-    //     console.log(file_0);
-    //     formData.append('imgFile', file_0,file_0.name);
-    //     console.log(formData);
-    //     // 创建字符串对象，用于存储请求报文的字符串
-    //     var params = '';
-    //     // 获取参数对象中的各种数据并拼接在一起
-    //     for (var attr in file_0) {
-    //         params += attr + '=' + file_0[attr] + '&';
-    //     }
-    //     // 对拼接在一起的字符串进行截取，目的在于将字符串末尾的 & 去除
-    //     params = params.substr(0, params.length - 1);
-    //     console.log(params);
-    //     Ajax({
-    //         url: 'https://autumnfish.cn/avatar/upload?imgFile='+params+'&imgSize=140'+'&cookie='+user_3.cookie,
-    //         header: {
-    //             'Content-Type': 'multipart/form-data'
-    //         },
-    //         success: function (results) {
-    //             avatar[1].src=results.data.url_pre;
-    //         }
-    //     });
-
-    // }
-
-   
     // 监听file是否改变
     file[0].onchange = function (event) {
         let file_0 = event.target.files[0];
@@ -122,28 +77,6 @@ window.onload = function () {
                 parent.inner.src = '../3.修改用户信息页/3.修改用户信息页.html';
             }
         });
-
-
-
-
-        // const res = await axios({
-        //     url: '/user/detail?uid=32953014&timestamp=${Date.now()}',
-        //     withCredentials: true, //关键
-        //   })
-        // async function upload(file) {
-        //     var formData = new FormData()
-        //     formData.append('imgFile', file)
-        //     const res = await axios({
-        //       method: 'get',
-        //       url: 'http://autumnfish.cn/avatar/upload'
-        //       },
-        //       headers: {
-        //         'Content-Type': 'multipart/form-data',
-        //       },
-        //       data: formData,
-        //     })
-        //     document.querySelector('#avatar').src = res.data.data.url
-        //   }
     };
 
     // 发送原手机验证码
@@ -175,38 +108,51 @@ window.onload = function () {
     save_button1[0].onclick = function () {
         let oldcaptchas = oldcaptcha.value;
         let newcaptchas = captcha.value;
-        console.log(oldcaptchas);
-        console.log(newcaptchas);
-        let urls = defaultUrlHeader + '/rebind?' + 'phone=' + newphone.value + '&oldcaptcha=' + oldcaptchas + '&captcha=' + newcaptchas;
+        let urls = defaultUrlHeader + '/rebind?' + 'phone=' + newphone.value + '&oldcaptcha=' + oldcaptchas + '&captcha=' + newcaptchas+'&cookie='+user_3.cookie;
         Ajax({
-            url: urls
+            url: urls,
+            success:function(results){
+                alert('绑定成功');
+            },
+            error:function(results){
+                alert(results.message);
+            }
         })
     };
-    // 发送验证码可优化封装函数
+
+    // 修改密码发送验证码
     captcha_button[2].onclick = function () {
         let phonenums = phonenum.value;
         if (phonenums == ' ') {
             alert("没有");
         } else {
-            console.log("09876");
             let newurl = defaultUrlHeader + '/captcha/sent?phone=' + phonenums;
             Ajax({
                 url: newurl
             })
         }
     };
-
     // 修改密码
     save_button1[1].onclick = function () {
         let urls = defaultUrlHeader + '/register/cellphone?' + 'phone=' + phonenum.value + '&password=' + new_password.value + '&captcha=' + captcha_password.value + '&nickname=' + user_3.profile.nickname + '&cookie=' + user_3.cookie;
         Ajax({
-            url: urls
+            url: urls,
+            success:function(){
+                alert('修改成功');
+            },
+            error:function(result){
+                alert(result.data.blockText);
+            }
         })
     }
 
     // 可以操作待播歌单
     let arrdata = JSON.parse(sessionStorage.getItem('arr'));
     playARR(arrdata);
+    
+    // 可以操作播放历史
+    let historyurl = defaultUrlHeader + '/user/record?uid=' + user_3.account.id + '&type=1&cookie=' + user_3.cookie;
+    historylist(historyurl);
 
     // 点击导航栏跳转页面
     one();

@@ -6,18 +6,12 @@ window.onload = function () {
     var avatar_audio = document.getElementsByClassName("avatar_audio");
     var avatar_big = document.getElementsByClassName("avatar_big");
     var td_one_play = document.getElementsByClassName("td_one_play");
-    var bar_musicname = document.getElementsByClassName("bar_musicname");
-    var header_avatar_img = document.getElementsByClassName("header_avatar_img");
-    var bar_musician = document.getElementsByClassName("bar_musician");
     var musician_work_list = document.getElementsByClassName("musician_work_list");
     var musician_edition_list = document.getElementsByClassName("musician_edition_list");
     var musician_intro_list = document.getElementsByClassName("musician_intro_list");
     var musician_mv_list = document.getElementsByClassName("musician_edition_list");
     var td_music_name = document.getElementsByClassName("td_music_name");
     var td_edition = document.getElementsByClassName("td_edition");
-    var edition_img = document.getElementsByClassName("edition_img");
-    var edition_name = document.getElementsByClassName("edition_name");
-    var edition_time = document.getElementsByClassName("edition_time");
     var edition_a = document.getElementsByClassName("edition_a");
     var mv_a = document.getElementsByClassName("mv_a");
     var pages = document.getElementsByClassName("pages");
@@ -37,9 +31,20 @@ window.onload = function () {
     // 添加歌曲框的取消确认按钮
     var cancel_plusMusic = document.getElementsByClassName("cancel_plusMusic");
     var confirm_plusMusic = document.getElementsByClassName("confirm_plusMusic");
+
+    // 控制播放条
     bofang();
     shichangload();
     play();
+
+    // 可以操作待播歌单
+    let arrdata = JSON.parse(sessionStorage.getItem('arr'));
+    playARR(arrdata);
+
+    // 可以操作播放历史
+    let user_8 = JSON.parse(sessionStorage.getItem("user"));
+    let historyurl = defaultUrlHeader + '/user/record?uid=' + user_8.account.id + '&type=1&cookie=' + user_8.cookie;
+    historylist(historyurl);
 
      // 点击导航栏跳转页面
      one();
@@ -50,6 +55,7 @@ window.onload = function () {
      // 搜索功能
     search();
 
+    // 设置鼠标移入改变导航样式
     var musician_li = document.getElementsByClassName("musician_li");
     for (let j = 0; j < musician_li.length; j++) {
         musician_li[j].onmouseover = function () {
@@ -69,6 +75,7 @@ window.onload = function () {
                 }
             }
         };
+        // 点击按钮切换信息
         musician_li[j].onclick = function () {
             for (let k = 0; k < musician_li.length; k++) {
                 musician_li[k].className = 'musician_li';
@@ -124,6 +131,8 @@ window.onload = function () {
             }
         }
     }
+
+    // 加载歌曲信息
     let user_4 = JSON.parse(sessionStorage.getItem("user"));
     let timestamp = (new Date()).valueOf();
     let url_1 = 'https://autumnfish.cn/artists?id=' + musician_id+ '&cookie=' + user_4.cookie + '&timestamp=' + timestamp;
@@ -133,7 +142,7 @@ window.onload = function () {
             sessionStorage.setItem('last_mv_size', results.artist.mvSize);
             musician_h2[0].innerHTML = results.artist.name;
             musician_h3[0].innerHTML = results.artist.alias[0];
-            avatar_img[0].src = results.artist.img1v1Url + '?param=640y300"';
+            avatar_img[0].src = results.artist.picUrl + '?param=640y300"';
             for (let j = 0; j < 50; j++) {
                 let span1 = j + 1;
                 let span2 = results.hotSongs[j].name;
@@ -196,7 +205,6 @@ window.onload = function () {
 
 
                 }
-
                 td_music_name[j].onclick = function () {
                     sessionStorage.setItem('ing', 'false');
                     sessionStorage.setItem("playing_id", results.hotSongs[j].id);
@@ -214,9 +222,11 @@ window.onload = function () {
                     let picurl = results.hotSongs[j].al.picUrl;
                     // 添加歌曲到待播歌单
                     addmusic(name, id,musicname,picurl);
+                    add[j].style.color='orange';
                     let arrdata = JSON.parse(sessionStorage.getItem('arr'));
                     playARR(arrdata);
                 }
+                // 添加歌曲到我的歌单里
                 add_musiclist[j].addEventListener('click', function () {
                     let user_4 = JSON.parse(sessionStorage.getItem("user"));
                     plusMusic_div[0].style.display = 'block';
@@ -227,6 +237,7 @@ window.onload = function () {
                         url: getmusicurl,
                         success: function (results) {
                             sessionStorage.setItem('select_musiclist', '');
+                            // 获取我的歌单
                             for (let j = 0; j < results.playlist.length; j++) {
                                 let li = document.createElement("li");
                                 let span = document.createElement("span");
@@ -254,7 +265,7 @@ window.onload = function () {
                                 Ajax({
                                     url: addurl,
                                     success: function () {
-                                        // alert("添加成功");
+                                        add_musiclist[j].style.color='orange';
                                         plusMusic_ul[0].innerHTML = '';
                                         plusMusic_div[0].style.display = 'none';
                                     }
@@ -266,6 +277,8 @@ window.onload = function () {
             }
         }
     });
+
+    // 相似歌手填入
     let url_3 = 'https://autumnfish.cn/simi/artist?id=' + musician_id;
     Ajax({
         url: url_3,
@@ -364,6 +377,7 @@ window.onload = function () {
         }
     }
 
+    // 创造歌曲节点
     function getsongs(span1, span2, span3, span5, span5_id) {
         let tbody = document.getElementsByTagName("tbody");
         let tr = document.createElement("tr");
@@ -411,6 +425,7 @@ window.onload = function () {
         span_5.id = span5_id;
     }
 
+    // 创造专辑节点
     function geteditions(imgsrc, p1, p2) {
         let musician_edition_list = document.getElementsByClassName("musician_edition_list");
         let li = document.createElement("li");
@@ -435,6 +450,7 @@ window.onload = function () {
         p_2.innerHTML = p2;
     }
 
+    // 加载专辑信息
     function load_edition() {
         let edition_page = sessionStorage.getItem("edition_page");
         musician_edition_list[0].innerHTML = '';
@@ -447,9 +463,11 @@ window.onload = function () {
                     let imgsrc = results.hotAlbums[j].picUrl + '?param=120y120';
                     let p1 = results.hotAlbums[j].name;
                     let p2 = results.hotAlbums[j].publishTime;
+                    p2=formatDateT(p2);
+                    p2=p2.split('T');
+                    p2=p2[0];
                     geteditions(imgsrc, p1, p2);
                     edition_a[j].onclick = function () {
-                        console.log("12");
                         sessionStorage.setItem('type', '专辑');
                         sessionStorage.setItem("musicid", results.hotAlbums[j].id);
                         window.location.href = '../4.歌单详情页/4.歌单详情页.html'
@@ -468,6 +486,7 @@ window.onload = function () {
         });
     }
 
+    // 创造mv节点
     function getmvs(imgsrc, p1) {
         let musician_mv_list = document.getElementsByClassName("musician_edition_list");
         let li = document.createElement("li");
@@ -488,6 +507,7 @@ window.onload = function () {
         p.innerHTML = p1;
     }
 
+    // 加载mv信息
     function load_mv() {
         let mv_page = sessionStorage.getItem("mv_page");
         musician_mv_list[0].innerHTML = '';
@@ -495,7 +515,6 @@ window.onload = function () {
         Ajax({
             url: url_2,
             success: function (results) {
-                console.log(results);
                 for (let j = 0; j < results.mvs.length; j++) {
                     let imgsrc = results.mvs[j].imgurl + '?param=137y103';
                     let p1 = results.mvs[j].name;
@@ -527,6 +546,7 @@ window.onload = function () {
         });
     }
 
+    // 创造信息节点
     function getintros(p_1, h_1) {
         let musician_intro_list = document.getElementsByClassName("musician_intro_list");
         let li = document.createElement("li");
@@ -541,6 +561,7 @@ window.onload = function () {
         h1.innerHTML = h_1;
     }
 
+    // 加载信息
     function load_intro() {
         let url_2 = 'https://autumnfish.cn/artist/desc?id=' + musician_id;
         Ajax({

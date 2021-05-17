@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>网易云</title>
-    <!-- <link rel="icon" href="//s1.music.126.net/style/favicon.ico?v20180823"> -->
     <link rel="icon" href='../img/favicon.ico'>
     <link rel="stylesheet" href="./1.首页.css">
     <link rel="stylesheet" href="../public/重置样式表.css">
@@ -17,6 +16,7 @@
 </head>
 
 <body>
+    <!-- 导航栏 -->
     <div class="top">
         <div class="nav_1">
             <div class="logo"> </div>
@@ -63,6 +63,7 @@
                 <div class="SignUpbig">
                     <div class="SignUp_content">
                         <input type="text" id="SignUp_phone" placeholder="请输入手机号">
+                        <div class="sign_info"></div>
                         <input type="password" id="SignUp_password" placeholder="请输入密码">
                         <div class="RemPassword">
                             <input type="checkbox" id="Rem_Password">记住密码
@@ -128,27 +129,16 @@
                 <input type="text" placeholder="常言道" id="searchBox">
             </div>
         </div>
-        <!-- <div class="nav_2">
-            <div class="nav_2_content"></div>
-        </div> -->
     </div>
 
+    <!-- 轮播图 -->
     <div class="roll">
         <!-- 轮播图 -->
         <ul class="roll_content">
-            <!-- <li class="roll_li visible" style="display:block"><img src="../img/1.jpg" alt=""></li>
-            <li class="roll_li hidden" style="display: none;"><img src="../img/2.jpg" alt=""></li>
-            <li class="roll_li hidden" style="display: none;"><img src="../img/3.jpg" alt=""></li>
-            <li class="roll_li hidden" style="display: none;"><img src="../img/4.jpg" alt=""></li>
-            <li class="roll_li hidden" style="display: none;"><img src="../img/5.jpg" alt=""></li>
-            <li class="roll_li hidden" style="display: none;"><img src="../img/6.jpg" alt=""></li>
-            <li class="roll_li hidden" style="display: none;"><img src="../img/7.jpg" alt=""></li>
-            <li class="roll_li hidden" style="display: none;"><img src="../img/8.jpg" alt=""></li>
-            <li class="roll_li hidden" style="display: none;"><img src="../img/9.jpg" alt=""></li>
-            <li class="roll_li hidden" style="display: none;"><img src="../img/10.jpg" alt=""></li> -->
             <div class="arrow_left arrow"></div>
             <div class="arrow_right arrow"> </div>
         </ul>
+        <!-- 导航点 -->
         <ul class="roll_pointers">
             <li class="pointer" style="background-color: rgb(255,210,85);"></li>
             <li class="pointer"></li>
@@ -167,19 +157,10 @@
     <div class="recommend">
         <!-- 推荐的左侧部分 -->
         <div class="recommend_left">
+            <!-- 热门推荐 -->
             <div class="rectop">
                 <span class="icon"></span>
                 <span class="rectitle">热门推荐</span>
-                <!-- <ul class="rec_list">
-                    <li class="rec_li">华语</li>
-                    <li class="rec_li">流行</li>
-                    <li class="rec_li">摇滚</li>
-                    <li class="rec_li">民谣</li>
-                    <li class="rec_li">电子</li>
-                </ul>
-                <div class="rec_more">更多
-                    <i class="fas fa-arrow-right" style="color: rgb(139,14,13);"></i>
-                </div> -->
             </div>
             <div class="MusicList">
                 <!-- <div class="CreateMusic">
@@ -194,24 +175,13 @@
                 </div> -->
 
             </div>
+            <!-- 个性化推荐 -->
             <div class="rectop">
                 <span class="icon"></span>
                 <span class="rectitle">个性化推荐</span>
-
             </div>
-            <div class="MusicList" style="height:254px">
-                <!-- <div class="CreateMusic">
-                    <a class="CreateMusic_a" href="">
-                        <img class="CreateMusic_img" src="" alt="">
-                    </a>
-                    <div class="CreateMusic_bottom">
-                        <i></i>
-                        <span class="CreateMusic_num"></span>
-                    </div>
-                    <div class="CreateMusic_name"></div>
-                </div> -->
-
-            </div>
+            <div class="MusicList" style="height:254px"></div>
+            <!-- 新碟上架 -->
             <div class="rectop">
                 <span class="icon"></span>
                 <span class="rectitle">新碟上架</span>
@@ -237,7 +207,6 @@
                 </div>
                 <i class="fas fa-angle-right arrow_1"></i>
             </div>
-
             <!-- 榜单 -->
             <div class="rectop">
                 <span class="icon"></span>
@@ -256,7 +225,6 @@
                     </div>
                     <ul class="chart_musics">
                     </ul>
-                    <div class="chartmore">查看更多></div>
                 </ul>
                 <ul class="chart_list">
                     <div class="chart_list_top">
@@ -270,7 +238,6 @@
                     </div>
                     <ul class="chart_musics">
                     </ul>
-                    <div class="chartmore">查看更多></div>
                 </ul>
                 <ul class="chart_list">
                     <div class="chart_list_top">
@@ -284,7 +251,6 @@
                     </div>
                     <ul class="chart_musics">
                     </ul>
-                    <div class="chartmore">查看更多></div>
                 </ul>
                 <div class="plusMusic_div" style="display: none;">
                     <h1>收藏至歌单</h1>
@@ -302,6 +268,7 @@
             </div>
 
         </div>
+        <!-- 右侧部分 -->
         <div class="recommend_right">
             <div class="user_profile">
                 <div class="user_profile_top">
@@ -495,44 +462,6 @@
             </ul>
         </div>
     </div>
-
-    <!-- 播放条 -->
-    <!-- <div class="mp3_content">
-        <div class="mp3Box">
-            <div class="radioBox">
-
-                <div class="prev">
-                    <audio id="prev_1"></audio>
-                </div>
-                <div class="broadcast">
-                    <audio id="broadcast_1"></audio>
-                </div>
-                <div class="next">
-                    <audio id="next_1"></audio>
-                </div>
-            </div>
-            <div class="head_avatar">
-                <img class="header_avatar_img" src="../img/" alt="">
-            </div>
-            <div class="bar">
-                <div class="bar_info">
-                    <a class="bar_musicname" href="">未播放</a>
-                    <a class="bar_musician" href="">未播放</a>
-                    <a class="bar_link" href=""></a>
-                </div>
-                <div class="bar_body">
-                    <input type="range" step="1" min="0" max="100" id="shichang" value="0" />
-                    <div class="time">
-                        <span class="currentTime">00:00</span> /
-                        <span class="duraTime">00:00</span>
-                    </div>
-                </div>
-            </div>
-            <a class="bar_collect" href=""></a>
-            <span class="bar_voice" href=""></span>
-            <input type="range" id="voice" step="1" min="0" max="100" value="0">
-        </div>
-    </div> -->
 
 </body>
 

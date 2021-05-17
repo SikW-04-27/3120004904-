@@ -1,6 +1,5 @@
 window.onload = function () {
     // 打开如果有保存的话自动登录
-
     let dengluurl_1 =
         defaultUrlHeader + "/login/cellphone?" + "phone=" + getCookie('phone') + "&" + "password=" + getCookie('password');
     if (getCookie('rem') == 'true') {
@@ -16,9 +15,26 @@ window.onload = function () {
                 let resultstr = JSON.stringify(result);
                 console.log(resultstr);
                 sessionStorage.setItem('user', resultstr);
+
+                // 播放记录
+                let historyurl = defaultUrlHeader + '/user/record?uid=' + result.account.id + '&type=1&cookie=' + result.cookie;
+                historylist(historyurl);
+                
             }
         });
     }
+
+    // 手机登录
+    var SignUp = document.querySelector(".SignUp");
+    var SignUp_error = document.querySelector(".SignUp_error");
+    var SignUpBox = document.querySelector(".SignUpBox");
+    var register_btn = document.getElementById("register_btn");
+    var SignUpbig = document.querySelector(".SignUpbig");
+    var sentctcodebig = document.querySelector(".sentctcodebig");
+    var registerbig = document.querySelector(".registerbig");
+    var emailbig = document.querySelector(".emailbig");
+    // 邮箱登录跳转
+    var SignUp_email0 = document.getElementById("SignUp_email0");
 
     let SignUp_phone = document.getElementById("SignUp_phone");
     let SignUp_password = document.getElementById("SignUp_password");
@@ -28,7 +44,6 @@ window.onload = function () {
     var email_SignUp_btn = document.getElementById("email_SignUp_btn");
     var SignUp_User = document.querySelector(".SignUp_User");
     var avatar = document.getElementsByClassName("avatar");
-    var SignUp = document.querySelector(".SignUp");
 
     var user_profile_name = document.getElementsByClassName("user_profile_name");
     var user_profile_levelnum = document.getElementsByClassName("user_profile_levelnum");
@@ -46,36 +61,12 @@ window.onload = function () {
     var confirm_plusMusic = document.getElementsByClassName("confirm_plusMusic");
     var cancel_plusMusic = document.getElementsByClassName("cancel_plusMusic");
 
-    // 点击登录按钮
-    function getCookie(name) {
-        var cookieArray = document.cookie.split(";");
-        for (var i = 0; i < cookieArray.length; ++i) {
-            var cookies = cookieArray[i].split("=");
-            if (cookies[0].trim() == name) {
-                return cookies[1];
-            }
-        }
-        if (i == cookieArray.length) {
-            return "";
-        }
 
-    }
-
-    // 记住账号密码
-    SignUp.addEventListener('click', function () {
-        SignUp_phone.value = getCookie('phone');
-        SignUp_password.value = getCookie('password');
-        if (getCookie('rem') == 'true') {
-            Rem_Password.checked = true;
-        }
-
-    })
 
     // 点击头像跳转到新页面
     SignUp_User_down1.onclick = function () {
-        // window.location.href = "../2.用户详情页/2.用户详情页.html";
         parent.inner.src = '../2.用户详情页/2.用户详情页.html';
-    }
+    };
     // 退出登录
     SignUp_User_down2.onclick = function () {
         let outurl = defaultUrlHeader + '/logout';
@@ -93,57 +84,94 @@ window.onload = function () {
                 }
             }
         });
-    }
+    };
 
     // 手机号登录
-    SignUp_btn.addEventListener('click', function () {
-
-        let phone = SignUp_phone.value;
-        let password = SignUp_password.value;
-        let dengluurl =
-            defaultUrlHeader + "/login/cellphone?" + "phone=" + phone + "&" + "password=" + password;
-        signup(dengluurl, phone, password);
-
-    });
+    let sign_info=document.getElementsByClassName("sign_info");
+    
+    // 电话号码正则判断
+    SignUp_phone.onkeyup=function(){
+        var num1 = SignUp_phone.value;
+        // 验证电话的正则表达式
+        var reg = /^1[34578][0-9]{9}$/;
+        // 如果用户输入的电话不符合规则
+        if (!reg.test(num1)) {
+            sign_info[0].innerHTML = '✖  请输入符合格式的电话';
+            // 让提示信息显示为错误的提示信息样式
+            sign_info[0].className = 'sign_info red';
+            // 阻止程序向下执行
+            SignUp_btn.onclick=function() {
+                SignUp_btn.onclick=null;
+            };
+            return;
+        } else {
+            // 如果电话输入正确提示正确信息，并设置相应样式
+            sign_info[0].innerHTML = '✔  bingo';
+            sign_info[0].className = 'sign_info green';
+            SignUp_btn.onclick= function() {
+                let phone = SignUp_phone.value;
+                let password = SignUp_password.value;
+                let dengluurl = defaultUrlHeader + "/login/cellphone?" + "phone=" + phone + "&" + "password=" + password;
+                signup(dengluurl, phone, password);
+        
+            };
+        }
+        
+    };
     function signup(dengluurl, phone, password) {
         Ajax({
             url: dengluurl,
             success: function (result) {
                 SignUpBox.style.display = "none";
-                console.log(result);
-                let resultstr = JSON.stringify(result);
-                console.log(resultstr);
-                sessionStorage.setItem('user', resultstr);
-
-                // 缓存存完就执行，个人头像信息
-                let user_1 = JSON.parse(sessionStorage.getItem("user"));
-                user_profile_name[0].innerHTML = user_1.profile.nickname;
-                user_profile_levelnum[0].innerHTML = user_1.account.ban;
-                user_profile_li[0].innerHTML = user_1.profile.eventCount;
-                user_profile_li[1].innerHTML = user_1.profile.follows;
-                user_profile_li[2].innerHTML = user_1.profile.followeds;
-
-                if (Rem_Password.checked) {
-                    document.cookie = "phone=" + phone;
-                    document.cookie = "password=" + password;
-                    document.cookie = "rem=true";
-                } else {
-                    document.cookie = "phone=";
-                    document.cookie = "password=";
-                    document.cookie = "rem=false";
+                if(result.code==200){
+                    let resultstr = JSON.stringify(result);
+                    console.log(resultstr);
+                    sessionStorage.setItem('user', resultstr);
+    
+                    // 缓存存完就执行，个人头像信息
+                    let user_1 = JSON.parse(sessionStorage.getItem("user"));
+                    user_profile_name[0].innerHTML = user_1.profile.nickname;
+                    user_profile_levelnum[0].innerHTML = user_1.account.ban;
+                    user_profile_li[0].innerHTML = user_1.profile.eventCount;
+                    user_profile_li[1].innerHTML = user_1.profile.follows;
+                    user_profile_li[2].innerHTML = user_1.profile.followeds;
+    
+                    if (Rem_Password.checked) {
+                        document.cookie = "phone=" + phone;
+                        document.cookie = "password=" + password;
+                        document.cookie = "rem=true";
+                    } else {
+                        document.cookie = "phone=";
+                        document.cookie = "password=";
+                        document.cookie = "rem=false";
+                    }
+                    avatar[0].src = result.profile.avatarUrl;
+                    avatar[1].src = result.profile.avatarUrl;
+                    SignUp_User.style.display = 'block';
+                    SignUp.style.display = 'none';
+                    // 登录成功引入历史数据
+                    let historyurl = defaultUrlHeader + '/user/record?uid=' + result.account.id + '&type=1&cookie=' + result.cookie;
+                    historylist(historyurl);
+                }else{
+                    alert('密码错误');
                 }
-
-                avatar[0].src = result.profile.avatarUrl;
-                avatar[1].src = result.profile.avatarUrl;
-                SignUp_User.style.display = 'block';
-                SignUp.style.display = 'none';
-                // SignUp_User.img.src=responseText.avatarUrl;
             },
             error: function () {
-                SignUpBox.innerHTML = "密码错误";
+                alert('网络错误');
             }
         });
-    }
+    };
+
+    // 记住账号密码
+    SignUp.addEventListener('click', function () {
+        SignUp_phone.value = getCookie('phone');
+        SignUp_password.value = getCookie('password');
+        if (getCookie('rem') == 'true') {
+            Rem_Password.checked = true;
+        }
+
+    });
+
     // 邮箱登录
     email_SignUp_btn.addEventListener('click', function () {
         let email = email_phone.value;
@@ -151,19 +179,9 @@ window.onload = function () {
         let dengluurl =
             defaultUrlHeader + "/login?email=" + email + "&password=" + password;
         signup(dengluurl, email, password);
-    })
+    });
 
-    // 手机登录
-    var SignUp = document.querySelector(".SignUp");
-    var SignUp_error = document.querySelector(".SignUp_error");
-    var SignUpBox = document.querySelector(".SignUpBox");
-    var register_btn = document.getElementById("register_btn");
-    var SignUpbig = document.querySelector(".SignUpbig");
-    var sentctcodebig = document.querySelector(".sentctcodebig");
-    var registerbig = document.querySelector(".registerbig");
-    var emailbig = document.querySelector(".emailbig");
-    // 邮箱登录跳转
-    var SignUp_email0 = document.getElementById("SignUp_email0");
+    // 调出相应提示框
     SignUp.addEventListener('click', function () {
         // alert("123");
         SignUpBox.style.display = "block";
@@ -172,33 +190,24 @@ window.onload = function () {
         SignUpBox.style.display = "none";
         SignUpbig.style.display = "block";
         sentctcodebig.style.display = "none";
-    }
+    };
     register_btn.onclick = function () {
         SignUpbig.style.display = "none";
         sentctcodebig.style.display = "block";
-    }
+    };
     SignUp_email0.onclick = function () {
         SignUpbig.style.display = "none";
         emailbig.style.display = "block";
-    }
+    };
 
-    // 发送验证码
+    // 发送验证码，验证验证码
     let sentctcode_btn = document.getElementById("sentctcode_btn");
     let sentctcode_phone = document.getElementById("sentctcode_phone");
-    // 电话号码跳转
-    let SignUp_phone1 = document.getElementById("SignUp_phone1");
     sentctcode_btn.onclick = function () {
         let phone = sentctcode_phone.value;
-        // console.log(phone);
         let senturl = defaultUrlHeader + "/captcha/sent?phone=" + phone;
         Ajax({ url: senturl });
-    }
-    SignUp_phone1.onclick = function () {
-        SignUpbig.style.display = "block";
-        sentctcodebig.style.display = "none";
-    }
-
-    // 验证验证码
+    };
     let captcha_btn = document.getElementById("captcha_btn");
     let sentctcode_code = document.getElementById("sentctcode_code");
     let SignUp_phone2 = document.getElementById("SignUp_phone2");
@@ -217,25 +226,30 @@ window.onload = function () {
                 console.log("验证失败");
             }
         });
-    }
+    };
     SignUp_phone2.onclick = function () {
         SignUpbig.style.display = "block";
         registerbig.style.display = "none";
-    }
+    };
 
-    // 邮箱登录
+    // 电话号码跳转调用框
+    let SignUp_phone1 = document.getElementById("SignUp_phone1");
+    SignUp_phone1.onclick = function () {
+        SignUpbig.style.display = "block";
+        sentctcodebig.style.display = "none";
+    };
+
+    // 邮箱登录调用框
     let SignUp_phone3 = document.getElementById("SignUp_phone3");
     let email_register_btn = document.getElementById("email_register_btn");
     SignUp_phone3.onclick = function () {
         SignUpbig.style.display = "block";
         emailbig.style.display = "none";
-    }
+    };
     email_register_btn.onclick = function () {
         SignUpbig.style.display = "none";
         sentctcodebig.style.display = "block";
-    }
-
-
+    };
 
     // 轮播图
     let roll_li = document.getElementsByClassName("roll_li");
@@ -243,7 +257,6 @@ window.onload = function () {
     let arrow = document.getElementsByClassName("arrow");
     let roll_content = document.getElementsByClassName("roll_content");
     var index = 0;
-
     // 加载轮播图的图片
     let timestamp = (new Date()).valueOf();
     Ajax({
@@ -258,32 +271,35 @@ window.onload = function () {
                 img.src = results.banners[j].imageUrl + '?param=732y285';
                 li.style.display = 'none';
                 li.style.backgroundImage = 'url(' + results.banners[j].imageUrl + '?imageView&blur=40x20' + ')';
+
+                roll_li[j].addEventListener("mouseover", function () {
+                    clearInterval(timer);
+                });
+                roll_li[j].addEventListener("mouseout", function () {
+                    automove();
+                });
             }
             roll_li[0].className = 'roll_li visible';
             roll_li[0].style.display = 'block';
+
+
         }
-    })
-
+    });
+    // 轮播图移动函数
     function move(font, after, speed) {
-        // timer=setInterval(() => {
-
         function one() {
             setTimeout(() => {
-                // console.log(font);
-                // console.log(font + "sss");
                 roll_li[after].style.display = "block";
                 iterator.next();
             }, 1);
         }
         function two() {
             setTimeout(() => {
-                // console.log(index + "aaa");
                 setPointer(after);
                 roll_li[font].className = "roll_li hidden";
                 roll_li[after].className = "roll_li visible";
                 iterator.next();
             }, speed);
-
         }
         function three() {
             setTimeout(() => {
@@ -300,7 +316,7 @@ window.onload = function () {
         let iterator = gen();
         iterator.next();
     }
-
+    // 自动轮播函数
     function automove() {
         timer = setInterval(function () {
             if (index == 9) {
@@ -312,32 +328,30 @@ window.onload = function () {
                 move(font, after, 200);
                 index++;
             }
-
         }, 3000);
     }
-
+    // 调用自动轮播
     automove();
-
     // 点击导航点跳转函数
     for (let i = 0; i < pointer.length; i++) {
         pointer[i].num = i;
         // 点击跳转，并且开启节流，防止用户误操作
         pointer[i].addEventListener("click", throttle(function () {
-            let tiao = this.num;
-            clearInterval(timer);
-            move(index, tiao, 1);
-            index = tiao;
-            automove();
-        }, 2000))
+            // 防止用户重复点正在显示的照片
+            if (roll_li[this.num].className != 'roll_li visible') {
+                let tiao = this.num;
+                clearInterval(timer);
+                move(index, tiao, 1);
+                index = tiao;
+                automove();
+            }
+        }, 2900))
     }
-
     // 点击箭头跳转函数
     for (let i = 0; i < arrow.length; i++) {
         arrow[i].num = i;
         arrow[i].addEventListener("click", function () {
-            console.log("23");
             clearInterval(timer);
-            // console.log(index);
             let tiao_1 = index;
             if (this.num == 0) {
                 let tiao_font = tiao_1 - 1;
@@ -357,7 +371,6 @@ window.onload = function () {
             automove();
         })
     }
-
     // 改变点的样式
     function setPointer(x) {
         if (x == 10) {
@@ -371,7 +384,6 @@ window.onload = function () {
         // 点击按钮修改样式
         pointer[x].style.backgroundColor = "rgb(255,210,85)";
     }
-
     // 实现限流函数
     function throttle(func, wait) {
         var _this, arg;
@@ -385,18 +397,6 @@ window.onload = function () {
             }
         }
     }
-
-    // 实现鼠标移入暂停
-    for (let i = 0; i < roll_li.length; i++) {
-        roll_li.num = i;
-        roll_li[i].addEventListener("mouseover", function () {
-            clearInterval(timer);
-        })
-        roll_li[i].addEventListener("mouseout", function () {
-            automove();
-        })
-    }
-
 
 
     // 加载推荐的信息
@@ -450,14 +450,11 @@ window.onload = function () {
                     console.log(this.id);
                     sessionStorage.setItem('musicid', this.id);
                     sessionStorage.setItem('type', '歌单');
-                    // window.location.href = '../4.歌单详情页/4.歌单详情页.html';
                     parent.inner.src = '../4.歌单详情页/4.歌单详情页.html';
                 }
             }
         }
     });
-
-
 
 
     // 榜单传数据
@@ -496,10 +493,7 @@ window.onload = function () {
             div.innerHTML = i + 1;
             a.innerHTML = results.playlist.tracks[i].name;
             a.onclick = function () {
-                // var inner = document.getElementById("inner");
-                // console.log(inner.src);
                 sessionStorage.setItem("playing_id", results.playlist.tracks[i].id);
-                // a.href = '../6.歌曲详情/6.歌曲详情.html';
                 sessionStorage.setItem('ing', 'false');
                 parent.inner.src = '../6.歌曲详情/6.歌曲详情.html';
             }
@@ -516,9 +510,11 @@ window.onload = function () {
                 let picurl = results.playlist.tracks[i].al.picUrl;
                 // 添加歌曲到待播歌单
                 addmusic(name, id, musicname, picurl);
+                alert('添加成功');
                 let arrdata = JSON.parse(sessionStorage.getItem('arr'));
                 playARR(arrdata);
             });
+            // 收藏歌曲到我的歌单里
             a_3.addEventListener('click', function () {
                 let user_1 = JSON.parse(sessionStorage.getItem("user"));
                 plusMusic_div[0].style.display = 'block';
@@ -540,7 +536,6 @@ window.onload = function () {
                             li.onclick = function () {
                                 for (let k = 0; k < results.playlist.length; k++) {
                                     plusMusic_li[k].style.backgroundColor = '';
-                                    console.log("123");
                                 }
                                 li.style.backgroundColor = '#9d9d9d';
                                 sessionStorage.setItem('select_musiclist', results.playlist[j].id);
@@ -616,8 +611,7 @@ window.onload = function () {
     var roll_li_img = document.getElementsByClassName("roll_li_img");
     var roll_li_workname = document.getElementsByClassName("roll_li_workname");
     var roll_li_name = document.getElementsByClassName("roll_li_name");
-    let getroll_li =
-        defaultUrlHeader + '/album/newest';
+    let getroll_li = defaultUrlHeader + '/album/newest';
     Ajax({
         url: getroll_li,
         success: function (results) {
@@ -690,18 +684,18 @@ window.onload = function () {
 
     // 搜索功能
     search();
-
+    // 歌曲播放操作功能
     bofang();
     shichangload();
     play();
-
     // 点击导航栏跳转页面
     one();
     two();
     five();
     seven();
-
     // 可以操作待播歌单
     let arrdata = JSON.parse(sessionStorage.getItem('arr'));
     playARR(arrdata);
+
+    
 }

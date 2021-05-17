@@ -9,7 +9,7 @@ window.onload = function () {
     avatar[0].src = user_4.profile.avatarUrl;
     avatar[1].src = user_4.profile.avatarUrl;
 
-
+    // 操作播放条
     bofang();
     shichangload();
     play();
@@ -20,7 +20,6 @@ window.onload = function () {
     var info_name = document.getElementsByClassName("info_name");
     var musician_avatar_1 = document.getElementsByClassName("musician_avatar_1");
     var musician_name_1 = document.getElementsByClassName("musician_name_1");
-    var musician_level_1 = document.getElementsByClassName("musician_level_1");
     var info_intr = document.getElementsByClassName("info_intr");
     var info_more_intr = document.getElementsByClassName("info_more_intr");
     var musician_time_1 = document.getElementsByClassName("musician_time_1");
@@ -30,11 +29,6 @@ window.onload = function () {
     var info_more = document.getElementsByClassName("info_more");
     var my_comment_btn = document.getElementsByClassName("my_comment_btn");
     var textarea = document.getElementsByTagName("textarea");
-
-    // 播放条
-    var header_avatar_img = document.getElementsByClassName("header_avatar_img");
-    var bar_musicname = document.getElementsByClassName("bar_musicname");
-    var bar_musician = document.getElementsByClassName("bar_musician");
 
     // 播放歌曲
     var td_one_play = document.getElementsByClassName("td_one_play");
@@ -57,26 +51,20 @@ window.onload = function () {
     var cancel_plusMusic = document.getElementsByClassName("cancel_plusMusic");
     var confirm_plusMusic = document.getElementsByClassName("confirm_plusMusic");
 
-    var collect_btn = document.getElementsByClassName("collect_btn");
-
     if (type == '歌单') {
         let cook = user_4.cookie;
         let timestamp = (new Date()).valueOf();
         let musicurl = defaultUrlHeader + '/playlist/detail?id=' + musicid + '&cookie=' + cook + '&timestamp=' + timestamp;
-        console.log(musicurl);
         Ajax({
             url: musicurl,
             success: function (results) {
                 let resultsjson = JSON.stringify(results);
                 sessionStorage.setItem("musicinfo", resultsjson);
                 var music_info = JSON.parse(sessionStorage.getItem("musicinfo"));
-
-
                 musician_avatar[0].src = music_info.playlist.coverImgUrl + '?param=200y200';
                 info_name[0].innerHTML = music_info.playlist.name;
                 musician_avatar_1[0].src = music_info.playlist.creator.avatarUrl + '?param=40y40';
                 musician_name_1[0].innerHTML = music_info.playlist.creator.nickname;
-                // musician_level_1[0].src = music_info.playlist.creator.avatarDetail.identityIconUrl;
                 // 让文本能够在每一个句号就换行
                 let text;
                 let texts;
@@ -88,8 +76,6 @@ window.onload = function () {
                     info_more_intr[0].innerHTML = '介绍：' + texts;
                     more[0].innerHTML = '展开';
                 }
-
-
 
                 // 展开和收起详情
                 more[0].onclick = function () {
@@ -141,7 +127,7 @@ window.onload = function () {
                     } else {
                         getsongs(span1, span2, span3, span4, span5, span5_id, j, 0);
                     }
-
+                    // 点击播放
                     td_one_play[j].onclick = function () {
                         let x = j;
                         // 定义一个自动播放的函数
@@ -202,17 +188,20 @@ window.onload = function () {
                         sessionStorage.setItem('type', '专辑');
                         parent.inner.src = '../4.歌单详情页/4.歌单详情页.html';
                     }
+                    // 添加到待播清单
                     add[j].onclick = function () {
                         let name = music_info.playlist.tracks[j].name;
                         let id = music_info.playlist.tracks[j].id;
                         let musicname = music_info.playlist.tracks[j].ar[0].name;
                         let picurl = music_info.playlist.tracks[j].al.picUrl;
+                        add[j].style.color='orange';
                         // 添加歌曲到待播歌单
                         addmusic(name, id, musicname, picurl);
                         let arrdata = JSON.parse(sessionStorage.getItem('arr'));
                         playARR(arrdata);
                     }
 
+                    // 判断是否为本人歌单，不是的话可以收藏歌曲，是的话可以删除歌曲
                     if (music_info.playlist.creator.userId == user_4.account.id) {
                         add_musiclist[j].addEventListener('click', function () {
                             let musicid = sessionStorage.getItem('musicid');
@@ -226,10 +215,12 @@ window.onload = function () {
                             })
                         })
                     } else {
+                        // 添加歌曲到我的歌单
                         add_musiclist[j].addEventListener('click', function () {
                             plusMusic_div[0].style.display = 'block';
                             sessionStorage.setItem('select_music', music_info.playlist.tracks[j].id);
                             let timestamp = (new Date()).valueOf();
+                            // 获取我的歌单
                             let getmusicurl = defaultUrlHeader + '/user/playlist?uid=' + user_4.account.id + '&cookie=' + user_4.cookie + '&timestamp=' + timestamp;
                             Ajax({
                                 url: getmusicurl,
@@ -262,7 +253,7 @@ window.onload = function () {
                                         Ajax({
                                             url: addurl,
                                             success: function () {
-                                                // alert("添加成功");
+                                                add_musiclist[j].style.color='orange';
                                                 plusMusic_ul[0].innerHTML = '';
                                                 plusMusic_div[0].style.display = 'none';
                                             }
@@ -272,14 +263,15 @@ window.onload = function () {
                             })
                         });
                     }
-
                 }
             }
         });
 
+        // 评论
         getcom();
+        sendcomment(2);
 
-        // 评论未优化
+        // 获取相关歌单
         let tuijianurl = defaultUrlHeader + '/related/playlist?id=' + musicid;
         Ajax({
             url: tuijianurl,
@@ -287,7 +279,7 @@ window.onload = function () {
                 if (results.playlists.length >= 5) {
                     var jmost = 5;
                 } else {
-                    var jmost = result.playlist.length;
+                    var jmost = results.playlist.length;
                 }
                 for (let j = 0; j < jmost; j++) {
                     let imgsrc = results.playlists[j].coverImgUrl + '?param=50y50';
@@ -307,15 +299,7 @@ window.onload = function () {
             }
 
         });
-        sendcomment(2);
-        // 收藏
-        // collect_btn[0].onclick = function () {
-        //     let cook = user_4.cookie;
-        //     let musicurl = defaultUrlHeader + '/playlist/subscribe?t=1&id=' + musicid + '&cookie=' + cook;
-        //     Ajax({
-        //         url: musicurl
-        //     });
-        // }
+        
     } else if (type == '专辑') {
         let musicurl = defaultUrlHeader + '/album?id=' + musicid;
         Ajax({
@@ -329,19 +313,17 @@ window.onload = function () {
                 musician_avatar_1[0].src = music_info.songs[0].al.picUrl + '?param=35y35';
                 musician_name_1[0].innerHTML = music_info.songs[0].ar[0].name;
                 musician_time_1[0].innerHTML = '发行公司：' + music_info.album.company;
-
                 let text;
                 let texts;
                 text = music_info.album.description;
+                // 获取介绍
                 if (text) {
                     texts = text.replace(new RegExp('\n', 'g'), '<br>');
                     info_intr[0].innerHTML = '介绍：' + texts;
                     info_more_intr[0].innerHTML = '介绍：' + texts;
                     more[0].innerHTML = '展开';
                 }
-
-
-
+                // 查看更多
                 more[0].onclick = function () {
                     if (more[0].innerHTML == '展开') {
                         info_intrroduce[0].style.display = 'none';
@@ -352,9 +334,7 @@ window.onload = function () {
                         info_more[0].style.display = 'none';
                         more[0].innerHTML = '展开';
                     }
-
                 }
-
                 // 获取专辑的歌曲
                 for (let j = 0; j < music_info.songs.length; j++) {
                     let span1 = j + 1;
@@ -366,7 +346,7 @@ window.onload = function () {
                     let span5_id = music_info.songs[j].al.id;
 
                     getsongs(span1, span2, span3, span4, span5, span5_id, j, 0);
-
+                    // 自动播放
                     td_one_play[j].onclick = function () {
                         let x = j;
                         // 定义一个自动播放的函数
@@ -425,6 +405,7 @@ window.onload = function () {
                         sessionStorage.setItem('type', '专辑');
                         parent.inner.src = '../4.歌单详情页/4.歌单详情页.html';
                     }
+                    // 添加到播放清单
                     add[j].onclick = function () {
                         let name = music_info.songs[j].name;
                         let id = music_info.songs[j].id;
@@ -432,9 +413,11 @@ window.onload = function () {
                         let picurl = music_info.songs[j].al.picUrl;
                         // 添加歌曲到待播歌单
                         addmusic(name, id, musicname, picurl);
+                        add[j].style.color='orange';
                         let arrdata = JSON.parse(sessionStorage.getItem('arr'));
                         playARR(arrdata);
                     }
+                    // 添加到我的歌单
                     add_musiclist[j].addEventListener('click', function () {
                         plusMusic_div[0].style.display = 'block';
                         sessionStorage.setItem('select_music', music_info.songs[j].id);
@@ -471,7 +454,7 @@ window.onload = function () {
                                     Ajax({
                                         url: addurl,
                                         success: function () {
-                                            // alert("添加成功");
+                                            add_musiclist[j].style.color='orange';
                                             plusMusic_ul[0].innerHTML = '';
                                             plusMusic_div[0].style.display = 'none';
                                         }
@@ -483,8 +466,12 @@ window.onload = function () {
                 }
             }
         });
-        getcom_2();
 
+        // 评论
+        getcom_2();
+        sendcomment(3);
+
+        // 获取相关专辑
         Ajax({
             url: 'https://autumnfish.cn/album/newest',
             success: function (results) {
@@ -505,12 +492,15 @@ window.onload = function () {
                 }
             }
         });
-        sendcomment(3);
     }
 
     // 可以操作待播歌单
     let arrdata = JSON.parse(sessionStorage.getItem('arr'));
     playARR(arrdata);
+
+    // 可以操作播放历史
+    let historyurl = defaultUrlHeader + '/user/record?uid=' + user_4.account.id + '&type=1&cookie=' + user_4.cookie;
+    historylist(historyurl);
 
     // 搜索功能
     search();
@@ -621,6 +611,7 @@ window.onload = function () {
         div_2_2.className = 'more_user_info';
         div_2_2_1.className = 'comment_time';
         div_2_2_2.className = 'good';
+        div_2_2_2.style.backgroundPosition='-150px 0';
         span_3.className = 'good_num';
 
         img.src = imgsrc;
@@ -631,6 +622,8 @@ window.onload = function () {
         time = time.split('T');
         div_2_2_1.innerHTML = time[0];
         span_3.innerHTML = span3;
+
+        
     }
 
     // 获取相关推荐创造节点
@@ -684,19 +677,19 @@ window.onload = function () {
                     div.appendChild(img);
                     img.src = '../img/loading.gif';
                     setTimeout(function () {
-                        if (type == 1) {
+                        if (type == 2) {
                             getcom();
                         } else {
                             getcom_2();
                         }
-                    }, 2000);
+                    }, 1000);
 
                 }
             });
         }
     }
 
-    // 获取评论
+    // 获取评论,点赞/取消点赞
     function getcom() {
         let comments = document.getElementsByClassName("comments");
         comments[0].innerHTML = '';
@@ -707,13 +700,37 @@ window.onload = function () {
             url: commenturl,
             success: function (results) {
                 for (let j = 0; j < results.comments.length; j++) {
-
                     let imgsrc = results.comments[j].user.avatarUrl + '?param=50y50';
                     let span1 = results.comments[j].user.nickname + '：';
                     let span2 = results.comments[j].content;
                     let time = results.comments[j].time;
                     let span3 = results.comments[j].likedCount;
                     getcomments(imgsrc, span1, span2, span3, time);
+                    
+                    let good=document.getElementsByClassName('good');
+                    let good_num=document.getElementsByClassName('good_num');
+                    // 点赞/取消点赞评论
+                    good[j].addEventListener('click',function(){
+                        if(good[j].style.backgroundPosition=='-150px 0px'){
+                            let getgoodurl=defaultUrlHeader+'/comment/like?id='+musicid+'&cid='+results.comments[j].commentId+'&t=1&type=2&'+'cookie='+user_4.cookie;
+                            Ajax({
+                                url:getgoodurl,
+                                success:function(){
+                                    good[j].style.backgroundPosition='-170px 0';
+                                    good_num[j].innerHTML=results.comments[j].likedCount+1;
+                                }
+                            })
+                        }else{
+                            let getgoodurl=defaultUrlHeader+'/comment/like?id='+musicid+'&cid='+results.comments[j].commentId+'&t=0&type=2&'+'cookie='+user_4.cookie;
+                            Ajax({
+                                url:getgoodurl,
+                                success:function(){
+                                    good[j].style.backgroundPosition='-150px 0';
+                                    good_num[j].innerHTML= good_num[j].innerHTML-1;
+                                }
+                            })
+                        }
+                    });
                 }
                 var comment_list_top = document.getElementsByClassName("comment_list_top");
                 var comment_num = document.getElementsByClassName("comment_num");
@@ -722,7 +739,6 @@ window.onload = function () {
             }
         });
     }
-
     function getcom_2() {
         let comments = document.getElementsByClassName("comments");
         comments[0].innerHTML = '';
@@ -744,6 +760,30 @@ window.onload = function () {
                     let time = results.hotComments[j].time;
                     let span3 = results.hotComments[j].likedCount;
                     getcomments(imgsrc, span1, span2, span3, time);
+                    let good=document.getElementsByClassName('good');
+                    let good_num=document.getElementsByClassName('good_num');
+                    // 点赞/取消点赞评论
+                    good[j].addEventListener('click',function(){
+                        if(good[j].style.backgroundPosition=='-150px 0px'){
+                            let getgoodurl=defaultUrlHeader+'/comment/like?id='+musicid+'&cid='+results.hotComments[j].commentId+'&t=1&type=3&'+'cookie='+user_4.cookie;
+                            Ajax({
+                                url:getgoodurl,
+                                success:function(){
+                                    good[j].style.backgroundPosition='-170px 0';
+                                    good_num[j].innerHTML=results.hotComments[j].likedCount+1;
+                                }
+                            })
+                        }else{
+                            let getgoodurl=defaultUrlHeader+'/comment/like?id='+musicid+'&cid='+results.hotComments[j].commentId+'&t=0&type=3&'+'cookie='+user_4.cookie;
+                            Ajax({
+                                url:getgoodurl,
+                                success:function(){
+                                    good[j].style.backgroundPosition='-150px 0';
+                                    good_num[j].innerHTML= good_num[j].innerHTML-1;
+                                }
+                            })
+                        }
+                    });
                 }
                 for (let j = 0; j < results.comments.length; j++) {
                     console.log(results.comments.length);
@@ -753,6 +793,30 @@ window.onload = function () {
                     let time = results.comments[j].time;
                     let span3 = results.comments[j].likedCount;
                     getcomments(imgsrc, span1, span2, span3, time);
+                    let good=document.getElementsByClassName('good');
+                    let good_num=document.getElementsByClassName('good_num');
+                    // 点赞/取消点赞评论
+                    good[j+results.hotComments.length].addEventListener('click',function(){
+                        if(good[j+results.hotComments.length].style.backgroundPosition=='-150px 0px'){
+                            let getgoodurl=defaultUrlHeader+'/comment/like?id='+musicid+'&cid='+results.comments[j].commentId+'&t=1&type=3&'+'cookie='+user_4.cookie;
+                            Ajax({
+                                url:getgoodurl,
+                                success:function(){
+                                    good[j+results.hotComments.length].style.backgroundPosition='-170px 0';
+                                    good_num[j+results.hotComments.length].innerHTML=results.comments[j].likedCount+1;
+                                }
+                            })
+                        }else{
+                            let getgoodurl=defaultUrlHeader+'/comment/like?id='+musicid+'&cid='+results.comments[j].commentId+'&t=0&type=3&'+'cookie='+user_4.cookie;
+                            Ajax({
+                                url:getgoodurl,
+                                success:function(){
+                                    good[j+results.hotComments.length].style.backgroundPosition='-150px 0';
+                                    good_num[j+results.hotComments.length].innerHTML= good_num[j+results.hotComments.length].innerHTML-1;
+                                }
+                            })
+                        }
+                    });
                 }
             }
         });

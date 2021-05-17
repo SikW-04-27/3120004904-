@@ -74,7 +74,7 @@ body{
     position: absolute;
     right: -10px;
     top: 70px;
-    z-index: 2;
+    z-index: 11;
     box-shadow: 0 8px 24px 0 rgb(0 0 0 / 50%);
     background-color: #fff;
     transition: 0.5s;
@@ -280,6 +280,26 @@ body{
 .nav_1 .SignUpbig{
     margin: 30px 0 0;
     width: 100%;
+}
+
+/* 正则验证框 */
+.sign_info{
+    position: relative;
+    top: -5px;
+    height: 0;
+    width: 204px;
+    line-height: 16px;
+    font-size: 12px;
+    padding-left: 10px;
+    transition: 0.5s;
+}
+.green{
+    height: 16px;
+    color: rgb(170, 255, 0);
+}
+.red{
+    height: 16px;
+    color: rgba(255, 59, 59, 0.884);
 }
 
 /* 手机登录内容框 */
@@ -655,7 +675,7 @@ body{
     position: relative;
     top: -3px;
     background: -webkit-linear-gradient(red, red) no-repeat;
-    background-size: 0 90%;
+    background-size: 0 10%;
     background-position: '';
     border-radius: 5px;
     height: 8px;
@@ -666,9 +686,7 @@ body{
 .shichang::-webkit-slider-runnable-track {
     position: relative;
     top: 3px;
-    /* background-color: #333; */
     background-image: url('../img/statbar.png');
-    /* background-position: 100% 0px; */
     border-radius: 5px;
 }
 
@@ -917,6 +935,9 @@ body{
     width: 230px;
     margin: 0 auto;
     border-bottom: 1px solid #d3d3d3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .plusMusic_div li:hover{

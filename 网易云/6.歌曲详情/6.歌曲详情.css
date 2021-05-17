@@ -231,6 +231,7 @@
     color: #999;
 }
 .comment_content_right .more_user_info .good{
+    cursor: pointer;
     position: absolute;
     right: 40px;
     width: 15px;

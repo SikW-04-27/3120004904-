@@ -362,14 +362,15 @@
 /* 榜单 */
 .chart{
     width: 689px;
-    height: 472px;
+    height: 440px;
+    border-bottom: 1px solid rgb(211, 211, 211);
     background-color: #f5f5f5;
     display: flex;
     background-image: url('../img/index_bill.png');
 }
 .chart_list{
     width: 230px;
-    height: 472px;
+    height: 440px;
 }
 .chart_list_top{
     width: 210px;
@@ -455,15 +456,6 @@
 .chart_music:hover .chart_music_name{
     width: 88px;
     display: block;
-}
-.chartmore{
-    width: 198px;
-    height: 32px; 
-    margin-right: 32px;
-    text-align: right;
-    color:#333;
-    font-size: 12px;
-    line-height: 32px;
 }
 .chartmore:hover{
     cursor: pointer;

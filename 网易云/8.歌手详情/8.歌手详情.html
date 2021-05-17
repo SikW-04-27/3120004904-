@@ -16,6 +16,7 @@
 </head>
 
 <body>
+    <!-- 导航栏 -->
     <div class="top">
         <div class="nav_1">
             <div class="logo"> </div>
@@ -48,24 +49,31 @@
         </div>
     </div>
 
+    <!-- 中部内容区 -->
     <div class="middle">
         <div class="middle_content">
+            <!-- 主要内容区 -->
             <div class="middle_left">
+                <!-- 歌手标题信息 -->
                 <div class="title">
-                    <h2 class="musician_h2"></h2>
+                    <h2 class="musician_h2">请登录</h2>
                     <h3 class="musician_h3"></h3>
                 </div>
+                <!-- 歌手头像 -->
                 <div class="avatar_big">
                     <img class="avatar_img" src="" alt="">
                     <div class="mask"></div>
                 </div>
+                <!-- mv播放内嵌框 -->
                 <video class="avatar_audio" src="" controls preload poster='' style="display: none;"></video>
+                <!-- 信息导航 -->
                 <ul class="musician_nav">
                     <li class="musician_li musician_nav_active">热门作品</li>
                     <li class="musician_li">所有专辑</li>
                     <li class="musician_li">相关MV</li>
                     <li class="musician_li">艺人介绍</li>
                 </ul>
+                <!-- 歌曲信息 -->
                 <table class="musician_work_list" style="display:table;">
                     <tbody>
                         <!-- <tr class="even">
@@ -91,19 +99,20 @@
                         </tr> -->
                     </tbody>
                 </table>
+                <!-- 添加到我的歌单的弹出框 -->
                 <div class="plusMusic_div" style="display: none;">
                     <h1>收藏至歌单</h1>
                     <ul class="plusMusic_ul">
                         <!-- <li class="plusMusic_li">
                             <span class="plusMusic_text">wodeshi </span>    
-                        </li> -->
-                        
+                        </li> -->      
                     </ul>
                     <div>
                         <span class="cancel_plusMusic">取消</span>
                         <span class="confirm_plusMusic">确认</span>
                     </div>
                 </div>
+                <!-- 歌手专辑 -->
                 <ul class="musician_edition_list" style="display: none;">
                     此歌手暂时没有专辑哦
                     <!-- <li >
@@ -115,6 +124,7 @@
                         <p class="edition_time">Private Corner迷你音乐会</p>
                     </li> -->
                 </ul>
+                <!-- 歌手mv -->
                 <ul class="musician_mv_list" style="display: none;">
                     此歌手暂时没有MV哦
                     <!-- <li>
@@ -125,6 +135,7 @@
                         <p class="mv_p">哈哈哈哈哈哈哈哈哈哈</p>
                     </li> -->
                 </ul>
+                <!-- 页码操作行 -->
                 <ul class="pages" style="display: none;">
                     <li><a href="javascript:;" id="page_first">首页</a></li>
                     <li><a href="javascript:;" id="page_prev">上一页</a></li>
@@ -133,6 +144,7 @@
                     <li><a href="javascript:;" id='now_page'>第几页</a></li>
                     <li><a href="javascript:;" id='page_count'>共几页</a></li>
                 </ul>
+                <!-- 歌手信息 -->
                 <ul class="musician_intro_list" style="display: none;">
                     <!-- <li class="musician_intro_first">
                         <h1 class="first_h1 intro_title">123</h1>
@@ -140,6 +152,7 @@
                     </li> -->
                 </ul>
             </div>
+            <!-- 相似歌手 -->
             <div class="middle_right">
                 <h1>相似歌手</h1>
                 <ul class="similar">
@@ -150,9 +163,9 @@
                 </ul>
             </div>
         </div>
-
     </div>
-
+    
+    <!-- 底部 -->
     <div class="bottom">
         <div class="bottom_content">
             <div class="bottom_left">

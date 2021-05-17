@@ -24,6 +24,7 @@ window.onload = function () {
     var searchurl;
     var searchkey;
 
+    // 操作播放条
     bofang();
     shichangload();
     play();
@@ -32,12 +33,16 @@ window.onload = function () {
     let arrdata = JSON.parse(sessionStorage.getItem('arr'));
     playARR(arrdata);
 
+    // 可以操作播放历史
+    let user_5 = JSON.parse(sessionStorage.getItem("user"));
+    let historyurl = defaultUrlHeader + '/user/record?uid=' + user_5.account.id + '&type=1&cookie=' + user_5.cookie;
+    historylist(historyurl);
+
     // 点击导航栏跳转页面
     one();
     two();
     five();
     seven();
-
     
     // 首页的搜索跳转
     searchurl = sessionStorage.getItem('search');
@@ -67,6 +72,7 @@ window.onload = function () {
                 let span5 = results.result.songs[j].al.name;
 
                 createmusic(span2, span3, span4, span5, j);
+                // 点击播放
                 td_one_play[j].onclick = function () {
                     let x = j;
                     // 定义一个自动播放的函数
@@ -103,23 +109,8 @@ window.onload = function () {
                         play();
                     }
                     autoplay(x);
-                    // var next = document.getElementsByClassName("next");
-                    // next[0].onclick = function () {
-                    //     x++;
-                    //     if (x > music_info.result.songs.length - 1) {
-                    //         x = music_info.result.songs.length - 1;
-                    //     }
-                    //     autoplay(x);
-                    // }
-                    // var prev = document.getElementsByClassName("prev");
-                    // prev[0].onclick = function () {
-                    //     x--;
-                    //     if (x < 0) {
-                    //         x = 0;
-                    //     }
-                    //     autoplay(x);
-                    // }
                 }
+                // 点击相关歌曲信息跳转相应页面
                 td_music_name[j].onclick=function(){
                     sessionStorage.setItem('ing', 'false');
                     sessionStorage.setItem("playing_id",music_info.result.songs[j].id);
@@ -141,9 +132,11 @@ window.onload = function () {
                     let picurl = music_info.result.songs[j].al.picUrl;
                     // 添加歌曲到待播歌单
                     addmusic(name, id,musicname,picurl);
+                    add[j].style.color='orange';
                     let arrdata = JSON.parse(sessionStorage.getItem('arr'));
                     playARR(arrdata);
                 }
+                // 添加歌曲到我的歌单
                 add_musiclist[j].addEventListener('click', function () {
                     let user_4 = JSON.parse(sessionStorage.getItem("user"));
                     plusMusic_div[0].style.display = 'block';
@@ -182,7 +175,7 @@ window.onload = function () {
                                 Ajax({
                                     url: addurl,
                                     success: function () {
-                                        // alert("添加成功");
+                                        add_musiclist[0].style.color='orange';
                                         plusMusic_ul[0].innerHTML = '';
                                         plusMusic_div[0].style.display = 'none';
                                     }
@@ -222,6 +215,7 @@ window.onload = function () {
         sessionStorage.setItem("page", 0);
         parent.inner.src = '../5.搜索歌曲页面/5.搜索歌曲页面.html';
     })
+    // 键盘事件
     document.onkeydown = function () {
         var code = window.event.keyCode;
         if (code == 13) {
@@ -251,7 +245,6 @@ window.onload = function () {
         sessionStorage.setItem("search", searchurl);
         parent.inner.src = '../5.搜索歌曲页面/5.搜索歌曲页面.html';
     }
-
     // 上一页
     page_prev.onclick=function(){
         let page=Number(sessionStorage.getItem('page'))-1;
@@ -285,7 +278,7 @@ window.onload = function () {
 
     }
 
-
+    // 创造音乐节点
     function createmusic(span2, span3, span4, span5, j) {
         let tbody = document.getElementsByTagName("tbody");
         let tr = document.createElement("tr");

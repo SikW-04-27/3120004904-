@@ -231,7 +231,7 @@
 
 .detail_info .info_tags .info_tag{
     float: left;
-    width: 40px;
+    /* width: 40px; */
     height: 22px;
     padding-right: 10px;
     margin-right: 10px;
@@ -244,7 +244,7 @@
     float: left;
     background-image: url('../img/button2.png');
     background-position: 0 0;
-    width: 24px;
+    /* width: 24px; */
     height: 22px;
     padding: 0 3px 0 13px;
     color: #666;
@@ -296,7 +296,7 @@
 
 .list{
     width: 640px;
-    /* height: 771px; */
+    margin-bottom: 30px;
     background-color:#fff;
     margin-top: 27px;
 }
@@ -563,6 +563,7 @@ tbody tr td{
     color: #999;
 }
 .comment_content_right .more_user_info .good{
+    cursor: pointer;
     position: absolute;
     right: 40px;
     width: 15px;

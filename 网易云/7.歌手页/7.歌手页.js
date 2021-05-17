@@ -9,6 +9,16 @@ window.onload = function () {
     huidiao(musicurl, musicurl, loadnum, -1, -1);
     right_title[0].innerHTML = musician_li[0].innerHTML;
 
+    // 可以操作待播歌单
+    let arrdata = JSON.parse(sessionStorage.getItem('arr'));
+    playARR(arrdata);
+
+    // 可以操作播放历史
+    let user_7 = JSON.parse(sessionStorage.getItem("user"));
+    let historyurl = defaultUrlHeader + '/user/record?uid=' + user_7.account.id + '&type=1&cookie=' + user_7.cookie;
+    historylist(historyurl);
+
+    // 可以操作播放条
     bofang();
     shichangload();
     play();
@@ -22,22 +32,7 @@ window.onload = function () {
     // 搜索功能
     search();
 
-    // Ajax({
-    //     url: musicurl,
-    //     success: function (results) {
-    //         right_title[0].innerHTML = musician_li[0].innerHTML;
-    //         console.log(results);
-    //         for (let j = 0; j < results.artists.length; j++) {
-
-    //             let imgsrc = results.artists[j].img1v1Url;
-    //             let a_text = results.artists[j].name
-    //             getmusicians(imgsrc, a_text);
-
-    //             let imgurl = avatar_img[j].getAttribute("data_src");
-    //             avatar_img[j].src = imgurl;
-    //         }
-    //     }
-    // });
+    // 设置点击左侧导航选择性加载信息
     for (let i = 0; i < musician_li.length; i++) {
         musician_li[i].onclick = function () {
             for (let j = 0; j < musician_li.length; j++) {
@@ -48,26 +43,11 @@ window.onload = function () {
             if (i == 0) {
                 let loadnum = 0;
                 musicurl = defaultUrlHeader + '/top/artists?limit=20';
-                // Ajax({
-                //     url: musicurl,
-                //     success: function (results) {
-                //         console.log(results);
-                //         for (let j = 0; j < results.artists.length; j++) {
-
-                //             let imgsrc = results.artists[j].img1v1Url;
-                //             let a_text = results.artists[j].name
-                //             getmusicians(imgsrc, a_text);
-                //             let imgurl = avatar_img[j].getAttribute("data_src");
-                //             avatar_img[j].src = imgurl;
-                //         }
-                //     }
-                // });
                 huidiao(musicurl, musicurl, loadnum);
                 right_title[0].innerHTML = musician_li[0].innerHTML;
 
             }
             if (i == 1) {
-                // document.documentElement.abort();
                 let loadnum = 0;
                 musicurl = defaultUrlHeader + '/artist/list?type=-1&area=-1' + '&limit=15';
                 huidiao(musicurl, musicurl, loadnum);
@@ -182,17 +162,8 @@ window.onload = function () {
 
     }
 
-    // window.onscroll = function () {
-    //     var height = document.documentElement.clientHeight + (document.body.scrollTop || document.documentElement.scrollTop)
-    //     var list_li = document.getElementsByClassName("list_li");
-    //     for (let i = 0; i < list_li.length; i++) {
-    //         if (list_li[i].offsetTop < height) {
-    //             var imgurl = avatar_img[i].getAttribute("data_src");
-    //             avatar_img[i].src = imgurl;
-    //         }
-    //     }
-    // }
 
+    // 创造歌手节点
     function getmusicians(imgsrc, a_text, musicianid) {
         let li = document.createElement("li");
         let div = document.createElement("div");
@@ -222,23 +193,22 @@ window.onload = function () {
         }
     }
 
-    // 懒加载函数
+    // 懒加载函数，回调的原因是可以先加载第一版（笔记有解释）
     function huidiao(url, musicurl, loadnum) {
         Ajax({
             url: musicurl,
             success: function (results) {
-                console.log(results);
+                // 将得到的信息填入
                 for (let j = 0; j < results.artists.length; j++) {
-
                     let imgsrc = results.artists[j].img1v1Url + '?param=130y130';
                     let a_text = results.artists[j].name;
                     let musicianid = results.artists[j].id;
                     getmusicians(imgsrc, a_text, musicianid);
                 }
-                window.onscroll = function () {
-                    var seeHeight = document.documentElement.clientHeight; //可见区域高度
+                // 懒加载函数
+                function lazyLoad() {
+                    var seeHeight = window.innerHeight; //可见区域高度
                     var scrollTop = document.documentElement.scrollTop || document.body.scrollTop; //滚动条距离顶部高度
-                    // console.log(scrollTop + seeHeight);
                     var list_li = document.getElementsByClassName("list_li");
                     for (let i = 0; i < list_li.length; i++) {
                         if (list_li[i].offsetTop < seeHeight + scrollTop) {
@@ -247,18 +217,18 @@ window.onload = function () {
                             avatar_img[i].src = imgurl;
                         }
                     }
-                    // console.log(list_li[list_li.length - 1].offsetTop);
-                    // console.log(scrollTop);
-                    // console.log(list_li.length);
-                    if (document.documentElement.scrollHeight - document.documentElement.scrollTop === document.documentElement.clientHeight) {
-                        console.log("123");
+                    // 检测是否滑动到底部，滑到底部则发送请求加载更多的数据
+                    if (document.documentElement.scrollHeight - document.documentElement.scrollTop < document.documentElement.clientHeight+10) {
                         loadnum++;
-                        // console.log(loadnum)
-                        // musicurl = defaultUrlHeader + '/artist/list?type=' + type + '&area=' + area + '&offset=' + loadnum * 30+'&limit=15';
                         musicurl = url + '&offset=' + loadnum * 30;
                         huidiao(url, musicurl, loadnum);
                     }
+                    // 监测鼠标的滚动
+                    window.onscroll=function(){
+                        lazyLoad();
+                    }
                 }
+                lazyLoad();
             }
         })
     }
